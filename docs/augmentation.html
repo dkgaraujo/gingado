@@ -117,7 +117,7 @@ nb_path: "00_augmentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="__main__.py#L4" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>start_date</code></strong>, <strong><code>end_date</code></strong>, <strong><code>time_col</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>start_date</code></strong>, <strong><code>end_date</code></strong>, <strong><code>time_col</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Downloads relevant data from SDMX sources to complement the original dataset</p>
 <p>Arguments:
@@ -125,7 +125,8 @@ nb_path: "00_augmentation.ipynb"
   start_date, end_date: the dates limiting the time period of the desired data from SDMX sources
   time_col: the name of the column in the original dataset that corresponds to time
   freq: the frequency of the desired data from SDMX; for example, 'A' is annual
-  sources: the list of SDMX sources or None; a list of possible sources can be obtained by running the function list_sdmx_sources()</p>
+  sources: the list of SDMX sources or None; a list of possible sources can be obtained by running the function list_sdmx_sources()
+  variance_threshold: a value larger than or equal to 0 or None, where 0 will lead to the removal of all data that does not vary across the dataset and None uses the scikit-learn default</p>
 
 </div>
 
@@ -139,7 +140,7 @@ nb_path: "00_augmentation.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Using-gingado-to-augment-a-dataset">Using <code>gingado</code> to augment a dataset<a class="anchor-link" href="#Using-gingado-to-augment-a-dataset"> </a></h2><p>The data augmentation functionalities of <code>gingado</code> is shown below using the <a href="https://www.macrohistory.net">Jordà-Schularick-Taylor Macrohistory Database</a> on macroeconomics and finance as an example. As a preliminary step, let's import <code>gingado</code> and other necessary libraries, and proceed to download the data:</p>
+<h2 id="Using-gingado-to-jumpstart-a-dataset">Using <code>gingado</code> to jumpstart a dataset<a class="anchor-link" href="#Using-gingado-to-jumpstart-a-dataset"> </a></h2><p>Since <code>gingado</code> downloads data from official sources through SDMX, users may want to use this funcitonality to gather the dataset of interest instead of augmenting some previously existent data. In these cases, the argument <code>df</code> must be set to <code>None</code>, like so:</p>
 
 </div>
 </div>
@@ -151,10 +152,399 @@ nb_path: "00_augmentation.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">JST_url</span> <span class="o">=</span> <span class="s2">&quot;http://data.macrohistory.net/JST/JSTdatasetR5.dta&quot;</span>
-<span class="n">jst</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="n">JST_url</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_data</span> <span class="o">=</span> <span class="n">augm_with_sdmx</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">time_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="s1">&#39;BIS&#39;</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">jst</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  6%|▌         | 1/18 [00:00&lt;00:04,  3.97it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_CBPOL_D ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 11%|█         | 2/18 [00:00&lt;00:04,  3.91it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_CBPOL_M ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 17%|█▋        | 3/18 [00:00&lt;00:04,  3.58it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_CBS_PUB ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 22%|██▏       | 4/18 [00:01&lt;00:03,  3.92it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_CREDIT_GAP ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 28%|██▊       | 5/18 [00:01&lt;00:03,  3.81it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_DEBT_SEC2_PUB ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 39%|███▉      | 7/18 [00:01&lt;00:02,  4.10it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_DER_OTC_TOV ok!
+Source: BIS, dataflow: WS_DSR ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 50%|█████     | 9/18 [00:02&lt;00:01,  4.57it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_EER_D ok!
+Source: BIS, dataflow: WS_EER_M ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 56%|█████▌    | 10/18 [00:02&lt;00:01,  4.19it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_GLI ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 61%|██████    | 11/18 [00:02&lt;00:01,  3.91it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_LBS_D_PUB ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 67%|██████▋   | 12/18 [00:02&lt;00:01,  4.18it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_LONG_CPI ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 78%|███████▊  | 14/18 [00:03&lt;00:00,  4.32it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_OTC_DERIV2 ok!
+Source: BIS, dataflow: WS_SPP ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 89%|████████▉ | 16/18 [00:03&lt;00:00,  4.88it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_TC ok!
+Source: BIS, dataflow: WS_XRU ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 94%|█████████▍| 17/18 [00:03&lt;00:00,  5.23it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_XRU_D ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 18/18 [00:04&lt;00:00,  4.29it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Source: BIS, dataflow: WS_XTD_DERIV ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 17%|█▋        | 3/18 [00:00&lt;00:00, 21.58it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_CBPOL_D from BIS... not possible.
+Trying to download WS_CBPOL_M from BIS... not possible.
+Trying to download WS_CBS_PUB from BIS... not possible.
+Trying to download WS_CREDIT_GAP from BIS... not possible.
+Trying to download WS_DEBT_SEC2_PUB from BIS... not possible.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 33%|███▎      | 6/18 [00:41&lt;01:38,  8.20s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_DER_OTC_TOV from BIS... ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 56%|█████▌    | 10/18 [00:42&lt;00:26,  3.35s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_DSR from BIS... not possible.
+Trying to download WS_EER_D from BIS... not possible.
+Trying to download WS_EER_M from BIS... not possible.
+Trying to download WS_GLI from BIS... not possible.
+Trying to download WS_LBS_D_PUB from BIS... not possible.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 67%|██████▋   | 12/18 [00:42&lt;00:13,  2.31s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_LONG_CPI from BIS... ok!
+Trying to download WS_OTC_DERIV2 from BIS... not possible.
+Trying to download WS_SPP from BIS... not possible.
+Trying to download WS_TC from BIS... not possible.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 89%|████████▉ | 16/18 [00:42&lt;00:02,  1.25s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_XRU from BIS... ok!
+Trying to download WS_XRU_D from BIS... not possible.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 18/18 [01:08&lt;00:00,  3.79s/it]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download WS_XTD_DERIV from BIS... ok!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 0/4 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Getting data from BIS&#39;s WS_DER_OTC_TOV
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 75%|███████▌  | 3/4 [00:19&lt;00:05,  5.19s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Successful
+Getting data from BIS&#39;s WS_LONG_CPI
+Successful
+Getting data from BIS&#39;s WS_XRU
+Successful
+Getting data from BIS&#39;s WS_XTD_DERIV
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 4/4 [00:20&lt;00:00,  5.02s/it]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Successful
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_data</span>
 </pre></div>
 
     </div>
@@ -186,153 +576,129 @@ nb_path: "00_augmentation.ipynb"
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>year</th>
-      <th>country</th>
-      <th>iso</th>
-      <th>ifs</th>
-      <th>pop</th>
-      <th>rgdpmad</th>
-      <th>rgdppc</th>
-      <th>rconpc</th>
-      <th>gdp</th>
-      <th>iy</th>
+      <th>BIS_WS_LONG_CPI_A_AE_628</th>
+      <th>BIS_WS_LONG_CPI_A_AE_771</th>
+      <th>BIS_WS_LONG_CPI_A_AR_628</th>
+      <th>BIS_WS_LONG_CPI_A_AR_771</th>
+      <th>BIS_WS_LONG_CPI_A_AT_628</th>
+      <th>BIS_WS_LONG_CPI_A_AT_771</th>
+      <th>BIS_WS_LONG_CPI_A_AU_628</th>
+      <th>BIS_WS_LONG_CPI_A_AU_771</th>
+      <th>BIS_WS_LONG_CPI_A_BE_628</th>
+      <th>BIS_WS_LONG_CPI_A_BE_771</th>
       <th>...</th>
-      <th>eq_capgain</th>
-      <th>eq_dp</th>
-      <th>eq_capgain_interp</th>
-      <th>eq_tr_interp</th>
-      <th>eq_dp_interp</th>
-      <th>bond_rate</th>
-      <th>eq_div_rtn</th>
-      <th>capital_tr</th>
-      <th>risky_tr</th>
-      <th>safe_tr</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_MXN_8A</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8A</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8B</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8C</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8E</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8F</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8G</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_TO1_8K</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_USD_8A</th>
+      <th>BIS_WS_XTD_DERIV_A_U_J_T_ZAR_8A</th>
+    </tr>
+    <tr>
+      <th>TIME_PERIOD</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2659</th>
-      <td>2013.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>315820.328999</td>
-      <td>31571.993947</td>
-      <td>103.425299</td>
-      <td>101.892671</td>
-      <td>16784.851</td>
-      <td>0.192086</td>
+      <th>2018-01-01</th>
+      <td>116.781662</td>
+      <td>3.070301</td>
+      <td>416.975221</td>
+      <td>34.150300</td>
+      <td>116.259014</td>
+      <td>2.004903</td>
+      <td>117.898023</td>
+      <td>1.911401</td>
+      <td>115.451626</td>
+      <td>2.053165</td>
       <td>...</td>
-      <td>0.271035</td>
-      <td>0.019355</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.023508</td>
-      <td>0.024601</td>
-      <td>0.139843</td>
-      <td>0.212405</td>
-      <td>-0.065168</td>
+      <td>11.0</td>
+      <td>846590.0</td>
+      <td>471264.0</td>
+      <td>284211.0</td>
+      <td>90731.0</td>
+      <td>59179.0</td>
+      <td>31552.0</td>
+      <td>383.0</td>
+      <td>462350.0</td>
+      <td>350.0</td>
     </tr>
     <tr>
-      <th>2660</th>
-      <td>2014.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>318106.646578</td>
-      <td>32113.618881</td>
-      <td>105.186253</td>
-      <td>104.113597</td>
-      <td>17527.258</td>
-      <td>0.196377</td>
+      <th>2019-01-01</th>
+      <td>114.524888</td>
+      <td>-1.932473</td>
+      <td>637.155776</td>
+      <td>52.804230</td>
+      <td>118.035180</td>
+      <td>1.527766</td>
+      <td>119.797086</td>
+      <td>1.610768</td>
+      <td>117.110457</td>
+      <td>1.436820</td>
       <td>...</td>
-      <td>0.136350</td>
-      <td>0.019199</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.025408</td>
-      <td>0.021817</td>
-      <td>0.130063</td>
-      <td>0.132729</td>
-      <td>0.122398</td>
+      <td>7.0</td>
+      <td>852979.0</td>
+      <td>514054.0</td>
+      <td>244999.0</td>
+      <td>93613.0</td>
+      <td>61141.0</td>
+      <td>32472.0</td>
+      <td>312.0</td>
+      <td>503307.0</td>
+      <td>278.0</td>
     </tr>
     <tr>
-      <th>2661</th>
-      <td>2015.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>320413.930388</td>
-      <td>32800.923063</td>
-      <td>107.421590</td>
-      <td>107.192931</td>
-      <td>18224.780</td>
-      <td>0.198301</td>
+      <th>2020-01-01</th>
+      <td>112.143786</td>
+      <td>-2.079113</td>
+      <td>895.091635</td>
+      <td>40.482386</td>
+      <td>119.741496</td>
+      <td>1.445600</td>
+      <td>120.811655</td>
+      <td>0.846906</td>
+      <td>117.978002</td>
+      <td>0.740792</td>
       <td>...</td>
-      <td>-0.000092</td>
-      <td>0.021124</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.021358</td>
-      <td>0.021122</td>
-      <td>0.046193</td>
-      <td>0.065433</td>
-      <td>-0.008779</td>
-    </tr>
-    <tr>
-      <th>2662</th>
-      <td>2016.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>322705.239927</td>
-      <td>33078.508719</td>
-      <td>108.318698</td>
-      <td>109.333457</td>
-      <td>18715.040</td>
-      <td>0.195831</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2663</th>
-      <td>2017.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>324802.861426</td>
-      <td>33593.446309</td>
-      <td>110.013284</td>
-      <td>111.389150</td>
-      <td>19519.424</td>
-      <td>0.204547</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>1.0</td>
+      <td>774172.0</td>
+      <td>446158.0</td>
+      <td>238840.0</td>
+      <td>88831.0</td>
+      <td>58457.0</td>
+      <td>30373.0</td>
+      <td>343.0</td>
+      <td>435049.0</td>
+      <td>298.0</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 57 columns</p>
+<p>3 rows × 658 columns</p>
 </div>
 </div>
 
@@ -346,392 +712,13 @@ nb_path: "00_augmentation.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The dataset is organised in a panel data structure, so the 'year' and 'country' columns are used as indices of the DataFrame. The redundant columns 'iso' and 'ifs' (which are different ways to code the country name) and 'crisisJST_old', which is similar to the target variable 'crisisJST', are dropped.</p>
+<p>The code above uses a greedy SDMX downloader that is not too concerned about selecting datasets in advance; rather, it downloads it data it possibly can from those official sources for the time period and frequency in question. It then filters out those data points that do not vary throughout the period, avoiding the use of memory to store data that does not contribute to the predictive power of the model. The dataset is then ready to be used.</p>
+<p>Two things are important to highlight. First, choosing even one source (the <a href="www.bis.org">BIS</a> in this example) leads to the download of hundreds of variables. Some of them might be representing the same underlying concepts, but for different jurisdictions. The second thing to bear in mind is that download and in particular parsing of the SDMX data can take up some time depending on your local setting.</p>
+<p>To use <code>gingado</code> to augment your dataset instead of creating a completely new one as done above, simply pass the original DataFrame as the argument <code>df</code> and name the corresponding column with the time values in the argument <code>time_col</code>.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jst</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;iso&#39;</span><span class="p">,</span> <span class="s1">&#39;ifs&#39;</span><span class="p">,</span> <span class="s1">&#39;crisisJST_old&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">jst</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">jst</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
-
-<span class="n">jst</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>pop</th>
-      <th>rgdpmad</th>
-      <th>rgdppc</th>
-      <th>rconpc</th>
-      <th>gdp</th>
-      <th>iy</th>
-      <th>cpi</th>
-      <th>ca</th>
-      <th>imports</th>
-      <th>exports</th>
-      <th>...</th>
-      <th>eq_capgain</th>
-      <th>eq_dp</th>
-      <th>eq_capgain_interp</th>
-      <th>eq_tr_interp</th>
-      <th>eq_dp_interp</th>
-      <th>bond_rate</th>
-      <th>eq_div_rtn</th>
-      <th>capital_tr</th>
-      <th>risky_tr</th>
-      <th>safe_tr</th>
-    </tr>
-    <tr>
-      <th>year</th>
-      <th>country</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1870-01-01</th>
-      <th>Australia</th>
-      <td>1775.000000</td>
-      <td>3273.239437</td>
-      <td>13.836157</td>
-      <td>21.449734</td>
-      <td>208.780</td>
-      <td>0.109266</td>
-      <td>2.708333</td>
-      <td>-6.147594</td>
-      <td>36.000</td>
-      <td>37.000</td>
-      <td>...</td>
-      <td>-0.070045</td>
-      <td>0.071417</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.049118</td>
-      <td>0.066415</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1871-01-01</th>
-      <th>Australia</th>
-      <td>1675.000000</td>
-      <td>3298.507463</td>
-      <td>13.936864</td>
-      <td>19.930801</td>
-      <td>211.560</td>
-      <td>0.104579</td>
-      <td>2.666667</td>
-      <td>5.260774</td>
-      <td>34.000</td>
-      <td>46.000</td>
-      <td>...</td>
-      <td>0.041654</td>
-      <td>0.065466</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.048446</td>
-      <td>0.068193</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1872-01-01</th>
-      <th>Australia</th>
-      <td>1722.000000</td>
-      <td>3553.426249</td>
-      <td>15.044247</td>
-      <td>21.085006</td>
-      <td>227.400</td>
-      <td>0.130438</td>
-      <td>2.541667</td>
-      <td>7.867636</td>
-      <td>38.000</td>
-      <td>53.000</td>
-      <td>...</td>
-      <td>0.108945</td>
-      <td>0.062997</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.047373</td>
-      <td>0.069861</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1873-01-01</th>
-      <th>Australia</th>
-      <td>1769.000000</td>
-      <td>3823.629169</td>
-      <td>16.219443</td>
-      <td>23.254910</td>
-      <td>266.540</td>
-      <td>0.124986</td>
-      <td>2.541667</td>
-      <td>-11.047833</td>
-      <td>49.000</td>
-      <td>50.000</td>
-      <td>...</td>
-      <td>0.083086</td>
-      <td>0.064484</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.046720</td>
-      <td>0.069842</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1874-01-01</th>
-      <th>Australia</th>
-      <td>1822.000000</td>
-      <td>3834.796926</td>
-      <td>16.268228</td>
-      <td>23.458050</td>
-      <td>287.580</td>
-      <td>0.141960</td>
-      <td>2.666667</td>
-      <td>-5.563959</td>
-      <td>49.000</td>
-      <td>54.000</td>
-      <td>...</td>
-      <td>0.119389</td>
-      <td>0.063503</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.046533</td>
-      <td>0.071085</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2013-01-01</th>
-      <th>USA</th>
-      <td>315820.328999</td>
-      <td>31571.993947</td>
-      <td>103.425299</td>
-      <td>101.892671</td>
-      <td>16784.851</td>
-      <td>0.192086</td>
-      <td>173.067206</td>
-      <td>-426.197000</td>
-      <td>2768.600</td>
-      <td>2276.625</td>
-      <td>...</td>
-      <td>0.271035</td>
-      <td>0.019355</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.023508</td>
-      <td>0.024601</td>
-      <td>0.139843</td>
-      <td>0.212405</td>
-      <td>-0.065168</td>
-    </tr>
-    <tr>
-      <th>2014-01-01</th>
-      <th>USA</th>
-      <td>318106.646578</td>
-      <td>32113.618881</td>
-      <td>105.186253</td>
-      <td>104.113597</td>
-      <td>17527.258</td>
-      <td>0.196377</td>
-      <td>175.997979</td>
-      <td>-365.193000</td>
-      <td>2879.284</td>
-      <td>2371.027</td>
-      <td>...</td>
-      <td>0.136350</td>
-      <td>0.019199</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.025408</td>
-      <td>0.021817</td>
-      <td>0.130063</td>
-      <td>0.132729</td>
-      <td>0.122398</td>
-    </tr>
-    <tr>
-      <th>2015-01-01</th>
-      <th>USA</th>
-      <td>320413.930388</td>
-      <td>32800.923063</td>
-      <td>107.421590</td>
-      <td>107.192931</td>
-      <td>18224.780</td>
-      <td>0.198301</td>
-      <td>176.301162</td>
-      <td>-407.769000</td>
-      <td>2786.461</td>
-      <td>2265.047</td>
-      <td>...</td>
-      <td>-0.000092</td>
-      <td>0.021124</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.021358</td>
-      <td>0.021122</td>
-      <td>0.046193</td>
-      <td>0.065433</td>
-      <td>-0.008779</td>
-    </tr>
-    <tr>
-      <th>2016-01-01</th>
-      <th>USA</th>
-      <td>322705.239927</td>
-      <td>33078.508719</td>
-      <td>108.318698</td>
-      <td>109.333457</td>
-      <td>18715.040</td>
-      <td>0.195831</td>
-      <td>178.575038</td>
-      <td>-428.350000</td>
-      <td>2738.146</td>
-      <td>2217.576</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2017-01-01</th>
-      <th>USA</th>
-      <td>324802.861426</td>
-      <td>33593.446309</td>
-      <td>110.013284</td>
-      <td>111.389150</td>
-      <td>19519.424</td>
-      <td>0.204547</td>
-      <td>182.415361</td>
-      <td>-439.642000</td>
-      <td>2928.596</td>
-      <td>2350.175</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>2664 rows × 52 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 </div>
  
 

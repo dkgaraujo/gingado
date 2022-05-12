@@ -6,9 +6,7 @@ __all__ = ['augm_with_sdmx']
 from simpledmx import *
 
 # Cell
-import pandas as pd
-
-def augm_with_sdmx(df, start_date, end_date, time_col, freq, sources=None):
+def augm_with_sdmx(df, start_date, end_date, time_col, freq, sources, variance_threshold=None):
     """Downloads relevant data from SDMX sources to complement the original dataset
 
     Arguments:
@@ -17,6 +15,7 @@ def augm_with_sdmx(df, start_date, end_date, time_col, freq, sources=None):
       time_col: the name of the column in the original dataset that corresponds to time
       freq: the frequency of the desired data from SDMX; for example, 'A' is annual
       sources: the list of SDMX sources or None; a list of possible sources can be obtained by running the function list_sdmx_sources()
+      variance_threshold: a value larger than or equal to 0 or None, where 0 will lead to the removal of all data that does not vary across the dataset and None uses the scikit-learn default
     """
     if start_date is None:
         start_date = df[time_col].min()
@@ -32,6 +31,16 @@ def augm_with_sdmx(df, start_date, end_date, time_col, freq, sources=None):
     sdmx_data = sdmx_data.dropna(axis=1).sort_index()
     sdmx_data.reset_index(inplace=True)
     sdmx_data['TIME_PERIOD'] = pd.to_datetime(sdmx_data['TIME_PERIOD'])
+    sdmx_data.set_index('TIME_PERIOD', inplace=True)
+
+    feat_sel = VarianceThreshold() if variance_threshold is None else VarianceThreshold(threshold=variance_threshold)
+    feat_sel.fit(sdmx_data)
+
+    # TODO: log which features were not kept and why
+    sdmx_data = sdmx_data.iloc[:, feat_sel.get_support()]
+
+    #sdmx_data = feat_sel.fit_transform(sdmx_data)
+
     if df is None:
         return sdmx_data
     df = df.merge(sdmx_data, how='left', left_on=time_col, right_on='TIME_PERIOD')
