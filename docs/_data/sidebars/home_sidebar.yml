@@ -13,6 +13,9 @@ entries:
       title: Data augmentation
       url: augmentation.html
     - output: web,pdf
+      title: Utils
+      url: utils.html
+    - output: web,pdf
       title: Automatic benchmark model
       url: benchmark.html
     - output: web,pdf

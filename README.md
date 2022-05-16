@@ -4,6 +4,8 @@
 
 The purpose of `gingado` is to support usage of machine learning models in economics and finance use cases, promoting good modelling practices while being easy to use. `gingado` aims to be suitable for beginners and advanced users alike.
 
+Most functionalities are likely to also be useful to a broader set of users. In addition to more general benefits, `gingado` is designed to align well with the workflow needs of economists due to its support for panel datasets and the functionality to quickly and easily add official statistical data on macroeconomics and finance to the user dataset.
+
 ## Install
 
 To install `gingado`, simply run the following code on the terminal:
@@ -17,7 +19,7 @@ To install `gingado`, simply run the following code on the terminal:
 * **automatic benchmark model**, to enable the user to assess their models against a reasonably well-performant model; and
 * **support for model documentation**, to embed documentation and ethical considerations in the model development phase.
 
-Each of these functionalities is illustrated below for a user trying to forecast GDP growth. Each step builds on top of the previous one, and they can be done with one line of code! But to highlight how `gingado` can benefit users in multiple ways, the brief walk-through below goes over them separtely. 
+Each of these functionalities is illustrated below for a user trying to forecast GDP growth. Each step builds on top of the previous one, and they can be used stand-alone, together, or even as part of a larger pipeline from data input to model training to documentation! But to highlight how `gingado` can benefit users in multiple ways, the brief walk-through below goes over them separtely and then highlights how they can work jointly. 
 
 Before stepping in, let's import the necessary packages and data.
 
@@ -34,364 +36,22 @@ jst = pd.read_stata(JST_url, iterator=False)
 jst.tail()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>country</th>
-      <th>iso</th>
-      <th>ifs</th>
-      <th>pop</th>
-      <th>rgdpmad</th>
-      <th>rgdppc</th>
-      <th>rconpc</th>
-      <th>gdp</th>
-      <th>iy</th>
-      <th>...</th>
-      <th>eq_capgain</th>
-      <th>eq_dp</th>
-      <th>eq_capgain_interp</th>
-      <th>eq_tr_interp</th>
-      <th>eq_dp_interp</th>
-      <th>bond_rate</th>
-      <th>eq_div_rtn</th>
-      <th>capital_tr</th>
-      <th>risky_tr</th>
-      <th>safe_tr</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2659</th>
-      <td>2013.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>315820.328999</td>
-      <td>31571.993947</td>
-      <td>103.425299</td>
-      <td>101.892671</td>
-      <td>16784.851</td>
-      <td>0.192086</td>
-      <td>...</td>
-      <td>0.271035</td>
-      <td>0.019355</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.023508</td>
-      <td>0.024601</td>
-      <td>0.139843</td>
-      <td>0.212405</td>
-      <td>-0.065168</td>
-    </tr>
-    <tr>
-      <th>2660</th>
-      <td>2014.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>318106.646578</td>
-      <td>32113.618881</td>
-      <td>105.186253</td>
-      <td>104.113597</td>
-      <td>17527.258</td>
-      <td>0.196377</td>
-      <td>...</td>
-      <td>0.136350</td>
-      <td>0.019199</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.025408</td>
-      <td>0.021817</td>
-      <td>0.130063</td>
-      <td>0.132729</td>
-      <td>0.122398</td>
-    </tr>
-    <tr>
-      <th>2661</th>
-      <td>2015.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>320413.930388</td>
-      <td>32800.923063</td>
-      <td>107.421590</td>
-      <td>107.192931</td>
-      <td>18224.780</td>
-      <td>0.198301</td>
-      <td>...</td>
-      <td>-0.000092</td>
-      <td>0.021124</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.021358</td>
-      <td>0.021122</td>
-      <td>0.046193</td>
-      <td>0.065433</td>
-      <td>-0.008779</td>
-    </tr>
-    <tr>
-      <th>2662</th>
-      <td>2016.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>322705.239927</td>
-      <td>33078.508719</td>
-      <td>108.318698</td>
-      <td>109.333457</td>
-      <td>18715.040</td>
-      <td>0.195831</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2663</th>
-      <td>2017.0</td>
-      <td>USA</td>
-      <td>USA</td>
-      <td>111</td>
-      <td>324802.861426</td>
-      <td>33593.446309</td>
-      <td>110.013284</td>
-      <td>111.389150</td>
-      <td>19519.424</td>
-      <td>0.204547</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 57 columns</p>
-</div>
-
-
-
-For practical purposes, let's use for this database only the information from 1991 onwards:
+For practical purposes, let's use for this database only the information from 2011 onwards:
 
 ```python
 jst.drop(labels=['iso', 'ifs', 'crisisJST_old'], axis=1, inplace=True)
 jst['year'] = pd.to_datetime(jst['year'], format='%Y')
 
-start_year = '1991-01-01'
+start_year = '2011-01-01'
 end_year = '2016-01-01'
 jst = jst[jst['year'] >= start_year]
+
+jst.set_index(['year', 'country'], inplace=True)
 ```
 
 ```python
 jst.tail()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>country</th>
-      <th>pop</th>
-      <th>rgdpmad</th>
-      <th>rgdppc</th>
-      <th>rconpc</th>
-      <th>gdp</th>
-      <th>iy</th>
-      <th>cpi</th>
-      <th>ca</th>
-      <th>...</th>
-      <th>eq_capgain</th>
-      <th>eq_dp</th>
-      <th>eq_capgain_interp</th>
-      <th>eq_tr_interp</th>
-      <th>eq_dp_interp</th>
-      <th>bond_rate</th>
-      <th>eq_div_rtn</th>
-      <th>capital_tr</th>
-      <th>risky_tr</th>
-      <th>safe_tr</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2659</th>
-      <td>2013-01-01</td>
-      <td>USA</td>
-      <td>315820.328999</td>
-      <td>31571.993947</td>
-      <td>103.425299</td>
-      <td>101.892671</td>
-      <td>16784.851</td>
-      <td>0.192086</td>
-      <td>173.067206</td>
-      <td>-426.197</td>
-      <td>...</td>
-      <td>0.271035</td>
-      <td>0.019355</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.023508</td>
-      <td>0.024601</td>
-      <td>0.139843</td>
-      <td>0.212405</td>
-      <td>-0.065168</td>
-    </tr>
-    <tr>
-      <th>2660</th>
-      <td>2014-01-01</td>
-      <td>USA</td>
-      <td>318106.646578</td>
-      <td>32113.618881</td>
-      <td>105.186253</td>
-      <td>104.113597</td>
-      <td>17527.258</td>
-      <td>0.196377</td>
-      <td>175.997979</td>
-      <td>-365.193</td>
-      <td>...</td>
-      <td>0.136350</td>
-      <td>0.019199</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.025408</td>
-      <td>0.021817</td>
-      <td>0.130063</td>
-      <td>0.132729</td>
-      <td>0.122398</td>
-    </tr>
-    <tr>
-      <th>2661</th>
-      <td>2015-01-01</td>
-      <td>USA</td>
-      <td>320413.930388</td>
-      <td>32800.923063</td>
-      <td>107.421590</td>
-      <td>107.192931</td>
-      <td>18224.780</td>
-      <td>0.198301</td>
-      <td>176.301162</td>
-      <td>-407.769</td>
-      <td>...</td>
-      <td>-0.000092</td>
-      <td>0.021124</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.021358</td>
-      <td>0.021122</td>
-      <td>0.046193</td>
-      <td>0.065433</td>
-      <td>-0.008779</td>
-    </tr>
-    <tr>
-      <th>2662</th>
-      <td>2016-01-01</td>
-      <td>USA</td>
-      <td>322705.239927</td>
-      <td>33078.508719</td>
-      <td>108.318698</td>
-      <td>109.333457</td>
-      <td>18715.040</td>
-      <td>0.195831</td>
-      <td>178.575038</td>
-      <td>-428.350</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2663</th>
-      <td>2017-01-01</td>
-      <td>USA</td>
-      <td>324802.861426</td>
-      <td>33593.446309</td>
-      <td>110.013284</td>
-      <td>111.389150</td>
-      <td>19519.424</td>
-      <td>0.204547</td>
-      <td>182.415361</td>
-      <td>-439.642</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 54 columns</p>
-</div>
-
-
 
 ### Data augmentation
 
@@ -407,260 +67,9 @@ from gingado.augmentation import augm_with_sdmx
 jst_augm_gingado = augm_with_sdmx(jst, start_year, end_year, time_col='year', freq='A', sources='BIS')
 ```
 
-      6%|▌         | 1/18 [00:00<00:07,  2.23it/s]
-
-    Source: BIS, dataflow: WS_CBPOL_D ok!
-
-
-     11%|█         | 2/18 [00:00<00:05,  2.89it/s]
-
-    Source: BIS, dataflow: WS_CBPOL_M ok!
-
-
-     17%|█▋        | 3/18 [00:01<00:04,  3.06it/s]
-
-    Source: BIS, dataflow: WS_CBS_PUB ok!
-
-
-     22%|██▏       | 4/18 [00:01<00:04,  3.47it/s]
-
-    Source: BIS, dataflow: WS_CREDIT_GAP ok!
-
-
-     28%|██▊       | 5/18 [00:01<00:03,  3.57it/s]
-
-    Source: BIS, dataflow: WS_DEBT_SEC2_PUB ok!
-
-
-     39%|███▉      | 7/18 [00:01<00:02,  4.11it/s]
-
-    Source: BIS, dataflow: WS_DER_OTC_TOV ok!
-    Source: BIS, dataflow: WS_DSR ok!
-
-
-     50%|█████     | 9/18 [00:02<00:02,  3.89it/s]
-
-    Source: BIS, dataflow: WS_EER_D ok!
-    Source: BIS, dataflow: WS_EER_M ok!
-
-
-     61%|██████    | 11/18 [00:02<00:01,  4.27it/s]
-
-    Source: BIS, dataflow: WS_GLI ok!
-    Source: BIS, dataflow: WS_LBS_D_PUB ok!
-
-
-     67%|██████▋   | 12/18 [00:03<00:01,  4.42it/s]
-
-    Source: BIS, dataflow: WS_LONG_CPI ok!
-
-
-     78%|███████▊  | 14/18 [00:03<00:00,  4.51it/s]
-
-    Source: BIS, dataflow: WS_OTC_DERIV2 ok!
-    Source: BIS, dataflow: WS_SPP ok!
-
-
-     89%|████████▉ | 16/18 [00:03<00:00,  5.14it/s]
-
-    Source: BIS, dataflow: WS_TC ok!
-    Source: BIS, dataflow: WS_XRU ok!
-
-
-     94%|█████████▍| 17/18 [00:04<00:00,  5.33it/s]
-
-    Source: BIS, dataflow: WS_XRU_D ok!
-
-
-    100%|██████████| 18/18 [00:04<00:00,  3.86it/s]
-
-
-    Source: BIS, dataflow: WS_XTD_DERIV ok!
-
-
-     25%|██▌       | 1/4 [00:02<00:06,  2.05s/it]
-
-    Source: WB, dataflow: DF_WITS_Tariff_TRAINS ok!
-
-
-     50%|█████     | 2/4 [00:02<00:02,  1.09s/it]
-
-    Source: WB, dataflow: DF_WITS_TradeStats_Development ok!
-
-
-     75%|███████▌  | 3/4 [00:02<00:00,  1.28it/s]
-
-    Source: WB, dataflow: DF_WITS_TradeStats_Tariff ok!
-
-
-    100%|██████████| 4/4 [00:03<00:00,  1.21it/s]
-
-
-    Source: WB, dataflow: DF_WITS_TradeStats_Trade ok!
-
-
-      6%|▌         | 1/18 [00:00<00:03,  4.54it/s]
-
-    Trying to download WS_CBPOL_D from BIS... not possible.
-
-
-     11%|█         | 2/18 [00:00<00:03,  4.65it/s]
-
-    Trying to download WS_CBPOL_M from BIS... not possible.
-
-
-     17%|█▋        | 3/18 [00:00<00:03,  3.95it/s]
-
-    Trying to download WS_CBS_PUB from BIS... not possible.
-
-
-     22%|██▏       | 4/18 [00:00<00:03,  4.03it/s]
-
-    Trying to download WS_CREDIT_GAP from BIS... not possible.
-
-
-     28%|██▊       | 5/18 [00:01<00:03,  3.95it/s]
-
-    Trying to download WS_DEBT_SEC2_PUB from BIS... not possible.
-
-
-     33%|███▎      | 6/18 [02:41<10:57, 54.82s/it]
-
-    Trying to download WS_DER_OTC_TOV from BIS... ok!
-
-
-     39%|███▉      | 7/18 [02:42<06:47, 37.02s/it]
-
-    Trying to download WS_DSR from BIS... not possible.
-
-
-     44%|████▍     | 8/18 [02:42<04:12, 25.30s/it]
-
-    Trying to download WS_EER_D from BIS... not possible.
-
-
-     50%|█████     | 9/18 [02:42<02:37, 17.45s/it]
-
-    Trying to download WS_EER_M from BIS... not possible.
-
-
-     61%|██████    | 11/18 [02:43<00:59,  8.48s/it]
-
-    Trying to download WS_GLI from BIS... not possible.
-    Trying to download WS_LBS_D_PUB from BIS... not possible.
-
-
-     67%|██████▋   | 12/18 [02:43<00:36,  6.10s/it]
-
-    Trying to download WS_LONG_CPI from BIS... ok!
-
-
-     78%|███████▊  | 14/18 [02:44<00:12,  3.06s/it]
-
-    Trying to download WS_OTC_DERIV2 from BIS... not possible.
-    Trying to download WS_SPP from BIS... not possible.
-
-
-     83%|████████▎ | 15/18 [02:44<00:06,  2.20s/it]
-
-    Trying to download WS_TC from BIS... not possible.
-
-
-     94%|█████████▍| 17/18 [02:46<00:01,  1.44s/it]
-
-    Trying to download WS_XRU from BIS... ok!
-    Trying to download WS_XRU_D from BIS... not possible.
-
-
-    100%|██████████| 18/18 [06:24<00:00, 21.37s/it]
-
-
-    Trying to download WS_XTD_DERIV from BIS... ok!
-
-
-      0%|          | 0/4 [00:00<?, ?it/s]/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandasdmx/api.py:260: UserWarning: 'provider' argument is redundant for <Resource.data: 'data'>
-      warn(f"'provider' argument is redundant for {resource_type!r}")
-     25%|██▌       | 1/4 [00:01<00:03,  1.24s/it]
-
-    Trying to download DF_WITS_Tariff_TRAINS from WB... not possible.
-
-
-     50%|█████     | 2/4 [00:01<00:01,  1.50it/s]
-
-    Trying to download DF_WITS_TradeStats_Development from WB... not possible.
-
-
-     75%|███████▌  | 3/4 [00:01<00:00,  2.08it/s]
-
-    Trying to download DF_WITS_TradeStats_Tariff from WB... not possible.
-
-
-    100%|██████████| 4/4 [00:02<00:00,  1.94it/s]
-
-
-    Trying to download DF_WITS_TradeStats_Trade from WB... not possible.
-
-
-      0%|          | 0/4 [00:00<?, ?it/s]
-
-    Getting data from BIS's WS_DER_OTC_TOV
-
-
-     25%|██▌       | 1/4 [00:08<00:24,  8.31s/it]
-
-    Getting data from BIS's WS_LONG_CPI
-
-
-     50%|█████     | 2/4 [00:08<00:07,  3.59s/it]
-
-    Successful
-    Getting data from BIS's WS_XRU
-
-
-     75%|███████▌  | 3/4 [00:09<00:02,  2.36s/it]
-
-    Successful
-    Getting data from BIS's WS_XTD_DERIV
-
-
-    100%|██████████| 4/4 [00:10<00:00,  2.61s/it]
-
-
-    Successful
-
-
-    0it [00:00, ?it/s]
-
-
-
-    ---------------------------------------------------------------------------
-
-    AttributeError                            Traceback (most recent call last)
-
-    /Users/douglasaraujo/Coding/gingado/index.ipynb Cell 11' in <module>
-          <a href='vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/index.ipynb#ch0000007?line=0'>1</a> from gingado.augmentation import augm_with_sdmx
-    ----> <a href='vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/index.ipynb#ch0000007?line=2'>3</a> jst_augm_gingado = augm_with_sdmx(jst, start_year, end_year, time_col='year', freq='A', sources=['BIS', 'WB'])
-
-
-    File ~/Coding/gingado/gingado/augmentation.py:33, in augm_with_sdmx(df, start_date, end_date, time_col, freq, sources)
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=24'>25</a>     end_date=df[time_col].max()
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=26'>27</a> sdmx_data = get_sdmx_data(
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=27'>28</a>     start_date=start_date,
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=28'>29</a>     end_date=end_date,
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=29'>30</a>     freq=freq,
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=30'>31</a>     sources=sources
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=31'>32</a>     )
-    ---> <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=32'>33</a> sdmx_data = sdmx_data.dropna(axis=1).sort_index()
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=33'>34</a> sdmx_data.reset_index(inplace=True)
-         <a href='file:///Users/douglasaraujo/Coding/gingado/gingado/augmentation.py?line=34'>35</a> sdmx_data['TIME_PERIOD'] = pd.to_datetime(sdmx_data['TIME_PERIOD'])
-
-
-    AttributeError: 'NoneType' object has no attribute 'dropna'
-
-
 ### Automatic benchmark
 
-Now
+Creating a model card can be facilitated by using the template. Upon creation, two informations are already filled by gingado...
 
 ## Design principles
 
@@ -668,3 +77,476 @@ The choices made during development of `gingado` derive from the following princ
 * *lowering the barrier to use machine learning* can help more economists familiarise themselves with these techniques and use them when appopriate
 * *promoting good practices* such as documenting ethical considerations and benchmarking models as part of machine learning development will help embed these habits in economists
 * *offering compatibility with other existing software that is consolidated by wide practice* benefits users and should be promoted as much as possible
+
+## Start-to-end usage example of `gingado`
+
+Let's use `gingado` to implement a machine learning model that seeks to predict multiple exchange rates at the same time. 
+
+### Obtaining the data
+
+The main dataset of interest is the EUR exchange rate against a set of other currencies. It is obtainable from the European Central Bank. Let's download the data using the SDMX protocol to ensure we are using trusted data from the official source and according to a definition that is compatible with the needs of this walk-through. If you are more particularly interested in the use of `gingado` to a dataset that is already downloaded, please proceed to the next section.
+
+If you want to know more about how you can use SDMX with python, or understand the details of this particular data request, consider visiting the [pandasdmx documentation](https://pandasdmx.readthedocs.io/en/v1.0/walkthrough.html). Note that this particular dataset was selected to illustrate this section because it is the similar to the example in the `pandasdmx` documentation, so that readers can refer to that material if more detail is needed.
+
+```python
+import pandasdmx as sdmx
+ecb = sdmx.Request('ECB')
+flow_msg = ecb.dataflow()
+```
+
+```python
+exr_msg = ecb.dataflow('EXR')
+exr_flow = exr_msg.dataflow.EXR
+dsd = exr_flow.structure
+```
+
+```python
+key = {
+    "CURRENCY": ['EUR', 'AUD', 'BRL', 'CAD', 'CHF', 'GBP', 'JPY', 'SGD', 'USD'],
+    "FREQ": 'D'
+}
+
+params = {"startPeriod": '2003'}
+```
+
+```python
+data_msg = ecb.data('EXR', key=key, params=params, dsd=dsd)
+EUR_FX = sdmx.to_pandas(data_msg.data[0], datetime='TIME_PERIOD')
+```
+
+The variable EUR_FX holds the data we want. The following lines remove index levels that are single-valued (and thus do not differentiate groups of observations), and pivots the data so that each exchange rate against the EUR is located in its own column.
+
+```python
+EUR_FX = EUR_FX.droplevel(['FREQ', 'CURRENCY_DENOM', 'EXR_TYPE', 'EXR_SUFFIX'], axis=1).dropna()
+```
+
+Before proceeding, let's plot the series to confirm that they were downloaded properly, and also to get a visual idea of how they vary over time.
+
+```python
+EUR_FX.plot(subplots=True, layout=(4, 2))
+```
+
+
+
+
+    array([[<AxesSubplot:xlabel='TIME_PERIOD'>,
+            <AxesSubplot:xlabel='TIME_PERIOD'>],
+           [<AxesSubplot:xlabel='TIME_PERIOD'>,
+            <AxesSubplot:xlabel='TIME_PERIOD'>],
+           [<AxesSubplot:xlabel='TIME_PERIOD'>,
+            <AxesSubplot:xlabel='TIME_PERIOD'>],
+           [<AxesSubplot:xlabel='TIME_PERIOD'>,
+            <AxesSubplot:xlabel='TIME_PERIOD'>]], dtype=object)
+
+
+
+
+![png](docs/images/output_20_1.png)
+
+
+### `gingado`'s first contribution: Augmenting data
+
+The user now might want to add more data to the original dataset. This would offer the machine learning model a more rich set of inputs from which to uncover relationships that will help better predict the dataset of interest.
+
+`gingado` helps the user augment its original dataset using the SDMX to fetch relevant data from official sources. But first, let's do it step by step.
+
+#### Preliminaries
+This phase entails importing the necessary libraries and defining the source(s), frequency and starting period for the statistical data to be downloaded.
+
+```python
+import pandas as pd
+import pandasdmx as sdmx
+from sklearn.feature_selection import VarianceThreshold
+
+sources = ['ECB']
+key = {"FREQ": 'D'}
+
+params = {"startPeriod": '2003-01-01'}
+```
+
+#### Downloading the additional data
+
+During this step, the information is sought after from the official sources, and added to the original dataset provided by the user.
+
+```python
+data_sdmx = {}
+for source in sources:
+    src_conn = sdmx.Request(source, backend='memory', expire_after=1800)
+    src_dflows = src_conn.dataflow()
+    dflows = {k: v for k, v in src_dflows.dataflow.items()}
+    for dflow in dflows.keys():
+        print(f"Trying to download data from {source}'s dataflow {dflow}...")
+        try:
+            data = sdmx.to_pandas(src_conn.data(dflow, key=key, params=params), datetime='TIME_PERIOD')
+        except:
+            print("this dataflow does not have data in the desired frequency and time period.")
+            continue
+        data.columns = ['_'.join(col) for col in data.columns.to_flat_index()]
+        data_sdmx[source+"_"+dflow] = data
+df = pd.concat(data_sdmx, axis=1)
+df.columns = ['_'.join(col) for col in df.columns.to_flat_index()]
+```
+
+#### Cleaning the augmented dataset
+
+It is plausible that some of the newly downloaded data might not be useful for the user. For example, they might not vary during the desired time period, or they might be collinear to the original dataset provided by the user. So this step entails removing any instances where this occurs in the augmented dataset.
+
+```python
+variance_threshold = None
+
+feat_sel = VarianceThreshold() if variance_threshold is None else VarianceThreshold(threshold=variance_threshold)
+feat_sel.fit(df)
+    
+features_stay_ = df.columns[feat_sel.get_support()]
+features_removed_ = df.columns[~feat_sel.get_support()]
+
+df = df.iloc[:, feat_sel.get_support()]
+```
+
+#### Merging the new dataset with the original dataset
+
+The original dataset is now augmented by additional data. One last check is done before handing it over again to the user, to confirm that the newly added data is not collinear to any of the columns of the original dataset. (TODO)
+
+```python
+augm_df = pd.concat([EUR_FX.dropna(), df], axis=1, join='inner')
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUD</th>
+      <th>BRL</th>
+      <th>CAD</th>
+      <th>CHF</th>
+      <th>GBP</th>
+      <th>JPY</th>
+      <th>SGD</th>
+      <th>USD</th>
+      <th>ECB_CISS_D_AT_Z0Z_4F_EC_SS_CIN_IDX</th>
+      <th>ECB_CISS_D_BE_Z0Z_4F_EC_SS_CIN_IDX</th>
+      <th>...</th>
+      <th>ECB_RDE_D_D0_Z0Z_DE_EC_SRCB_COVAR_95P</th>
+      <th>ECB_RDE_D_D0_Z0Z_DE_EC_SRCB_COVAR_AVE</th>
+      <th>ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_5P</th>
+      <th>ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_95P</th>
+      <th>ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_AVE</th>
+      <th>ECB_RDF_D_D0_Z0Z_4F_EC_DFTLB_PR</th>
+      <th>ECB_RDF_D_U2_Z0Z_4F_EC_U2_CEB_HST</th>
+      <th>ECB_RDF_D_U2_Z0Z_4F_EC_U2_CI_HST</th>
+      <th>ECB_RDF_D_U2_Z0Z_4F_EC_U2_GRAI_HST</th>
+      <th>ECB_RDF_D_U2_Z0Z_4F_EC_U2_MM_HST</th>
+    </tr>
+    <tr>
+      <th>TIME_PERIOD</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2003-01-02</th>
+      <td>1.8554</td>
+      <td>3.6770</td>
+      <td>1.6422</td>
+      <td>1.4528</td>
+      <td>0.65200</td>
+      <td>124.40</td>
+      <td>1.8188</td>
+      <td>1.0446</td>
+      <td>0.023427</td>
+      <td>0.047823</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.50</td>
+      <td>-0.42</td>
+      <td>1.17</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2003-01-03</th>
+      <td>1.8440</td>
+      <td>3.6112</td>
+      <td>1.6264</td>
+      <td>1.4555</td>
+      <td>0.65000</td>
+      <td>124.56</td>
+      <td>1.8132</td>
+      <td>1.0392</td>
+      <td>0.021899</td>
+      <td>0.043292</td>
+      <td>...</td>
+      <td>-0.008989</td>
+      <td>-0.078866</td>
+      <td>-0.178504</td>
+      <td>-0.04966</td>
+      <td>-0.112854</td>
+      <td>NaN</td>
+      <td>-0.48</td>
+      <td>-0.40</td>
+      <td>1.04</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2003-01-06</th>
+      <td>1.8281</td>
+      <td>3.5145</td>
+      <td>1.6383</td>
+      <td>1.4563</td>
+      <td>0.64950</td>
+      <td>124.40</td>
+      <td>1.8210</td>
+      <td>1.0488</td>
+      <td>0.020801</td>
+      <td>0.039924</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.47</td>
+      <td>-0.36</td>
+      <td>0.78</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>2003-01-07</th>
+      <td>1.8160</td>
+      <td>3.5139</td>
+      <td>1.6257</td>
+      <td>1.4565</td>
+      <td>0.64960</td>
+      <td>124.82</td>
+      <td>1.8155</td>
+      <td>1.0425</td>
+      <td>0.019738</td>
+      <td>0.038084</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.45</td>
+      <td>-0.34</td>
+      <td>0.61</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>2003-01-08</th>
+      <td>1.8132</td>
+      <td>3.4405</td>
+      <td>1.6231</td>
+      <td>1.4586</td>
+      <td>0.64950</td>
+      <td>124.90</td>
+      <td>1.8102</td>
+      <td>1.0377</td>
+      <td>0.019947</td>
+      <td>0.040338</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.43</td>
+      <td>-0.30</td>
+      <td>0.90</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-05-09</th>
+      <td>1.5048</td>
+      <td>5.4321</td>
+      <td>1.3656</td>
+      <td>1.0462</td>
+      <td>0.85235</td>
+      <td>138.10</td>
+      <td>1.4676</td>
+      <td>1.0559</td>
+      <td>0.236760</td>
+      <td>0.112418</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-05-10</th>
+      <td>1.5162</td>
+      <td>5.4232</td>
+      <td>1.3707</td>
+      <td>1.0479</td>
+      <td>0.85595</td>
+      <td>137.38</td>
+      <td>1.4667</td>
+      <td>1.0554</td>
+      <td>0.256625</td>
+      <td>0.130420</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-05-11</th>
+      <td>1.5055</td>
+      <td>5.3859</td>
+      <td>1.3685</td>
+      <td>1.0446</td>
+      <td>0.85393</td>
+      <td>137.07</td>
+      <td>1.4622</td>
+      <td>1.0553</td>
+      <td>0.250490</td>
+      <td>0.128284</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-05-12</th>
+      <td>1.5163</td>
+      <td>5.4161</td>
+      <td>1.3569</td>
+      <td>1.0377</td>
+      <td>0.85293</td>
+      <td>133.85</td>
+      <td>1.4529</td>
+      <td>1.0408</td>
+      <td>0.293719</td>
+      <td>0.153846</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-05-13</th>
+      <td>1.5067</td>
+      <td>5.3204</td>
+      <td>1.3505</td>
+      <td>1.0385</td>
+      <td>0.85115</td>
+      <td>133.91</td>
+      <td>1.4500</td>
+      <td>1.0385</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>4960 rows × 183 columns</p>
+</div>
+
+

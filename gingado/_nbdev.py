@@ -2,9 +2,14 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"augm_with_sdmx": "00_augmentation.ipynb"}
+index = {"augm_with_sdmx": "00_augmentation.ipynb",
+         "get_username": "00_utils.ipynb",
+         "get_datetime": "00_utils.ipynb",
+         "ModelCard": "02_documentation.ipynb"}
 
-modules = ["augmentation.py"]
+modules = ["augmentation.py",
+           "utils.py",
+           "model_documentation.py"]
 
 doc_url = "https://dkgaraujo.github.io/gingado/"
 

@@ -2,6 +2,7 @@
   "gingado": {
     "Overview": "/",
     "Data augmentation": "augmentation.html",
+    "Utils": "utils.html",
     "Automatic benchmark model": "benchmark.html",
     "Model documentation": "documentation.html"
   }

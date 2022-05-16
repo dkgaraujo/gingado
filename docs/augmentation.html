@@ -31,6 +31,7 @@ nb_path: "00_augmentation.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><p>Most users will probably find it helpful to use the <code>DataAugment</code> transformer, which is compatible with <code>scikit-learn</code>, rather than the underlying functions. However, they are documented below in case their use might address some specific user need.</p>
 <h2 id="Sources-of-data">Sources of data<a class="anchor-link" href="#Sources-of-data"> </a></h2><p><code>gingado</code> only lists official data sources by choice. This is meant to provide users with the trust that their dataset will be complemented by reliable sources. Unfortunately, it is not possible at this stage to include <em>all</em> official sources - let alone all reliable sources - because that requires substantial manual and maintenance work. <code>gingado</code> leverages the existence of the <a href="https://sdmx.org">Statistical Data and Metadata eXchange (SDMX)</a>, an organisation of official data sources that establishes common data and metadata formats, to download data that is relevant (and hopefully also useful) to users.</p>
 <p>The function below from the package <a href="https://github.com/dkgaraujo/simpledmx">simpledmx</a> returns a list of codes corresponding to the data sources available to provide <code>gingado</code> users with data through SDMX.</p>
 
@@ -117,13 +118,11 @@ nb_path: "00_augmentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>start_date</code></strong>, <strong><code>end_date</code></strong>, <strong><code>time_col</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Downloads relevant data from SDMX sources to complement the original dataset</p>
 <p>Arguments:
   df: a pandas DataFrame
-  start_date, end_date: the dates limiting the time period of the desired data from SDMX sources
-  time_col: the name of the column in the original dataset that corresponds to time
   freq: the frequency of the desired data from SDMX; for example, 'A' is annual
   sources: the list of SDMX sources or None; a list of possible sources can be obtained by running the function list_sdmx_sources()
   variance_threshold: a value larger than or equal to 0 or None, where 0 will lead to the removal of all data that does not vary across the dataset and None uses the scikit-learn default</p>
