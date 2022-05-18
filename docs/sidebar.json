@@ -4,6 +4,7 @@
     "Data augmentation": "augmentation.html",
     "Utils": "utils.html",
     "Automatic benchmark model": "benchmark.html",
-    "Model documentation": "documentation.html"
+    "Model documentation": "documentation.html",
+    "Walkthrough": "Walkthrough.html"
   }
 }

@@ -21,6 +21,9 @@ entries:
     - output: web,pdf
       title: Model documentation
       url: documentation.html
+    - output: web,pdf
+      title: Walkthrough
+      url: Walkthrough.html
     output: web
     title: gingado
   output: web
