@@ -256,10 +256,10 @@ nb_path: "Walkthrough.ipynb"
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this dataflow does not have data in the desired frequency and time period.&quot;</span><span class="p">)</span>
             <span class="k">continue</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
         <span class="n">data_sdmx</span><span class="p">[</span><span class="n">source</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">dflow</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">data_sdmx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
 </pre></div>
 
     </div>
@@ -856,6 +856,211 @@ Trying to download data from ECB&#39;s dataflow EXR...
 </div>
 </div>
 
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:30:44,796 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow FM...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:34:14,556 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow FVC...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow FXI...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:34:43,534 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow GST...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ICB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ICO...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ICP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow IFI...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:35:10,664 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow ILM...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:35:11,150 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow IRS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow IVF...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow KRI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow LIG...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow MFI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow MIR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow MMS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow MMSR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow MPD...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow OFI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow PFB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow PFBR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow PSS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RA...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RAI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RDE...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:35:15,393 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow RDF...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:35:18,868 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow RESC...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RESH...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RESR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RESV...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RIR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RPP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RPV...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow RTD...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SAFE...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SEC...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SEE...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SHI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SHS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SPF...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SSI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SSP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SST...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ST1...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ST3...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow STP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow STS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SUP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow SUR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow TGB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow TRD...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow WTS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow YC...
+this dataflow does not have data in the desired frequency and time period.
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -875,6 +1080,68 @@ Trying to download data from ECB&#39;s dataflow EXR...
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/douglasaraujo/Coding/gingado/Walkthrough.ipynb Cell 27&#39;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/Walkthrough.ipynb#ch0000044?line=0&#39;&gt;1&lt;/a&gt;</span> from pandas.testing import assert_frame_equal
+<span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/Walkthrough.ipynb#ch0000044?line=2&#39;&gt;3&lt;/a&gt;</span> assert_frame_equal(augm_df, augm_X, check_dtype=True)
+
+    <span class="ansi-red-fg">[... skipping hidden 2 frame]</span>
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_libs/testing.pyx:53</span>, in <span class="ansi-cyan-fg">pandas._libs.testing.assert_almost_equal</span><span class="ansi-blue-fg">()</span>
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_libs/testing.pyx:168</span>, in <span class="ansi-cyan-fg">pandas._libs.testing.assert_almost_equal</span><span class="ansi-blue-fg">()</span>
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_testing/asserters.py:665</span>, in <span class="ansi-cyan-fg">raise_assert_detail</span><span class="ansi-blue-fg">(obj, message, left, right, diff, index_values)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_testing/asserters.py?line=661&#39;&gt;662&lt;/a&gt;</span> if diff is not None:
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_testing/asserters.py?line=662&#39;&gt;663&lt;/a&gt;</span>     msg += f&#34;\n[diff]: {diff}&#34;
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/_testing/asserters.py?line=664&#39;&gt;665&lt;/a&gt;</span> raise AssertionError(msg)
+
+<span class="ansi-red-fg">AssertionError</span>: DataFrame.columns are different
+
+DataFrame.columns values are different (95.62842 %)
+[left]:  Index([&#39;AUD&#39;, &#39;BRL&#39;, &#39;CAD&#39;, &#39;CHF&#39;, &#39;GBP&#39;, &#39;JPY&#39;, &#39;SGD&#39;, &#39;USD&#39;,
+       &#39;ECB_CISS_D_AT_Z0Z_4F_EC_SS_CIN_IDX&#39;,
+       &#39;ECB_CISS_D_BE_Z0Z_4F_EC_SS_CIN_IDX&#39;,
+       ...
+       &#39;ECB_RDE_D_D0_Z0Z_DE_EC_SRCB_COVAR_95P&#39;,
+       &#39;ECB_RDE_D_D0_Z0Z_DE_EC_SRCB_COVAR_AVE&#39;,
+       &#39;ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_5P&#39;,
+       &#39;ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_95P&#39;,
+       &#39;ECB_RDE_D_D0_Z0Z_DE_EC_SRCI_COVAR_AVE&#39;,
+       &#39;ECB_RDF_D_D0_Z0Z_4F_EC_DFTLB_PR&#39;, &#39;ECB_RDF_D_U2_Z0Z_4F_EC_U2_CEB_HST&#39;,
+       &#39;ECB_RDF_D_U2_Z0Z_4F_EC_U2_CI_HST&#39;,
+       &#39;ECB_RDF_D_U2_Z0Z_4F_EC_U2_GRAI_HST&#39;,
+       &#39;ECB_RDF_D_U2_Z0Z_4F_EC_U2_MM_HST&#39;],
+      dtype=&#39;object&#39;, length=183)
+[right]: Index([&#39;AUD&#39;, &#39;BRL&#39;, &#39;CAD&#39;, &#39;CHF&#39;, &#39;GBP&#39;, &#39;JPY&#39;, &#39;SGD&#39;, &#39;USD&#39;,
+       &#39;ECB__CISS_D__AT__Z0Z__4F__EC__SS_CIN__IDX&#39;,
+       &#39;ECB__CISS_D__BE__Z0Z__4F__EC__SS_CIN__IDX&#39;,
+       ...
+       &#39;ECB__RDE_D__D0__Z0Z__DE__EC__SRCB_COVAR__95P&#39;,
+       &#39;ECB__RDE_D__D0__Z0Z__DE__EC__SRCB_COVAR__AVE&#39;,
+       &#39;ECB__RDE_D__D0__Z0Z__DE__EC__SRCI_COVAR__5P&#39;,
+       &#39;ECB__RDE_D__D0__Z0Z__DE__EC__SRCI_COVAR__95P&#39;,
+       &#39;ECB__RDE_D__D0__Z0Z__DE__EC__SRCI_COVAR__AVE&#39;,
+       &#39;ECB__RDF_D__D0__Z0Z__4F__EC__DFTLB__PR&#39;,
+       &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_CEB__HST&#39;,
+       &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_CI__HST&#39;,
+       &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_GRAI__HST&#39;,
+       &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_MM__HST&#39;],
+      dtype=&#39;object&#39;, length=183)</pre>
+</div>
+</div>
+
 </div>
 </div>
 
