@@ -257,9 +257,9 @@ nb_path: "Walkthrough.ipynb"
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this dataflow does not have data in the desired frequency and time period.&quot;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
-        <span class="n">data_sdmx</span><span class="p">[</span><span class="n">source</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">dflow</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">data_sdmx</span><span class="p">[</span><span class="n">source</span><span class="o">+</span><span class="s2">&quot;__&quot;</span><span class="o">+</span><span class="n">dflow</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">data_sdmx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
 </pre></div>
 
     </div>
@@ -740,6 +740,7 @@ this dataflow does not have data in the desired frequency and time period.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ggd_augm</span> <span class="o">=</span> <span class="n">gingadoSDMX</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ECB&#39;</span><span class="p">])</span>
 <span class="n">ggd_augm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">)</span>
+<span class="n">augm_X</span> <span class="o">=</span> <span class="n">ggd_augm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -757,308 +758,6 @@ this dataflow does not have data in the desired frequency and time period.
 <pre>gingadoSDMX(sources=[&#39;ECB&#39;])</pre>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">augm_X</span> <span class="o">=</span> <span class="n">ggd_augm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow AME...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BKN...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BLS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BNT...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BOP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BSI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow BSP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow CBD...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow CBD2...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow CCP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow CISS...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:29:39,491 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow CLIFS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow CPP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow DCM...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow DD...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow EON...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:30:06,718 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow ESA...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ESB...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow EST...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow EXR...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:30:44,796 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow FM...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:34:14,556 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow FVC...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow FXI...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:34:43,534 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow GST...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ICB...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ICO...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ICP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow IFI...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:35:10,664 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow ILM...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:35:11,150 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow IRS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow IVF...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow KRI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow LIG...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow MFI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow MIR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow MMS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow MMSR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow MPD...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow OFI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow PFB...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow PFBR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow PSS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RA...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RAI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RDE...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:35:15,393 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow RDF...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-19 02:35:18,868 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow RESC...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RESH...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RESR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RESV...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RIR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RPP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RPV...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow RTD...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SAFE...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SEC...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SEE...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SHI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SHS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SPF...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SSI...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SSP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SST...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ST1...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow ST3...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow STP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow STS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SUP...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow SUR...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow TGB...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow TRD...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow WTS...
-this dataflow does not have data in the desired frequency and time period.
-Trying to download data from ECB&#39;s dataflow YC...
-this dataflow does not have data in the desired frequency and time period.
-</pre>
-</div>
 </div>
 
 </div>
@@ -1139,6 +838,178 @@ DataFrame.columns values are different (95.62842 %)
        &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_GRAI__HST&#39;,
        &#39;ECB__RDF_D__U2__Z0Z__4F__EC__U2_MM__HST&#39;],
       dtype=&#39;object&#39;, length=183)</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ensuring-that-the-X-variable-has-a-conducive-format-formating-with-series">Ensuring that the X variable has a conducive format formating with series<a class="anchor-link" href="#Ensuring-that-the-X-variable-has-a-conducive-format-formating-with-series"> </a></h3><p>Now that the original dataset is accompanied by more data, <code>gingado</code> offers a function that ensures the X data is in the appropriate format, including with respect to any number of lags to be added in the data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">gingadoLag</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">jump</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jump</span> <span class="o">=</span> <span class="n">jump</span>
+    
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_names_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">columns</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">effective_lags_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">jump</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_lags_</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">lag</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">jump</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">lag_count</span> <span class="o">=</span> <span class="n">lag</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">lag_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag_count</span><span class="p">)</span>
+            <span class="n">lag_X</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">+</span><span class="s2">&quot;_lag&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lag_count</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">col_names_</span><span class="p">]</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">lag_X</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Testing-the-pipeline-so-far">Testing the pipeline so far<a class="anchor-link" href="#Testing-the-pipeline-so-far"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;ggdSDMX&#39;</span><span class="p">,</span> <span class="n">gingadoSDMX</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ggdLad&#39;</span><span class="p">,</span> <span class="n">gingadoLag</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/douglasaraujo/Coding/gingado/Walkthrough.ipynb Cell 31&#39;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/Walkthrough.ipynb#ch0000068?line=0&#39;&gt;1&lt;/a&gt;</span> pipe.fit(X=EUR_FX, y=None)
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py:390</span>, in <span class="ansi-cyan-fg">Pipeline.fit</span><span class="ansi-blue-fg">(self, X, y, **fit_params)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=363&#39;&gt;364&lt;/a&gt;</span> &#34;&#34;&#34;Fit the model.
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=364&#39;&gt;365&lt;/a&gt;</span> 
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=365&#39;&gt;366&lt;/a&gt;</span> Fit all the transformers one after the other and transform the
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=386&#39;&gt;387&lt;/a&gt;</span>     Pipeline with fitted steps.
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=387&#39;&gt;388&lt;/a&gt;</span> &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=388&#39;&gt;389&lt;/a&gt;</span> fit_params_steps = self._check_fit_params(**fit_params)
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=389&#39;&gt;390&lt;/a&gt;</span> Xt = self._fit(X, y, **fit_params_steps)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=390&#39;&gt;391&lt;/a&gt;</span> with _print_elapsed_time(&#34;Pipeline&#34;, self._log_message(len(self.steps) - 1)):
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=391&#39;&gt;392&lt;/a&gt;</span>     if self._final_estimator != &#34;passthrough&#34;:
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py:348</span>, in <span class="ansi-cyan-fg">Pipeline._fit</span><span class="ansi-blue-fg">(self, X, y, **fit_params_steps)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=345&#39;&gt;346&lt;/a&gt;</span>     cloned_transformer = clone(transformer)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=346&#39;&gt;347&lt;/a&gt;</span> # Fit or load from cache the current transformer
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=347&#39;&gt;348&lt;/a&gt;</span> X, fitted_transformer = fit_transform_one_cached(
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=348&#39;&gt;349&lt;/a&gt;</span>     cloned_transformer,
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=349&#39;&gt;350&lt;/a&gt;</span>     X,
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=350&#39;&gt;351&lt;/a&gt;</span>     y,
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=351&#39;&gt;352&lt;/a&gt;</span>     None,
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=352&#39;&gt;353&lt;/a&gt;</span>     message_clsname=&#34;Pipeline&#34;,
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=353&#39;&gt;354&lt;/a&gt;</span>     message=self._log_message(step_idx),
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=354&#39;&gt;355&lt;/a&gt;</span>     **fit_params_steps[name],
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=355&#39;&gt;356&lt;/a&gt;</span> )
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=356&#39;&gt;357&lt;/a&gt;</span> # Replace the transformer of the step with the fitted
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=357&#39;&gt;358&lt;/a&gt;</span> # transformer. This is necessary when loading the transformer
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=358&#39;&gt;359&lt;/a&gt;</span> # from the cache.
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=359&#39;&gt;360&lt;/a&gt;</span> self.steps[step_idx] = (name, fitted_transformer)
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/joblib/memory.py:349</span>, in <span class="ansi-cyan-fg">NotMemorizedFunc.__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/joblib/memory.py?line=347&#39;&gt;348&lt;/a&gt;</span> def __call__(self, *args, **kwargs):
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/joblib/memory.py?line=348&#39;&gt;349&lt;/a&gt;</span>     return self.func(*args, **kwargs)
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py:893</span>, in <span class="ansi-cyan-fg">_fit_transform_one</span><span class="ansi-blue-fg">(transformer, X, y, weight, message_clsname, message, **fit_params)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=890&#39;&gt;891&lt;/a&gt;</span> with _print_elapsed_time(message_clsname, message):
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=891&#39;&gt;892&lt;/a&gt;</span>     if hasattr(transformer, &#34;fit_transform&#34;):
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=892&#39;&gt;893&lt;/a&gt;</span>         res = transformer.fit_transform(X, y, **fit_params)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=893&#39;&gt;894&lt;/a&gt;</span>     else:
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/pipeline.py?line=894&#39;&gt;895&lt;/a&gt;</span>         res = transformer.fit(X, y, **fit_params).transform(X)
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py:852</span>, in <span class="ansi-cyan-fg">TransformerMixin.fit_transform</span><span class="ansi-blue-fg">(self, X, y, **fit_params)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=847&#39;&gt;848&lt;/a&gt;</span> # non-optimized default implementation; override when a better
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=848&#39;&gt;849&lt;/a&gt;</span> # method is possible for a given clustering algorithm
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=849&#39;&gt;850&lt;/a&gt;</span> if y is None:
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=850&#39;&gt;851&lt;/a&gt;</span>     # fit method of arity 1 (unsupervised transformation)
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=851&#39;&gt;852&lt;/a&gt;</span>     return self.fit(X, **fit_params).transform(X)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=852&#39;&gt;853&lt;/a&gt;</span> else:
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=853&#39;&gt;854&lt;/a&gt;</span>     # fit method of arity 2 (supervised transformation)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=854&#39;&gt;855&lt;/a&gt;</span>     return self.fit(X, y, **fit_params).transform(X)
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py:5487</span>, in <span class="ansi-cyan-fg">NDFrame.__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5479&#39;&gt;5480&lt;/a&gt;</span> if (
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5480&#39;&gt;5481&lt;/a&gt;</span>     name not in self._internal_names_set
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5481&#39;&gt;5482&lt;/a&gt;</span>     and name not in self._metadata
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5482&#39;&gt;5483&lt;/a&gt;</span>     and name not in self._accessors
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5483&#39;&gt;5484&lt;/a&gt;</span>     and self._info_axis._can_hold_identifiers_and_holds_name(name)
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5484&#39;&gt;5485&lt;/a&gt;</span> ):
+<span class="ansi-green-intense-fg ansi-bold">   &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5485&#39;&gt;5486&lt;/a&gt;</span>     return self[name]
+<span class="ansi-green-fg">-&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/pandas/core/generic.py?line=5486&#39;&gt;5487&lt;/a&gt;</span> return object.__getattribute__(self, name)
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;fit&#39;</pre>
 </div>
 </div>
 
