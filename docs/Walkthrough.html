@@ -130,7 +130,7 @@ nb_path: "Walkthrough.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">EUR_FX</span> <span class="o">=</span> <span class="n">EUR_FX</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s1">&#39;FREQ&#39;</span><span class="p">,</span> <span class="s1">&#39;CURRENCY_DENOM&#39;</span><span class="p">,</span> <span class="s1">&#39;EXR_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;EXR_SUFFIX&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">EUR_FX</span> <span class="o">=</span> <span class="n">EUR_FX</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s1">&#39;FREQ&#39;</span><span class="p">,</span> <span class="s1">&#39;CURRENCY_DENOM&#39;</span><span class="p">,</span> <span class="s1">&#39;EXR_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;EXR_SUFFIX&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -300,7 +300,7 @@ Trying to download data from ECB&#39;s dataflow CISS...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 20:59:30,904 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:18:39,951 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -324,7 +324,7 @@ Trying to download data from ECB&#39;s dataflow EON...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:00:11,459 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:19:08,098 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -346,7 +346,7 @@ Trying to download data from ECB&#39;s dataflow EXR...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:00:26,852 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:19:12,195 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -362,7 +362,7 @@ Trying to download data from ECB&#39;s dataflow EXR...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:04:16,953 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:22:42,765 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -380,7 +380,7 @@ Trying to download data from ECB&#39;s dataflow FXI...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:04:26,633 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:22:51,617 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -393,7 +393,22 @@ this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow ICB...
 this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow ICO...
-this dataflow does not have data in the desired frequency and time period.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:23:32,625 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow ICP...
 this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow IFI...
@@ -404,7 +419,7 @@ Trying to download data from ECB&#39;s dataflow IFI...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:04:52,091 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:23:32,802 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -413,22 +428,7 @@ Trying to download data from ECB&#39;s dataflow IFI...
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Trying to download data from ECB&#39;s dataflow ILM...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:04:52,636 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow IRS...
+Trying to download data from ECB&#39;s dataflow IRS...
 this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow IVF...
 this dataflow does not have data in the desired frequency and time period.
@@ -466,7 +466,8 @@ Trying to download data from ECB&#39;s dataflow RDE...
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:05:35,093 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-19 02:23:36,482 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+2022-05-19 02:23:37,695 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -475,22 +476,7 @@ Trying to download data from ECB&#39;s dataflow RDE...
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Trying to download data from ECB&#39;s dataflow RDF...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-18 21:05:50,124 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Trying to download data from ECB&#39;s dataflow RESC...
+Trying to download data from ECB&#39;s dataflow RESC...
 this dataflow does not have data in the desired frequency and time period.
 Trying to download data from ECB&#39;s dataflow RESH...
 this dataflow does not have data in the desired frequency and time period.
@@ -654,7 +640,7 @@ this dataflow does not have data in the desired frequency and time period.
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>These steps are wrapped under the following <code>scikit-learn</code>'s custom Transformer object:</p>
+<h3 id="Augmenting-the-dataset-with-gingado">Augmenting the dataset with <code>gingado</code><a class="anchor-link" href="#Augmenting-the-dataset-with-gingado"> </a></h3><p>These steps listed above are wrapped under a custom object, <code>gingadoSDMX</code>.</p>
 
 </div>
 </div>
@@ -666,30 +652,226 @@ this dataflow does not have data in the desired frequency and time period.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="kn">import</span> <span class="n">check_X_y</span><span class="p">,</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_is_fitted</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.multiclass</span> <span class="kn">import</span> <span class="n">unique_labels</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="kn">import</span> <span class="n">check_is_fitted</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">VarianceThreshold</span>
 
-<span class="k">class</span> <span class="nc">SDMXDataAugmentation</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;BIS&#39;</span><span class="p">,</span> <span class="s1">&#39;ECB&#39;</span><span class="p">],</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">gingadoSDMX</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;BIS&#39;</span><span class="p">,</span> <span class="s1">&#39;ECB&#39;</span><span class="p">,</span> <span class="s1">&#39;IMF&#39;</span><span class="p">,</span> <span class="s1">&#39;UNSD&#39;</span><span class="p">,</span> <span class="s1">&#39;WB&#39;</span><span class="p">],</span> <span class="n">variance_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;memory&#39;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="n">sources</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variance_threshold</span> <span class="o">=</span> <span class="n">variance_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">check_X_y</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">X</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">=</span> <span class="n">y</span>
 
-        <span class="n">data_freq</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">resolution_string</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;FREQ&#39;</span><span class="p">:</span> <span class="n">data_freq</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_freq_</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">resolution_string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys_</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;FREQ&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_freq_</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;startPeriod&quot;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">year</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">data_sdmx</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="n">src_conn</span> <span class="o">=</span> <span class="n">sdmx</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">expire_after</span><span class="o">=</span><span class="mi">1800</span><span class="p">)</span>
+            <span class="n">src_dflows</span> <span class="o">=</span> <span class="n">src_conn</span><span class="o">.</span><span class="n">dataflow</span><span class="p">()</span>
+            <span class="n">dflows</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">src_dflows</span><span class="o">.</span><span class="n">dataflow</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">for</span> <span class="n">dflow</span> <span class="ow">in</span> <span class="n">dflows</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trying to download data from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39;s dataflow </span><span class="si">{</span><span class="n">dflow</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">sdmx</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">src_conn</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">dflow</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys_</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params_</span><span class="p">),</span> <span class="n">datetime</span><span class="o">=</span><span class="s1">&#39;TIME_PERIOD&#39;</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this dataflow does not have data in the desired frequency and time period.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
+                <span class="n">data_sdmx</span><span class="p">[</span><span class="n">source</span><span class="o">+</span><span class="s2">&quot;__&quot;</span><span class="o">+</span><span class="n">dflow</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
-        <span class="k">pass</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_sdmx</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">X</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">data_sdmx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()]</span>
+
+        <span class="n">feat_sel</span> <span class="o">=</span> <span class="n">VarianceThreshold</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variance_threshold</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">VarianceThreshold</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">variance_threshold</span><span class="p">)</span>
+        <span class="n">feat_sel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">features_stay</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">feat_sel</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features_removed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">~</span><span class="n">feat_sel</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">feat_sel</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">augm_df_</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="k">del</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">augm_df_</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The code below verifies that the manually-augmented dataset described above (<code>augm_df</code>) is exactly the same as a dataset augmented with <code>gingadoSDMX</code>.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ggd_augm</span> <span class="o">=</span> <span class="n">gingadoSDMX</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ECB&#39;</span><span class="p">])</span>
+<span class="n">ggd_augm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>gingadoSDMX(sources=[&#39;ECB&#39;])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">augm_X</span> <span class="o">=</span> <span class="n">ggd_augm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">EUR_FX</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow AME...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BKN...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BLS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BNT...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BOP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BSI...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow BSP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow CBD...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow CBD2...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow CCP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow CISS...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:29:39,491 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow CLIFS...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow CPP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow DCM...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow DD...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow EON...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-05-19 02:30:06,718 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from ECB&#39;s dataflow ESA...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow ESB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow EST...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from ECB&#39;s dataflow EXR...
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.testing</span> <span class="kn">import</span> <span class="n">assert_frame_equal</span>
+
+<span class="n">assert_frame_equal</span><span class="p">(</span><span class="n">augm_df</span><span class="p">,</span> <span class="n">augm_X</span><span class="p">,</span> <span class="n">check_dtype</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
