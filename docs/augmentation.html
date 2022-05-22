@@ -31,7 +31,151 @@ nb_path: "00_augmentation.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><p>Most users will probably find it helpful to use the <code>DataAugment</code> transformer, which is compatible with <code>scikit-learn</code>, rather than the underlying functions. However, they are documented below in case their use might address some specific user need.</p>
+<h2 id="Data-augmentation-as-a-transformer">Data augmentation as a transformer<a class="anchor-link" href="#Data-augmentation-as-a-transformer"> </a></h2><p>The package <code>scikit-learn</code> makes use of the concept of transformer, an object in python that adapts the transformation at hand to the training data, and then deploys it on the testing data. These transformers can be used as part of a pipeline.</p>
+<p>In order to ensure maximumm compatibility with packages that are widely used, <code>gingado</code>'s data augmentation function are implemented as an object that are funcional on their own, but also as a transformer as parte pines.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="gingadoSDMX" class="doc_header"><code>class</code> <code>gingadoSDMX</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>gingadoSDMX</code>(<strong><code>sources</code></strong>=<em><code>['BIS', 'ECB', 'IMF', 'UNSD', 'WB']</code></em>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>, <strong><code>backend</code></strong>=<em><code>'memory'</code></em>) :: <code>BaseEstimator</code></p>
+</blockquote>
+<p>Base class for all estimators in scikit-learn.</p>
+<h2 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h2><p>All estimators should specify all the parameters that can be set
+at the class level in their <code>__init__</code> as explicit keyword
+arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned above, <code>gingado</code>'s transformers are built to be compatible with <code>scikit-learn</code>. The code below checks whether this is achieved:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gingado.utils</span> <span class="kn">import</span> <span class="n">load_EURFX_data</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.estimator_checks</span> <span class="kn">import</span> <span class="n">check_n_features_in</span>
+
+<span class="n">EUR_FX</span> <span class="o">=</span> <span class="n">load_EURFX_data</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>gingadoSDMX()</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">augm_df</span> <span class="o">=</span> <span class="n">gingadoSDMX</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">EUR_FX</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Trying to download data from BIS&#39;s dataflow WS_CBPOL_D...
+Trying to download data from BIS&#39;s dataflow WS_CBPOL_M...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_CBS_PUB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_CREDIT_GAP...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_DEBT_SEC2_PUB...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_DER_OTC_TOV...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_DSR...
+this dataflow does not have data in the desired frequency and time period.
+Trying to download data from BIS&#39;s dataflow WS_EER_D...
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overall-scheme:">Overall scheme:<a class="anchor-link" href="#Overall-scheme:"> </a></h2><ul>
+<li>Since sklearn <code>Pipeline</code> objects transform data into numpy arrays (and thus do not allow for things like looking at the index or title, etc), <code>gingado</code> will create a "workflow" object that:<ul>
+<li>includes the data augmentation (useful to have pandas available!)</li>
+<li>the sklearn pipeline is a component that lies in the "middle" of the pipeline</li>
+<li>the documentation step benefits from the workflow retaining things like main dates, etc, so that it can also be used in the documentation.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-functions">Other functions<a class="anchor-link" href="#Other-functions"> </a></h2><p>Most users will probably find it helpful to use the <code>DataAugment</code> transformer, which is compatible with <code>scikit-learn</code>, rather than the underlying functions. However, they are documented below in case their use might address some specific user need.</p>
 <h2 id="Sources-of-data">Sources of data<a class="anchor-link" href="#Sources-of-data"> </a></h2><p><code>gingado</code> only lists official data sources by choice. This is meant to provide users with the trust that their dataset will be complemented by reliable sources. Unfortunately, it is not possible at this stage to include <em>all</em> official sources - let alone all reliable sources - because that requires substantial manual and maintenance work. <code>gingado</code> leverages the existence of the <a href="https://sdmx.org">Statistical Data and Metadata eXchange (SDMX)</a>, an organisation of official data sources that establishes common data and metadata formats, to download data that is relevant (and hopefully also useful) to users.</p>
 <p>The function below from the package <a href="https://github.com/dkgaraujo/simpledmx">simpledmx</a> returns a list of codes corresponding to the data sources available to provide <code>gingado</code> users with data through SDMX.</p>
 
@@ -118,7 +262,7 @@ nb_path: "00_augmentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="augm_with_sdmx" class="doc_header"><code>augm_with_sdmx</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>augm_with_sdmx</code>(<strong><code>df</code></strong>, <strong><code>freq</code></strong>, <strong><code>sources</code></strong>, <strong><code>variance_threshold</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Downloads relevant data from SDMX sources to complement the original dataset</p>
 <p>Arguments:

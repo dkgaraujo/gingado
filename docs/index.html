@@ -39,6 +39,19 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p><code>gingado</code> is built around three main functionalities:</p>
+<ul>
+<li><strong>data augmentation</strong>, to add more data from official sources, improving the machine models being trained by the user;</li>
+<li><strong>automatic benchmark model</strong>, to enable the user to assess their models against a reasonably well-performant model; and</li>
+<li><strong>support for model documentation</strong>, to embed documentation and ethical considerations in the model development phase.</li>
+</ul>
+<p>Each of these functionalities builds on top of the previous one, and they can be used stand-alone, together, or even as part of a larger pipeline from data input to model training to documentation!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2><p>To install <code>gingado</code>, simply run the following code on the terminal:</p>
 
 </div>
@@ -47,126 +60,6 @@ nb_path: "index.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><code>$ pip install gingado</code></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p><code>gingado</code> is built around three main functionalities:</p>
-<ul>
-<li><strong>data augmentation</strong>, to add more data from official sources, improving the machine models being trained by the user;</li>
-<li><strong>automatic benchmark model</strong>, to enable the user to assess their models against a reasonably well-performant model; and</li>
-<li><strong>support for model documentation</strong>, to embed documentation and ethical considerations in the model development phase.</li>
-</ul>
-<p>Each of these functionalities is illustrated below for a user trying to forecast GDP growth. Each step builds on top of the previous one, and they can be used stand-alone, together, or even as part of a larger pipeline from data input to model training to documentation! But to highlight how <code>gingado</code> can benefit users in multiple ways, the brief walk-through below goes over them separtely and then highlights how they can work jointly.</p>
-<p>Before stepping in, let's import the necessary packages and data.</p>
-<h3 id="Setup">Setup<a class="anchor-link" href="#Setup"> </a></h3><p>This walk-through will use the <a href="https://www.macrohistory.net">Jordà-Schularick-Taylor Macrohistory Database</a> on macroeconomics and finance as an example. As a preliminary step, let's import <code>gingado</code> and other necessary libraries, and proceed to download the data:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">JST_url</span> <span class="o">=</span> <span class="s2">&quot;http://data.macrohistory.net/JST/JSTdatasetR5.dta&quot;</span>
-<span class="n">jst</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="n">JST_url</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">jst</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For practical purposes, let's use for this database only the information from 2011 onwards:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jst</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;iso&#39;</span><span class="p">,</span> <span class="s1">&#39;ifs&#39;</span><span class="p">,</span> <span class="s1">&#39;crisisJST_old&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">jst</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">jst</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
-
-<span class="n">start_year</span> <span class="o">=</span> <span class="s1">&#39;2011-01-01&#39;</span>
-<span class="n">end_year</span> <span class="o">=</span> <span class="s1">&#39;2016-01-01&#39;</span>
-<span class="n">jst</span> <span class="o">=</span> <span class="n">jst</span><span class="p">[</span><span class="n">jst</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start_year</span><span class="p">]</span>
-
-<span class="n">jst</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jst</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Data-augmentation">Data augmentation<a class="anchor-link" href="#Data-augmentation"> </a></h3><p>As we can see, the dataset contains mainly information on the GDP of other countries. There are many ways in which this dataset can be complement by a richer set of variables. For example, for the same time periods we can add detailed information on trade, inflation, labour markets, foreign currency exchange rates, and many other series that would help machine learning models better form predictions.</p>
-<p><code>gingado</code> helps this step by facilitating <em>data augmentation</em>, ie complementing the user dataset with compatible data. <code>gingado</code> only sources data from official data sources, namely statistical agencies, central banks, and other relevant authorities at the domestic or international level.</p>
-<p>In particular, <code>gingado</code>'s function <a href="/gingado/augmentation.html#augm_with_sdmx"><code>augm_with_sdmx</code></a> looks for all data available from the desired sources for the defined period and frequency and downloads them all, but only adds to the original dataset the variables that bring some level of variance in the data that can be explored by the machine learning models later on.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gingado.augmentation</span> <span class="kn">import</span> <span class="n">augm_with_sdmx</span>
-
-<span class="n">jst_augm_gingado</span> <span class="o">=</span> <span class="n">augm_with_sdmx</span><span class="p">(</span><span class="n">jst</span><span class="p">,</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">time_col</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="s1">&#39;BIS&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Automatic-benchmark">Automatic benchmark<a class="anchor-link" href="#Automatic-benchmark"> </a></h3><p>Creating a model card can be facilitated by using the template. Upon creation, two informations are already filled by gingado...</p>
 
 </div>
 </div>
