@@ -2,8 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"gingadoSDMX": "00_augmentation.ipynb",
+index = {"ggdAugmentSDMX": "00_augmentation.ipynb",
          "augm_with_sdmx": "00_augmentation.ipynb",
+         "ggdBenchmark": "00_benchmark.ipynb",
          "ModelCard": "00_documentation.ipynb",
          "get_username": "00_utils.ipynb",
          "get_datetime": "00_utils.ipynb",
@@ -11,6 +12,7 @@ index = {"gingadoSDMX": "00_augmentation.ipynb",
          "gingadoLag": "00_utils.ipynb"}
 
 modules = ["augmentation.py",
+           "benchmark.py",
            "model_documentation.py",
            "utils.py"]
 
