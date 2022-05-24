@@ -10,9 +10,6 @@ class ggdBenchmark(BaseEstimator):
         pass
 
     def fit(self, X, y=None):
-        return self
-
-    def predict(self, X):
         pass
 
     def compare(self, candidate):

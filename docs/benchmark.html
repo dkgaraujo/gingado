@@ -31,16 +31,16 @@ nb_path: "00_benchmark.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> object has a similar API to a <code>sciki-learn</code> estimator: you build an instance with the desired arguments, and fit it to the data at a later moment.</p>
-<p><a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> is a convenience wrapper for reading the training data, passing it through a simplified pipeline consisting of data imputation and a standard scalar, and then the benchmark function calibrated with a grid search.</p>
-<p>A <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> comprises the following steps, all glued together:</p>
+<p>A <code>Benchmark</code> object has a similar API to a <code>sciki-learn</code> estimator: you build an instance with the desired arguments, and fit it to the data at a later moment.</p>
+<p><code>Benchmark</code> is a convenience wrapper for reading the training data, passing it through a simplified pipeline consisting of data imputation and a standard scalar, and then the benchmark function calibrated with a grid search.</p>
+<p>A <code>Benchmark</code> comprises the following steps, all glued together:</p>
 <ul>
 <li>split the dataset into a training and a test datasets</li>
 <li>a <code>Pipeline</code> that consisting of a data imputation, a standard scaler, and a random forest estimator</li>
 <li>a grid search object</li>
 </ul>
-<p>The user may include her own data split and/or pipeline in the benchmark object. If none is present, the benchmark object will create one. The user may also include her own grid search parameter preferences, but that is also not required for the <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> to be instanciated appropriately.</p>
-<p>In addition to the estimator methods <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> has by virtue of itself being an estimator, these objects also have a <code>compare</code> method, which takes as argument another fitted estimator (which could be itself a solo estimator or a whole pipeline) or a list of estimators.</p>
+<p>The user may include her own data split and/or pipeline in the benchmark object. If none is present, the benchmark object will create one. The user may also include her own grid search parameter preferences, but that is also not required for the <code>Benchmark</code> to be instanciated appropriately.</p>
+<p>In addition to the estimator methods <code>Benchmark</code> has by virtue of itself being an estimator, these objects also have a <code>compare</code> method, which takes as argument another fitted estimator (which could be itself a solo estimator or a whole pipeline) or a list of estimators.</p>
 
 </div>
 </div>

@@ -226,6 +226,49 @@ nb_path: "00_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Lag</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">jump</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keep_contemporaneous_X</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jump</span> <span class="o">=</span> <span class="n">jump</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_contemporaneous_X</span> <span class="o">=</span> <span class="n">keep_contemporaneous_X</span>
+    
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>        
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">effective_lags_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">jump</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">X_lags</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">X_forlag</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_lags_</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">lag</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">jump</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">lag_count</span> <span class="o">=</span> <span class="n">lag</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">lag_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">X_forlag</span><span class="p">,</span> <span class="n">lag_count</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">X_lags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lag_X</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">X_lags</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_contemporaneous_X</span><span class="p">:</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">X_forlag</span><span class="p">,</span> <span class="n">X</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_lags_</span><span class="p">:,</span> <span class="p">:]</span>
+        <span class="k">return</span> <span class="n">X</span>
+<span class="c1">####</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -234,7 +277,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="gingadoLag" class="doc_header"><code>class</code> <code>gingadoLag</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>gingadoLag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
+<h2 id="Lag" class="doc_header"><code>class</code> <code>Lag</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Lag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
 </blockquote>
 <p>Base class for all estimators in scikit-learn.</p>
 <h2 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h2><p>All estimators should specify all the parameters that can be set
@@ -253,7 +296,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The object <a href="/gingado/utils.html#gingadoLag"><code>gingadoLag</code></a> is a utility that can serve as a transformer in <code>scikit-learn</code>'s <code>pipeline</code>s.</p>
+<p>The object <a href="/gingado/utils.html#Lag"><code>Lag</code></a> is a utility to</p>
 
 </div>
 </div>
@@ -274,11 +317,45 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
     <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s1">&#39;lagger&#39;</span><span class="p">,</span> <span class="n">gingadoLag</span><span class="p">(</span><span class="n">jump</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">keep_contemporaneous_X</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="p">])</span>
+    <span class="p">(</span><span class="s1">&#39;lagger&#39;</span><span class="p">,</span> <span class="n">Lag</span><span class="p">(</span><span class="n">jump</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">keep_contemporaneous_X</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="p">])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">randomX</span><span class="p">,</span> <span class="n">randomY</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipe</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[-0.90760773, -1.13993163],
+       [-1.10398975, -0.4760476 ]])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
