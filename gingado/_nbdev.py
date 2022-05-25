@@ -3,7 +3,6 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"AugmentSDMX": "00_augmentation.ipynb",
-         "augm_with_sdmx": "00_augmentation.ipynb",
          "ggdBenchmark": "00_benchmark.ipynb",
          "ModelCard": "00_documentation.ipynb",
          "get_username": "00_utils.ipynb",

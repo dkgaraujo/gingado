@@ -36,7 +36,7 @@ nb_path: "00_benchmark.ipynb"
 <p>A <code>Benchmark</code> comprises the following steps, all glued together:</p>
 <ul>
 <li>split the dataset into a training and a test datasets</li>
-<li>a <code>Pipeline</code> that consisting of a data imputation, a standard scaler, and a random forest estimator</li>
+<li>a <code>Pipeline</code> that consisting of a missing data imputation step and a random forest estimator</li>
 <li>a grid search object</li>
 </ul>
 <p>The user may include her own data split and/or pipeline in the benchmark object. If none is present, the benchmark object will create one. The user may also include her own grid search parameter preferences, but that is also not required for the <code>Benchmark</code> to be instanciated appropriately.</p>
