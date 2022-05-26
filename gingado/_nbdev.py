@@ -3,8 +3,10 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"AugmentSDMX": "00_augmentation.ipynb",
-         "ggdBenchmark": "00_benchmark.ipynb",
          "ModelCard": "00_documentation.ipynb",
+         "ggdBenchmark": "00_benchmark.ipynb",
+         "ClassificationBenchmark": "00_benchmark.ipynb",
+         "RegressionBenchmark": "00_benchmark.ipynb",
          "get_username": "00_utils.ipynb",
          "get_datetime": "00_utils.ipynb",
          "load_EURFX_data": "00_utils.ipynb",

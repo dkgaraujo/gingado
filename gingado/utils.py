@@ -27,7 +27,7 @@ def get_datetime():
 #export
 import pandasdmx as sdmx
 
-def load_EURFX_data():
+def load_EURFX_data(startYear=2003):
     "Loads a real-life dataset for testing use cases."
     ecb = sdmx.Request('ECB')
     flow_msg = ecb.dataflow()
@@ -38,17 +38,18 @@ def load_EURFX_data():
     "CURRENCY": ['EUR', 'AUD', 'BRL', 'CAD', 'CHF', 'GBP', 'JPY', 'SGD', 'USD'],
     "FREQ": 'D'
     }
-    params = {"startPeriod": '2003'}
+    params = {"startPeriod": startYear}
     data_msg = ecb.data('EXR', key=key, params=params, dsd=dsd)
     EUR_FX = sdmx.to_pandas(data_msg.data[0], datetime='TIME_PERIOD')
     EUR_FX = EUR_FX.droplevel(['FREQ', 'CURRENCY_DENOM', 'EXR_TYPE', 'EXR_SUFFIX'], axis=1).dropna(how='all')
     return EUR_FX
 
 # Cell
+#export
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.utils.validation import check_is_fitted, check_array
+from sklearn.utils.validation import check_is_fitted
 
 class Lag(BaseEstimator, TransformerMixin):
     def __init__(self, lags=1, jump=0, keep_contemporaneous_X=False):

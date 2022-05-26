@@ -31,16 +31,17 @@ nb_path: "00_benchmark.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A <code>Benchmark</code> object has a similar API to a <code>sciki-learn</code> estimator: you build an instance with the desired arguments, and fit it to the data at a later moment.</p>
-<p><code>Benchmark</code> is a convenience wrapper for reading the training data, passing it through a simplified pipeline consisting of data imputation and a standard scalar, and then the benchmark function calibrated with a grid search.</p>
-<p>A <code>Benchmark</code> comprises the following steps, all glued together:</p>
+<p>A Benchmark object has a similar API to a <code>sciki-learn</code> estimator: you build an instance with the desired arguments, and fit it to the data at a later moment.</p>
+<p>Benchmarks is a convenience wrapper for reading the training data, passing it through a simplified pipeline consisting of data imputation and a standard scalar, and then the benchmark function calibrated with a grid search.</p>
+<p>A <code>gingado</code> Benchmark comprises the following steps, all glued together:</p>
 <ul>
 <li>split the dataset into a training and a test datasets</li>
-<li>a <code>Pipeline</code> that consisting of a missing data imputation step and a random forest estimator</li>
-<li>a grid search object</li>
+<li>a <code>Pipeline</code> consisting of a missing data imputation step and a random forest estimator</li>
+<li>a grid search object that tunes the parameters of the random forest</li>
+<li>a <code>compare</code> method that helps users evaluate if their model is better than the benchmark</li>
 </ul>
-<p>The user may include her own data split and/or pipeline in the benchmark object. If none is present, the benchmark object will create one. The user may also include her own grid search parameter preferences, but that is also not required for the <code>Benchmark</code> to be instanciated appropriately.</p>
-<p>In addition to the estimator methods <code>Benchmark</code> has by virtue of itself being an estimator, these objects also have a <code>compare</code> method, which takes as argument another fitted estimator (which could be itself a solo estimator or a whole pipeline) or a list of estimators.</p>
+<p>In addition to the estimator methods that a Benchmark object has by virtue of itself being an estimator, these objects also have a <code>compare</code> method, which takes as argument another fitted estimator (which could be itself a solo estimator or a whole pipeline) or a list of fitted estimators.</p>
+<p>Benchmarks start with default values, but the user is also free to choose any of the benchmark's components by passing as arguments the data split, pipeline, a dictionary of parameters for the hyperparameter tuning, etc.</p>
 
 </div>
 </div>
@@ -56,12 +57,33 @@ nb_path: "00_benchmark.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ggdBenchmark" class="doc_header"><code>class</code> <code>ggdBenchmark</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/benchmark.py#L8" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ggdBenchmark</code>() :: <code>BaseEstimator</code></p>
+<h2 id="ModelCard" class="doc_header"><code>class</code> <code>ModelCard</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/benchmark.py#L12" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ModelCard</code>()</p>
 </blockquote>
-<p>Base class for all estimators in scikit-learn.</p>
-<h2 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h2><p>All estimators should specify all the parameters that can be set
-at the class level in their <code>__init__</code> as explicit keyword
-arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ggdBenchmark" class="doc_header"><code>class</code> <code>ggdBenchmark</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/benchmark.py#L22" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ggdBenchmark</code>()</p>
+</blockquote>
+<p>The base class for gingado's Benchmark objects.</p>
 
 </div>
 
@@ -80,6 +102,494 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Classification-tasks">Classification tasks<a class="anchor-link" href="#Classification-tasks"> </a></h3><p>The default benchmark for classification tasks is a <code>RandomForestClassifier</code> object. Its parameters are fine-tuned in each case according to the user's data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ClassificationBenchmark" class="doc_header"><code>class</code> <code>ClassificationBenchmark</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/benchmark.py#L114" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ClassificationBenchmark</code>(<strong><code>cv</code></strong>=<em><code>None</code></em>, <strong><code>estimator</code></strong>=<em><code>RandomForestClassifier()</code></em>, <strong><code>param_grid</code></strong>=<em><code>None</code></em>, <strong><code>param_search</code></strong>=<em><code>GridSearchCV</code></em>, <strong><code>scoring</code></strong>=<em><code>None</code></em>, <strong><code>auto_document</code></strong>=<em><code>&lt;gingado.benchmark.ModelCard object at 0x13c67c4f0&gt;</code></em>) :: <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a></p>
+</blockquote>
+<p>The base class for gingado's Benchmark objects.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Regression-tasks">Regression tasks<a class="anchor-link" href="#Regression-tasks"> </a></h3><p>The default benchmark for regression tasks is a <code>RandomForestRegressor</code> object.  Its parameters are fine-tuned in each case according to the user's data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="RegressionBenchmark" class="doc_header"><code>class</code> <code>RegressionBenchmark</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/benchmark.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RegressionBenchmark</code>(<strong><code>cv</code></strong>=<em><code>None</code></em>, <strong><code>estimator</code></strong>=<em><code>RandomForestRegressor()</code></em>, <strong><code>param_search</code></strong>=<em><code>GridSearchCV</code></em>, <strong><code>param_grid</code></strong>=<em><code>None</code></em>, <strong><code>scoring</code></strong>=<em><code>None</code></em>, <strong><code>auto_document</code></strong>=<em><code>&lt;gingado.benchmark.ModelCard object at 0x13c67c550&gt;</code></em>) :: <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a></p>
+</blockquote>
+<p>The base class for gingado's Benchmark objects.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is also simple to define as benchmark a model that you already fitted and still benefit from the other functionalities provided by <code>Benchmark</code> class. This can also be done in case you are using a saved version of a fitted model (eg, the model you are using in production) and want to have that as the benchmark.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="c1">#from gingado.benchmark import RegressionBenchmark</span>
+
+<span class="n">forest</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">bm</span> <span class="o">=</span> <span class="n">RegressionBenchmark</span><span class="p">()</span>
+<span class="n">bm</span><span class="o">.</span><span class="n">set_benchmark</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">forest</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">forest</span> <span class="o">==</span> <span class="n">bm</span><span class="o">.</span><span class="n">benchmark</span>
+<span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">bm</span><span class="o">.</span><span class="n">benchmark</span><span class="p">,</span> <span class="s2">&quot;predict&quot;</span><span class="p">)</span>
+<span class="c1"># note that now the `bm` object can be used as the estimator: </span>
+<span class="k">assert</span> <span class="n">bm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Data-split">Data split<a class="anchor-link" href="#Data-split"> </a></h3><p>Please refer to <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection">this page</a> for more information on the different <code>Splitter</code> classes available on <code>scikit-learn</code>, and <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html#sphx-glr-auto-examples-model-selection-plot-cv-indices-py">this page</a> for practical advice on how to choose a splitter for data that are not time series. Any one of these objects (or a custom splitter that is compatible with them) can be passed to a <code>Benchmark</code> object.</p>
+<p>The API does not accept custom parameters for the splitters. USers that wish to use specific parameters should include the actual <code>Splitter</code> object as the parameter.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bm</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/douglasaraujo/Coding/gingado/00_benchmark.ipynb Cell 15&#39;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/douglasaraujo/Coding/gingado/00_benchmark.ipynb#ch0000020?line=0&#39;&gt;1&lt;/a&gt;</span> bm.get_params()
+
+File <span class="ansi-green-fg">~/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py:212</span>, in <span class="ansi-cyan-fg">BaseEstimator.get_params</span><span class="ansi-blue-fg">(self, deep)</span>
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=209&#39;&gt;210&lt;/a&gt;</span> value = getattr(self, key)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=210&#39;&gt;211&lt;/a&gt;</span> if deep and hasattr(value, &#34;get_params&#34;):
+<span class="ansi-green-fg">--&gt; &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=211&#39;&gt;212&lt;/a&gt;</span>     deep_items = value.get_params().items()
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=212&#39;&gt;213&lt;/a&gt;</span>     out.update((key + &#34;__&#34; + k, val) for k, val in deep_items)
+<span class="ansi-green-intense-fg ansi-bold">    &lt;a href=&#39;file:///Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/base.py?line=213&#39;&gt;214&lt;/a&gt;</span> out[key] = value
+
+<span class="ansi-red-fg">TypeError</span>: BaseEstimator.get_params() missing 1 required positional argument: &#39;self&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">)])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">steps</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&#39;scaler&#39;, sklearn.preprocessing._data.StandardScaler),
+ (&#39;clf&#39;, sklearn.ensemble._forest.RandomForestClassifier)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+
+<span class="n">tscv</span> <span class="o">=</span> <span class="n">TimeSeriesSplit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gingado.utils</span> <span class="kn">import</span> <span class="n">load_EURFX_data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">load_EURFX_data</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;BRL&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>CURRENCY</th>
+      <th>AUD</th>
+      <th>CAD</th>
+      <th>CHF</th>
+      <th>GBP</th>
+      <th>JPY</th>
+      <th>SGD</th>
+      <th>USD</th>
+    </tr>
+    <tr>
+      <th>TIME_PERIOD</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2003-01-02</th>
+      <td>1.8554</td>
+      <td>1.6422</td>
+      <td>1.4528</td>
+      <td>0.65200</td>
+      <td>124.40</td>
+      <td>1.8188</td>
+      <td>1.0446</td>
+    </tr>
+    <tr>
+      <th>2003-01-03</th>
+      <td>1.8440</td>
+      <td>1.6264</td>
+      <td>1.4555</td>
+      <td>0.65000</td>
+      <td>124.56</td>
+      <td>1.8132</td>
+      <td>1.0392</td>
+    </tr>
+    <tr>
+      <th>2003-01-06</th>
+      <td>1.8281</td>
+      <td>1.6383</td>
+      <td>1.4563</td>
+      <td>0.64950</td>
+      <td>124.40</td>
+      <td>1.8210</td>
+      <td>1.0488</td>
+    </tr>
+    <tr>
+      <th>2003-01-07</th>
+      <td>1.8160</td>
+      <td>1.6257</td>
+      <td>1.4565</td>
+      <td>0.64960</td>
+      <td>124.82</td>
+      <td>1.8155</td>
+      <td>1.0425</td>
+    </tr>
+    <tr>
+      <th>2003-01-08</th>
+      <td>1.8132</td>
+      <td>1.6231</td>
+      <td>1.4586</td>
+      <td>0.64950</td>
+      <td>124.90</td>
+      <td>1.8102</td>
+      <td>1.0377</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-05-19</th>
+      <td>1.5036</td>
+      <td>1.3490</td>
+      <td>1.0265</td>
+      <td>0.84728</td>
+      <td>134.46</td>
+      <td>1.4576</td>
+      <td>1.0525</td>
+    </tr>
+    <tr>
+      <th>2022-05-20</th>
+      <td>1.4980</td>
+      <td>1.3526</td>
+      <td>1.0280</td>
+      <td>0.84820</td>
+      <td>135.34</td>
+      <td>1.4588</td>
+      <td>1.0577</td>
+    </tr>
+    <tr>
+      <th>2022-05-23</th>
+      <td>1.4982</td>
+      <td>1.3626</td>
+      <td>1.0310</td>
+      <td>0.84783</td>
+      <td>136.05</td>
+      <td>1.4639</td>
+      <td>1.0659</td>
+    </tr>
+    <tr>
+      <th>2022-05-24</th>
+      <td>1.5152</td>
+      <td>1.3714</td>
+      <td>1.0334</td>
+      <td>0.85750</td>
+      <td>136.49</td>
+      <td>1.4722</td>
+      <td>1.0720</td>
+    </tr>
+    <tr>
+      <th>2022-05-25</th>
+      <td>1.5126</td>
+      <td>1.3720</td>
+      <td>1.0269</td>
+      <td>0.85295</td>
+      <td>135.34</td>
+      <td>1.4676</td>
+      <td>1.0656</td>
+    </tr>
+  </tbody>
+</table>
+<p>4968 rows × 7 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Custom-benchmarks">Custom benchmarks<a class="anchor-link" href="#Custom-benchmarks"> </a></h3><p><code>gingado</code> provides users with two <code>Benchmark</code> objects out of the box: <a href="/gingado/benchmark.html#ClassificationBenchmark"><code>ClassificationBenchmark</code></a> and <a href="/gingado/benchmark.html#RegressionBenchmark"><code>RegressionBenchmark</code></a>, to be used depending on the task at hand. Both classes derive from a base class <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a>, which implements methods that facilitate model comparison. Users that want to create a customised benchmark model for themselves have two options:</p>
+<ul>
+<li>the simpler possibility is to train the estimator as usual, and then assign the fitted estimator to a <code>Benchmark</code> object. </li>
+<li>if the user wants more control over the fitting process of estimating the benchmark, they can create a class that subclasses from <a href="/gingado/benchmark.html#ggdBenchmark"><code>ggdBenchmark</code></a> and either implements custom <code>fit</code>, <code>predict</code> and <code>score</code> methods, or also subclasses from <a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.BaseEstimator.html"><code>scikit-learn</code>'s <code>BaseEstimator</code></a>. <ul>
+<li>In any case, if the user wants the benchmark to automatically detect if the data is a time series and also to document the model right after fitting, the <code>fit</code> method should call <code>self._fit</code> on the data. Otherwise, the user can simply implement any consistent logic in fit as the user sees fit (pun intended).</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
  
 
