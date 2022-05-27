@@ -1,1 +1,3 @@
-theme: jekyll-theme-tactile
+twitter_username: DouglasKGAraujo # DO NOT include the @ character, or else the build will fail!
+github_username:  dkgaraujo
+toc: true

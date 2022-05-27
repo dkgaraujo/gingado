@@ -90,7 +90,7 @@ class ggdBenchmark(BaseEstimator):
                     param_grid.append(ensemble)
                 return param_grid
 
-    def compare(self, X, y, candidates, ensemble_method=None, update_benchmark=True):
+    def compare(self, X, y, candidates, ensemble_method='object_default', update_benchmark=True):
         """
         Uses a test dataset to compare the performance of the fitted benchmark model with one or more candidate models
         This method achieves this by conducting a grid search
@@ -105,6 +105,8 @@ class ggdBenchmark(BaseEstimator):
         est = self.benchmark.base_estimator_ if hasattr(self.benchmark, "base_estimator_") else self.benchmark.best_estimator_
         cand_pipeline = Pipeline([('candidate_estimator', est)])
 
+        if ensemble_method == 'object_default':
+            ensemble_method = self.ensemble_method
         cand_params = self._read_candidate_params(list_candidates, ensemble_method=ensemble_method)
         cand_grid = GridSearchCV(cand_pipeline, cand_params, verbose=self.verbose_grid).fit(X, y)
 
@@ -163,7 +165,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     scoring=None,
     auto_document=ModelCard,
     random_state=None,
-    verbose_grid=3,
+    verbose_grid=False,
     ensemble_method=VotingClassifier):
         self.cv = cv
         self.estimator = estimator
@@ -173,6 +175,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         self.auto_document = auto_document
         self.random_state = random_state
         self.verbose_grid = verbose_grid
+        self.ensemble_method = ensemble_method
 
     def fit(self, X, y=None):
         self._fit(X, y)
@@ -189,7 +192,7 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     param_grid={'n_estimators': [50, 100, 250]},
     param_search=GridSearchCV,
     scoring=None,
-    auto_document=ModelCard(),
+    auto_document=ModelCard,
     random_state=None,
     verbose_grid=False,
     ensemble_method=VotingRegressor):
@@ -201,6 +204,7 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
         self.auto_document = auto_document
         self.random_state = random_state
         self.verbose_grid = verbose_grid
+        self.ensemble_method = ensemble_method
 
     def fit(self, X, y=None):
         self._fit(X, y)
