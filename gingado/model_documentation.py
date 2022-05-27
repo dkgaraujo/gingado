@@ -22,7 +22,12 @@ class ggdModelDocumentation:
         self.json_doc = json.load(f)
 
     def open_questions(self):
-        return {k: v for k, v in self.json_doc.items() if v is None}
+        return {
+                    v: i
+                    for k, v in mdoc.json_doc.items()
+                    for v, i in v.items()
+                    if i is None
+                }
 
     def fill_info(self, dict):
         for k, v in dict.items():
@@ -33,6 +38,12 @@ class ggdModelDocumentation:
 
     def __getitem__(self, key):
         return getattr(self, key)
+
+    def __str__(self):
+        return json.dumps(self.json_doc, indent=4)
+
+    def __repr__(self):
+        return f"{self.__class__}()"
 
 # Cell
 #export

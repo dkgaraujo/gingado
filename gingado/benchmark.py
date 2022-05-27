@@ -64,7 +64,7 @@ class ggdBenchmark(BaseEstimator):
 
         self.benchmark.fit(X, y)
 
-        if self.auto_document:
+        if self.auto_document is not None:
             self.document()
 
         return self
@@ -115,9 +115,11 @@ class ggdBenchmark(BaseEstimator):
                 self.set_benchmark(cand_grid)
                 print("Benchmark updated!")
 
+        if self.auto_document is not None:
+            self.document()
 
     def document(self):
-        pass
+        self.auto_document()
 
     @available_if(_benchmark_has("predict"))
     def predict(self, X, **predict_params):
@@ -159,7 +161,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     param_grid={'n_estimators': [50, 100, 250]},
     param_search=GridSearchCV,
     scoring=None,
-    auto_document=ModelCard(),
+    auto_document=ModelCard,
     random_state=None,
     verbose_grid=3,
     ensemble_method=VotingClassifier):
