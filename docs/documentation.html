@@ -33,31 +33,13 @@ nb_path: "00_documentation.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Each user has a specific documentation need, ranging from the simply logging the model training to a more complex description of the model pipeline with a discusson of its predictions. <code>gingado</code> addresses this variety of needs by offering a class of objects that facilitate model documentation in a generic way, as well as one specific model documentation type, described below.</p>
 <p>The model documentation is performed by Documenters, objects that are analogous to <code>scikit-learn</code>'s Estimator, Predictor, Transformer and Model objects (described <a href="https://scikit-learn.org/dev/developers/develop.html">here</a>). Users with documentation needs beyond the out-of-the-box solutions provided by <code>gingado</code> can simply create their own class of Documenters, and compatibility with these custom documentation routines with the rest of the code is ensured.</p>
-<p>The baseline <code>DocumenterMixin</code> class offers code that can be used by any Documenter object to read the pipeline in question and to save the resulting documentation in a variety of formats (eg, HTML, PDF).</p>
-<p>Users are encouraged to submit a PR with their own documentation models subclassing <code>DocumenterMixin</code>.</p>
+<p>The baseline <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> class offers code that can be used by any Documenter object to read the pipeline in question and to save the resulting documentation in a variety of formats (eg, HTML, PDF).</p>
+<p>Users are encouraged to submit a PR with their own documentation models subclassing <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>.</p>
+<p><strong>Warning: development of documentation is still on-going. Please do not use it yet.</strong></p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     &quot;&quot;&quot;Mixin class for all documenters in gingado&quot;&quot;&quot;</span>
-
-<span class="c1">#     def read</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -69,7 +51,7 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ModelCard" class="doc_header"><code>class</code> <code>ModelCard</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ModelCard</code>(<strong><code>from_template</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h2 id="ggdModelDocumentation" class="doc_header"><code>class</code> <code>ggdModelDocumentation</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L8" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ggdModelDocumentation</code>()</p>
 </blockquote>
 
 </div>
@@ -100,7 +82,38 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ModelCard.__init__" class="doc_header"><code>ModelCard.__init__</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.__init__</code>(<strong><code>from_template</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h2 id="ModelCard" class="doc_header"><code>class</code> <code>ModelCard</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L42" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ModelCard</code>(<strong><code>from_template</code></strong>=<em><code>True</code></em>) :: <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a></p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ModelCard.__init__" class="doc_header"><code>ModelCard.__init__</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.__init__</code>(<strong><code>from_template</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 
@@ -125,7 +138,7 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ModelCard.start_from_template" class="doc_header"><code>ModelCard.start_from_template</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.start_from_template</code>()</p>
+<h4 id="ModelCard.start_from_template" class="doc_header"><code>ModelCard.start_from_template</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.start_from_template</code>()</p>
 </blockquote>
 <p>Creates an empty model card template, then fills it with information that is automatically obtained from the system</p>
 
@@ -142,21 +155,14 @@ nb_path: "00_documentation.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-<div class="output_wrapper">
-<div class="output">
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdoc</span> <span class="o">=</span> <span class="n">ModelCard</span><span class="p">()</span>
+</pre></div>
 
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="ModelCard.__setitem__" class="doc_header"><code>ModelCard.__setitem__</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.__setitem__</code>(<strong><code>key</code></strong>, <strong><code>value</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -166,6 +172,16 @@ nb_path: "00_documentation.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdoc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -173,11 +189,9 @@ nb_path: "00_documentation.ipynb"
 <div class="output_area">
 
 
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="object.__getattribute__" class="doc_header"><code>object.__getattribute__</code><a href="" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>object.__getattribute__</code>(<strong><code>name</code></strong>)</p>
-</blockquote>
-<p>Return getattr(self, name).</p>
 
+<div class="output_text output_subarea output_execute_result">
+<pre>{}</pre>
 </div>
 
 </div>
@@ -189,5 +203,5 @@ nb_path: "00_documentation.ipynb"
     {% endraw %}
 
 </div>
- 
+
 

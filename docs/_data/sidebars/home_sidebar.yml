@@ -21,9 +21,6 @@ entries:
     - output: web,pdf
       title: Utils
       url: utils.html
-    - output: web,pdf
-      title: Walkthrough
-      url: Walkthrough.html
     output: web
     title: gingado
   output: web

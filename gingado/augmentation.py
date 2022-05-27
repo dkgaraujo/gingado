@@ -3,13 +3,14 @@
 __all__ = ['AugmentSDMX']
 
 # Cell
+#export
 import pandas as pd
 import pandasdmx as sdmx
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 from sklearn.feature_selection import VarianceThreshold
 
-class AugmentSDMX(BaseEstimator):
+class AugmentSDMX(BaseEstimator, TransformerMixin):
 
     InputIndexMessage = "The dataset to be augmented must have a row index with the date/time information"
     def _format_string(self):
