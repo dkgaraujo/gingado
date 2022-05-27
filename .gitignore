@@ -11,7 +11,7 @@ Gemfile.lock
 _tmp*
 tmp*
 tags
-*.DEV
+*.DONTRUN
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
