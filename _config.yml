@@ -1,6 +1,6 @@
+repository: dkgaraujo/gingado
 twitter_username: DouglasKGAraujo
 github_username:  dkgaraujo
-toc: true
 default_badges:
   colab: true
 google_search: 8e62117eaaea69e2e
@@ -27,7 +27,3 @@ defaults:
 
 sidebars: [home_sidebar]
 baseurl: /
-plugins:
-    - jekyll-remote-theme
-    
-remote_theme: fastai/nbdev-jekyll-theme
