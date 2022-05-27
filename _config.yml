@@ -1,3 +1,6 @@
 twitter_username: DouglasKGAraujo # DO NOT include the @ character, or else the build will fail!
 github_username:  dkgaraujo
 toc: true
+default_badges:
+  colab: true
+google_search: 8e62117eaaea69e2e
