@@ -4,10 +4,6 @@ __all__ = ['get_username', 'get_datetime', 'Lag', 'load_EURFX_data']
 
 # Cell
 #export
-from nbdev.showdoc import *
-
-# Cell
-#export
 import datetime
 import os
 import pwd

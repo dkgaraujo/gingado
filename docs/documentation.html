@@ -33,7 +33,8 @@ nb_path: "00_documentation.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Each user has a specific documentation need, ranging from the simply logging the model training to a more complex description of the model pipeline with a discusson of its predictions. <code>gingado</code> addresses this variety of needs by offering a class of objects that facilitate model documentation in a generic way, as well as one specific model documentation type, described below.</p>
 <p>The model documentation is performed by objects that subclass from <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>, for example, <a href="/gingado/documentation.html#ModelCard"><code>ModelCard</code></a> - the model documentation template inspired by the work of <a href="https://dl.acm.org/doi/abs/10.1145/3287560.3287596?casa_token=3JORxBYy_DQAAAAA:0RsTpg5NsCX8B2lEwMg81rCxHiQlkZIuP1rPjAmOOF1fP0NTi3Vv3-WT75gwQm6bysUYxdXLkgqUuA">Mitchell et al, 2019</a> that comes with <code>gingado</code>. Users with documentation needs beyond the out-of-the-box solutions provided by <code>gingado</code> can simply create their own class of Documenters, and compatibility with these custom documentation routines with the rest of the code is ensured.</p>
-<p>The baseline <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> class offers code that can be used by any Documenter object to read the pipeline in question and to save the resulting documentation in a JSON format. The user can then use existing libraries to transform the information stored in JSON into a variety of formats (eg, HTML, PDF) as needed by each user.</p>
+<p>The baseline <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> class offers code that can be used by any Documenter object to read the pipeline in question and to save the resulting documentation in a JSON format. One current area of development is the automatic filing of some fields.</p>
+<p>With the JSON documentation file at hand, the user can then use existing third-party libraries to transform the information stored in JSON into a variety of formats (eg, HTML, PDF) as needed.</p>
 <p>Users are encouraged to submit a PR with their own documentation models subclassing <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>, if the template can also benefit other users.</p>
 
 </div>
@@ -190,34 +191,34 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;task&#39;: None,
- &#39;framework&#39;: None,
- &#39;architecture&#39;: None,
- &#39;parameters&#39;: None,
- &#39;optimizer&#39;: None,
- &#39;type&#39;: None,
- &#39;info&#39;: None,
- &#39;citation&#39;: None,
- &#39;license&#39;: None,
- &#39;contact&#39;: None,
- &#39;primary_uses&#39;: None,
- &#39;primary_users&#39;: None,
- &#39;out_of_scope&#39;: None,
- &#39;relevant&#39;: None,
- &#39;evaluation&#39;: None,
- &#39;performance_measures&#39;: None,
- &#39;thresholds&#39;: None,
- &#39;variation_approaches&#39;: None,
- &#39;datasets&#39;: None,
- &#39;preprocessing&#39;: None,
- &#39;motivation&#39;: None,
- &#39;impact&#39;: None,
- &#39;risks&#39;: None,
- &#39;mitigation&#39;: None,
- &#39;avoid&#39;: None,
- &#39;caveats&#39;: None,
- &#39;recommendations&#39;: None,
- &#39;misc_notes&#39;: None}</pre>
+<pre>[&#39;model_details__task&#39;,
+ &#39;model_details__framework&#39;,
+ &#39;model_details__architecture&#39;,
+ &#39;model_details__parameters&#39;,
+ &#39;model_details__optimizer&#39;,
+ &#39;model_details__type&#39;,
+ &#39;model_details__info&#39;,
+ &#39;model_details__citation&#39;,
+ &#39;model_details__license&#39;,
+ &#39;model_details__contact&#39;,
+ &#39;intended_use__primary_uses&#39;,
+ &#39;intended_use__primary_users&#39;,
+ &#39;intended_use__out_of_scope&#39;,
+ &#39;factors__relevant&#39;,
+ &#39;factors__evaluation&#39;,
+ &#39;metrics__performance_measures&#39;,
+ &#39;metrics__thresholds&#39;,
+ &#39;metrics__variation_approaches&#39;,
+ &#39;data__datasets&#39;,
+ &#39;data__preprocessing&#39;,
+ &#39;data__motivation&#39;,
+ &#39;ethical_cons__impact&#39;,
+ &#39;ethical_cons__risks&#39;,
+ &#39;ethical_cons__mitigation&#39;,
+ &#39;ethical_cons__avoid&#39;,
+ &#39;caveats_recomm__caveats&#39;,
+ &#39;caveats_recomm__recommendations&#39;,
+ &#39;caveats_recomm__misc_notes&#39;]</pre>
 </div>
 
 </div>
@@ -306,5 +307,5 @@ nb_path: "00_documentation.ipynb"
     {% endraw %}
 
 </div>
-
+ 
 

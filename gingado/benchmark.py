@@ -4,9 +4,6 @@ __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 
 # Cell
 #export
-from nbdev.showdoc import show_doc
-
-# Cell
 import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import TimeSeriesSplit, StratifiedShuffleSplit, GridSearchCV
@@ -154,6 +151,7 @@ class ggdBenchmark(BaseEstimator):
 # Cell
 from .model_documentation import ModelCard
 from sklearn.base import ClassifierMixin
+from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 
 class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):

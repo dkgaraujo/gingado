@@ -40,7 +40,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_username" class="doc_header"><code>get_username</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_username</code>()</p>
+<h4 id="get_username" class="doc_header"><code>get_username</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_username</code>()</p>
 </blockquote>
 <p>Returns the active username in the computer</p>
 
@@ -84,7 +84,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_datetime" class="doc_header"><code>get_datetime</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datetime</code>()</p>
+<h4 id="get_datetime" class="doc_header"><code>get_datetime</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datetime</code>()</p>
 </blockquote>
 <p>Returns the time now</p>
 
@@ -128,7 +128,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Lag" class="doc_header"><code>class</code> <code>Lag</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L34" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Lag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
+<h2 id="Lag" class="doc_header"><code>class</code> <code>Lag</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Lag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
 </blockquote>
 <p>Base class for all estimators in scikit-learn.</p>
 <h2 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h2><p>All estimators should specify all the parameters that can be set
@@ -224,7 +224,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_EURFX_data" class="doc_header"><code>load_EURFX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_EURFX_data</code>(<strong><code>startYear</code></strong>=<em><code>2003</code></em>, <strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="load_EURFX_data" class="doc_header"><code>load_EURFX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_EURFX_data</code>(<strong><code>startYear</code></strong>=<em><code>2003</code></em>, <strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Loads a real-life dataset for testing use cases.</p>
 
@@ -264,7 +264,8 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 
-<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -532,7 +533,8 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
   </tbody>
 </table>
 <p>4969 rows × 16 columns</p>
-</div></div>
+</div>
+</div>
 
 </div>
 
@@ -543,5 +545,5 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
     {% endraw %}
 
 </div>
-
+ 
 

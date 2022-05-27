@@ -22,12 +22,12 @@ class ggdModelDocumentation:
         self.json_doc = json.load(f)
 
     def open_questions(self):
-        return {
-                    v: i
+        return [
+                    k + "__" + v
                     for k, v in mdoc.json_doc.items()
                     for v, i in v.items()
                     if i is None
-                }
+        ]
 
     def fill_info(self, dict):
         for k, v in dict.items():
