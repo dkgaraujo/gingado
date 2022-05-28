@@ -24,7 +24,7 @@ class ggdModelDocumentation:
     def open_questions(self):
         return [
                     k + "__" + v
-                    for k, v in mdoc.json_doc.items()
+                    for k, v in self.json_doc.items()
                     for v, i in v.items()
                     if i is None
         ]
