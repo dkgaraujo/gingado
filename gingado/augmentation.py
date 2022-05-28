@@ -26,7 +26,7 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
     def _transform(self, X, training=True):
         data_sdmx = {}
         for source in self.sources.keys():
-            src_conn = sdmx.Request(source, backend=self.backend, expire_after=1800, use_cache=True)
+            src_conn = sdmx.Request(source)
             src_dflows = src_conn.dataflow()
             if self.sources[source] == 'all':
                 dflows = {k: v for k, v in src_dflows.dataflow.items()}
@@ -81,10 +81,9 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
             X.index = self.index_
         return X
 
-    def __init__(self, sources={'BIS': 'WS_CBPOL_D'}, variance_threshold=None, backend='memory', propagate_last_known_value=True, verbose=True):
+    def __init__(self, sources={'BIS': 'WS_CBPOL_D'}, variance_threshold=None, propagate_last_known_value=True, verbose=True):
         self.sources = sources
         self.variance_threshold = variance_threshold
-        self.backend = backend
         self.propagate_last_known_value = propagate_last_known_value
         self.verbose = verbose
 
