@@ -16,9 +16,9 @@ Each of these functionalities builds on top of the previous one. They can be use
 ## Design principles
 
 The choices made during development of `gingado` derive from the following principles, in no particular order:
-* *lowering the barrier to use machine learning* can help more economists familiarise themselves with these techniques and use them when appopriate
-* *offering compatibility with other existing software that is consolidated by wide practice* benefits users and should be promoted as much as possible
-* *promoting good practices* such as documenting ethical considerations and benchmarking models as part of machine learning development will help embed these habits in economists
+* **flexibility**: users can use `gingado` out of the box or build custom processes on top of it
+* **compatibility**: `gingado` works well with other widely used libraries in machine learning, such as `scikit-learn` and `pandas`
+* **responsibility**: `gingado` facilitates and promotes model documentation, including ethical considerations, as part of the machine learning development workflow
 
 ## Presentations, talks, papers
 
