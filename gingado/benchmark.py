@@ -33,7 +33,7 @@ class ggdBenchmark(BaseEstimator):
             self.is_timeseries = pd.core.dtypes.common.is_datetime_or_timedelta_dtype(X.index)
         else:
             self.is_timeseries = False
-        if self.is_timeseries and y:
+        if self.is_timeseries and y is not None:
             if hasattr(y, "index"):
                 self.is_timeseries = pd.core.dtypes.common.is_datetime_or_timedelta_dtype(y.index)
             else:
