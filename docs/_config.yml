@@ -2,7 +2,7 @@ repository: dkgaraujo/gingado
 output: web
 topnav_title: gingado
 site_title: gingado
-company_name: 2022 Douglas K. G. de Araujo
+company_name: Douglas K. G. de Araujo
 description: A machine learning library for economics and finance
 # Set to false to disable KaTeX math
 use_math: true
