@@ -98,6 +98,8 @@ def list_all_dataflows(codes_only=False):
 
 # Cell
 #export
+import pandasdmx as sdmx
+
 def load_SDMX_data(sources, keys, params, verbose=True):
     "Loads datasets from SDMX."
     data_sdmx = {}
