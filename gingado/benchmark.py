@@ -149,6 +149,7 @@ class ggdBenchmark(BaseEstimator):
         return self.benchmark.predict_log_proba(X, **predict_log_proba_params)
 
 # Cell
+#export
 from .model_documentation import ModelCard
 from sklearn.base import ClassifierMixin
 from sklearn.model_selection import GridSearchCV
@@ -180,6 +181,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         return self
 
 # Cell
+#export
 from sklearn.base import RegressorMixin
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 

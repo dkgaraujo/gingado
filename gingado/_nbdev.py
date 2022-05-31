@@ -11,6 +11,9 @@ index = {"AugmentSDMX": "00_augmentation.ipynb",
          "get_username": "00_utils.ipynb",
          "get_datetime": "00_utils.ipynb",
          "Lag": "00_utils.ipynb",
+         "list_SDMX_sources": "00_utils.ipynb",
+         "list_all_dataflows": "00_utils.ipynb",
+         "load_SDMX_data": "00_utils.ipynb",
          "load_EURFX_data": "00_utils.ipynb"}
 
 modules = ["augmentation.py",

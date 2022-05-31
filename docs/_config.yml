@@ -64,5 +64,3 @@ plugins:
     
 remote_theme: fastai/nbdev-jekyll-theme
 baseurl: /gingado/
-
-theme: jekyll-theme-tactile

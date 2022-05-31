@@ -4,6 +4,8 @@ __all__ = ['AugmentSDMX']
 
 # Cell
 #export
+
+from .utils import load_SDMX_data
 import pandas as pd
 import pandasdmx as sdmx
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -24,29 +26,9 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
         }
 
     def _transform(self, X, training=True):
-        data_sdmx = {}
-        for source in self.sources.keys():
-            src_conn = sdmx.Request(source)
-            src_dflows = src_conn.dataflow()
-            if self.sources[source] == 'all':
-                dflows = {k: v for k, v in src_dflows.dataflow.items()}
-            else:
-                dflows = {k: v for k, v in src_dflows.dataflow.items() if k in self.sources[source]}
-            for dflow in dflows.keys():
-                if self.verbose: print(f"Querying data from {source}'s dataflow '{dflow}' - {dflows[dflow].dict()['name']}...")
-                try:
-                    data = sdmx.to_pandas(src_conn.data(dflow, key=self.keys_, params=self.params_), datetime='TIME_PERIOD')
-                except:
-                    if self.verbose: print("this dataflow does not have data in the desired frequency and time period.")
-                    continue
-                data.columns = ['__'.join(col) for col in data.columns.to_flat_index()]
-                data_sdmx[source+"__"+dflow] = data
-
-        if len(data_sdmx.keys()) is None:
+        df = load_SDMX_data(sources=self.sources, keys=self.keys_, params=self.params_, verbose=self.verbose)
+        if df is None:
             return X
-
-        df = pd.concat(data_sdmx, axis=1)
-        df.columns = ['_'.join(col) for col in df.columns.to_flat_index()]
 
         if training:
             # test that the dataset `X` has the same dimension as the one

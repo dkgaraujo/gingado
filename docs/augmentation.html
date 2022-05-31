@@ -55,7 +55,7 @@ nb_path: "00_augmentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="AugmentSDMX.fit" class="doc_header"><code>AugmentSDMX.fit</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>AugmentSDMX.fit</code>(<strong><code>X</code></strong>, <strong><code>y</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="AugmentSDMX.fit" class="doc_header"><code>AugmentSDMX.fit</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/augmentation.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>AugmentSDMX.fit</code>(<strong><code>X</code></strong>, <strong><code>y</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Fits transformer to <code>X</code>; <code>y</code> is kept as argument for API consistency only.</p>
 <h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2><p>X : a pandas Series or DataFrame with an index of datetime type
@@ -101,6 +101,21 @@ y : default=None</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/var/folders/b9/p8z57lqd55xfk68xz34dg0s40000gn/T/ipykernel_25780/2144762245.py:4: DeprecationWarning: Function &#39;load_EURFX_data&#39; will no longer be present after gingado v0.0.2. Use &#39;load_SDMX_data(source={&#39;ECB&#39;: &#39;EXR&#39;}) instead.
+  X = load_EURFX_data(keep_contemporaneous_X=True)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -129,7 +144,7 @@ y : default=None</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>((4968, 8), (4968,), (1, 8), (1,))</pre>
+<pre>((4969, 8), (4969,), (1, 8), (1,))</pre>
 </div>
 
 </div>
@@ -182,24 +197,7 @@ y : default=None</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:07:13,775 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Querying data from BIS&#39;s dataflow &#39;WS_CBPOL_D&#39; - Policy rates daily...
-Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:08:49,632 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-05-31 09:40:55,298 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -304,8 +302,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -638,8 +635,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
   </tbody>
 </table>
 <p>4968 rows × 68 columns</p>
-</div>
-</div>
+</div></div>
 
 </div>
 
@@ -1054,5 +1050,5 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
     {% endraw %}
 
 </div>
- 
+
 
