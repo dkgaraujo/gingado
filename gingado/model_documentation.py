@@ -50,6 +50,7 @@ class ggdModelDocumentation:
 from .utils import get_username, get_datetime
 
 # Cell
+#export
 class ModelCard(ggdModelDocumentation):
     def __init__(self, from_template = True):
         if from_template:

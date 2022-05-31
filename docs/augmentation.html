@@ -115,16 +115,16 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-31 23:08:33,245 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Querying data from ECB&#39;s dataflow &#39;EXR&#39; - Exchange Rates...
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Querying data from ECB&#39;s dataflow &#39;EXR&#39; - Exchange Rates...
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-01 01:03:59,391 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-31 09:40:55,298 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:11:00,886 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -220,6 +220,23 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from BIS&#39;s dataflow &#39;WS_CBPOL_D&#39; - Policy rates daily...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-01 01:12:24,776 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
+Querying data from BIS&#39;s dataflow &#39;WS_CBPOL_D&#39; - Policy rates daily...
 </pre>
 </div>
 </div>
@@ -527,54 +544,6 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-05-20</th>
-      <td>1.5036</td>
-      <td>5.2094</td>
-      <td>1.3490</td>
-      <td>1.0265</td>
-      <td>0.84728</td>
-      <td>134.46</td>
-      <td>1.4576</td>
-      <td>1.0525</td>
-      <td>0.288026</td>
-      <td>0.189337</td>
-      <td>...</td>
-      <td>3.75</td>
-      <td>2.0</td>
-      <td>14.0</td>
-      <td>1.75</td>
-      <td>0.25</td>
-      <td>0.50</td>
-      <td>14.0</td>
-      <td>0.875</td>
-      <td>0.00</td>
-      <td>4.75</td>
-    </tr>
-    <tr>
-      <th>2022-05-23</th>
-      <td>1.4980</td>
-      <td>5.1989</td>
-      <td>1.3526</td>
-      <td>1.0280</td>
-      <td>0.84820</td>
-      <td>135.34</td>
-      <td>1.4588</td>
-      <td>1.0577</td>
-      <td>0.267919</td>
-      <td>0.182845</td>
-      <td>...</td>
-      <td>3.75</td>
-      <td>2.0</td>
-      <td>14.0</td>
-      <td>1.75</td>
-      <td>0.25</td>
-      <td>0.50</td>
-      <td>14.0</td>
-      <td>0.875</td>
-      <td>0.00</td>
-      <td>4.75</td>
-    </tr>
-    <tr>
       <th>2022-05-24</th>
       <td>1.4982</td>
       <td>5.1623</td>
@@ -584,7 +553,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
       <td>136.05</td>
       <td>1.4639</td>
       <td>1.0659</td>
-      <td>0.269618</td>
+      <td>0.269626</td>
       <td>0.200358</td>
       <td>...</td>
       <td>3.75</td>
@@ -608,8 +577,8 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
       <td>136.49</td>
       <td>1.4722</td>
       <td>1.0720</td>
-      <td>0.264483</td>
-      <td>0.204047</td>
+      <td>0.264778</td>
+      <td>0.204644</td>
       <td>...</td>
       <td>3.75</td>
       <td>2.0</td>
@@ -632,8 +601,56 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
       <td>135.34</td>
       <td>1.4676</td>
       <td>1.0656</td>
-      <td>0.250493</td>
-      <td>0.198205</td>
+      <td>0.249738</td>
+      <td>0.198993</td>
+      <td>...</td>
+      <td>3.75</td>
+      <td>2.0</td>
+      <td>14.0</td>
+      <td>1.75</td>
+      <td>0.25</td>
+      <td>0.50</td>
+      <td>14.0</td>
+      <td>0.875</td>
+      <td>0.00</td>
+      <td>4.75</td>
+    </tr>
+    <tr>
+      <th>2022-05-27</th>
+      <td>1.5110</td>
+      <td>5.1741</td>
+      <td>1.3715</td>
+      <td>1.0283</td>
+      <td>0.85073</td>
+      <td>135.95</td>
+      <td>1.4709</td>
+      <td>1.0697</td>
+      <td>0.237198</td>
+      <td>0.188693</td>
+      <td>...</td>
+      <td>3.75</td>
+      <td>2.0</td>
+      <td>14.0</td>
+      <td>1.75</td>
+      <td>0.25</td>
+      <td>0.50</td>
+      <td>14.0</td>
+      <td>0.875</td>
+      <td>0.00</td>
+      <td>4.75</td>
+    </tr>
+    <tr>
+      <th>2022-05-30</th>
+      <td>1.4995</td>
+      <td>5.0959</td>
+      <td>1.3661</td>
+      <td>1.0258</td>
+      <td>0.84875</td>
+      <td>136.05</td>
+      <td>1.4679</td>
+      <td>1.0722</td>
+      <td>0.219695</td>
+      <td>0.184084</td>
       <td>...</td>
       <td>3.75</td>
       <td>2.0</td>
@@ -648,7 +665,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
     </tr>
   </tbody>
 </table>
-<p>4968 rows × 68 columns</p>
+<p>4970 rows × 68 columns</p>
 </div></div>
 
 </div>
@@ -725,23 +742,23 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
 [Pipeline] ............ (step 3 of 3) Processing forest, total=   0.3s
-[CV 1/5] END ..........augmentation=passthrough;, score=0.484 total time=   0.4s
+[CV 1/5] END ..........augmentation=passthrough;, score=0.623 total time=   0.3s
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
 [Pipeline] ............ (step 3 of 3) Processing forest, total=   0.6s
-[CV 2/5] END ..........augmentation=passthrough;, score=0.437 total time=   0.6s
+[CV 2/5] END ..........augmentation=passthrough;, score=0.423 total time=   0.6s
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
 [Pipeline] ............ (step 3 of 3) Processing forest, total=   0.9s
-[CV 3/5] END ..........augmentation=passthrough;, score=0.910 total time=   1.0s
+[CV 3/5] END ..........augmentation=passthrough;, score=0.912 total time=   0.9s
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.3s
-[CV 4/5] END ..........augmentation=passthrough;, score=0.947 total time=   1.3s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.1s
+[CV 4/5] END ..........augmentation=passthrough;, score=0.950 total time=   1.2s
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.7s
-[CV 5/5] END .........augmentation=passthrough;, score=-0.990 total time=   1.7s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.5s
+[CV 5/5] END .........augmentation=passthrough;, score=-0.979 total time=   1.5s
 </pre>
 </div>
 </div>
@@ -749,7 +766,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:10:58,142 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:31:08,006 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -758,9 +775,9 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[Pipeline] ...... (step 1 of 3) Processing augmentation, total=   9.8s
+[Pipeline] ...... (step 1 of 3) Processing augmentation, total=   3.4s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.1s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   0.8s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   0.7s
 </pre>
 </div>
 </div>
@@ -768,7 +785,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:11:08,678 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:31:12,084 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -777,7 +794,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[CV 1/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.557 total time=  15.3s
+[CV 1/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.453 total time=   7.8s
 </pre>
 </div>
 </div>
@@ -785,7 +802,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:11:13,330 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:31:15,679 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -794,9 +811,9 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[Pipeline] ...... (step 1 of 3) Processing augmentation, total=   8.0s
+[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  13.6s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.2s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.7s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   1.8s
 </pre>
 </div>
 </div>
@@ -804,7 +821,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:11:23,149 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:31:31,223 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -813,7 +830,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[CV 2/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.369 total time=  18.8s
+[CV 2/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.385 total time=  24.2s
 </pre>
 </div>
 </div>
@@ -821,7 +838,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:11:32,241 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:31:39,924 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -830,9 +847,62 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  13.1s
+[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  13.4s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.2s
 [Pipeline] ............ (step 3 of 3) Processing forest, total=   2.8s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-01 01:31:56,266 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
+[CV 3/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.917 total time=  28.6s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-01 01:32:08,450 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
+[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  16.7s
+[Pipeline] ............... (step 2 of 3) Processing imp, total=   0.3s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   3.9s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-01 01:32:29,346 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
+[CV 4/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.926 total time=  36.8s
 Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
 </pre>
 </div>
@@ -841,7 +911,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:11:48,452 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:32:45,419 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -849,26 +919,9 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[CV 3/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.916 total time=  30.1s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:12:02,257 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  18.1s
+<pre>[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  21.5s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.3s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   4.1s
+[Pipeline] ............ (step 3 of 3) Processing forest, total=   4.8s
 </pre>
 </div>
 </div>
@@ -876,7 +929,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:12:24,799 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
+<pre>2022-06-01 01:33:11,953 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
 </pre>
 </div>
 </div>
@@ -885,43 +938,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[CV 4/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=0.928 total time=  40.7s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:12:43,088 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[Pipeline] ...... (step 1 of 3) Processing augmentation, total=  22.5s
-[Pipeline] ............... (step 2 of 3) Processing imp, total=   0.3s
-[Pipeline] ............ (step 3 of 3) Processing forest, total=   5.3s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-28 01:13:11,231 pandasdmx.reader.sdmxml - INFO: Use supplied dsd=… argument for non–structure-specific message
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Systemic Stress...
-[CV 5/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=-1.438 total time=  50.3s
+[CV 5/5] END augmentation=AugmentSDMX(sources={&#39;ECB&#39;: &#39;CISS&#39;});, score=-1.428 total time=  47.8s
 [Pipeline] ...... (step 1 of 3) Processing augmentation, total=   0.0s
 [Pipeline] ............... (step 2 of 3) Processing imp, total=   0.0s
 [Pipeline] ............ (step 3 of 3) Processing forest, total=   1.9s
@@ -975,6 +992,37 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The best model was achieved by </span><span class="si">{</span><span class="s1">&#39;not &#39;</span> <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;augmentation&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;passthrough&#39;</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">using the data augmentation.&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The best model was achieved by *not* using the data augmentation.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The last value in the training dataset was </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="si">}</span><span class="s2">. The predicted value was </span><span class="si">{</span><span class="n">y_pred_grid</span><span class="si">}</span><span class="s2">, and the actual value was </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -988,7 +1036,7 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The last value in the training dataset was [5.1741]. The predicted value was [5.181137], and the actual value was [5.0959].
+<pre>The last value in the training dataset was [5.0629]. The predicted value was [5.102027], and the actual value was [5.0965].
 </pre>
 </div>
 </div>
@@ -1014,8 +1062,8 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandasdmx</span> <span class="k">as</span> <span class="nn">sdmx</span>
-<span class="n">sdmx</span><span class="o">.</span><span class="n">list_sources</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gingado.utils</span> <span class="kn">import</span> <span class="n">list_SDMX_sources</span>
+<span class="n">list_SDMX_sources</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1093,12 +1141,12 @@ Querying data from ECB&#39;s dataflow &#39;CISS&#39; - Composite Indicator of Sy
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>2022-05-31 23:14:14,539 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
-2022-05-31 23:14:39,523 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
-2022-05-31 23:14:43,952 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
-2022-05-31 23:14:45,377 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
-2022-05-31 23:14:48,597 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
-2022-05-31 23:14:49,363 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+<pre>2022-06-01 01:36:58,978 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-01 01:37:16,370 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-01 01:37:20,557 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-01 01:37:21,384 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-01 01:37:24,412 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-01 01:37:25,177 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
 </pre>
 </div>
 </div>
