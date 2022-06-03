@@ -3,21 +3,37 @@
 __all__ = ['ggdModelDocumentation', 'ModelCard']
 
 # Cell
+#export
+import copy
 import json
 
 class ggdModelDocumentation:
+    "Base class for gingado Documenters"
+
+    def setup_template(self):
+        self.json_doc = copy.deepcopy(self.__class__.template)
+        for k in self.json_doc.keys():
+            self.json_doc[k].pop('field_description', "")
+
+    def show_template(self, indent=True):
+        if indent:
+            print(json.dumps(self.__class__.template, indent=self.indent_level))
+        else:
+            return self.__class__.template
 
     def documentation_path(self):
-        pass
+        print(self.file_path)
 
     def show_json(self):
-        return self.json_doc
+        print(json.dumps(self.json_doc, indent=self.indent_level))
 
     def save_json(self, file_path):
         with open(file_path, 'w') as f:
             json.dump(self.json_doc, f)
 
-    def read_json(self, file_path):
+    def read_json(self, file_path=None):
+        if file_path is None:
+            file_path = self.file_path
         f = open(file_path)
         self.json_doc = json.load(f)
 
@@ -25,13 +41,28 @@ class ggdModelDocumentation:
         return [
                     k + "__" + v
                     for k, v in self.json_doc.items()
+                    if isinstance(v, dict)
                     for v, i in v.items()
-                    if i is None
+                    if i == self.__class__.template[k][v]
         ]
 
-    def fill_info(self, dict):
-        for k, v in dict.items():
-            self.json_doc[k] = v
+    def fill_info(self, new_info):
+        for k, v in new_info.items():
+            if k not in self.__class__.template.keys():
+                raise KeyError(f"key '{k}' is not in the documentation template. The template's keys are: {self.__class__.template.keys()}")
+            if isinstance(v, dict) and isinstance(self.json_doc[k], dict):
+                for v_k, v_v in v.items():
+                    if v_k == 'field_description':
+                        raise KeyError("The key 'field_description' is not supposed to be changed from the template definition.")
+                    if v_k not in self.json_doc[k].keys():
+                        field_keys = [k for k in self.__class__.template[k].keys() if k != 'field_description']
+                        raise KeyError(f"key '{v_k}' is not in the documentation template's item {k}. These template item's keys are: {field_keys}")
+                    #self.json_doc[k][v_k] = v_v
+                    for kk in self.json_doc[k].keys():
+                        if kk == v_k:
+                            self.json_doc[k][kk] = v_v
+            else:
+                self.json_doc.update({k: v})
 
     def __setitem__(self, key, value):
         setattr(self, key, value)
@@ -51,57 +82,93 @@ from .utils import get_username, get_datetime
 
 # Cell
 #export
+
 class ModelCard(ggdModelDocumentation):
-    def __init__(self, from_template = True):
-        if from_template:
-            self.start_from_template()
+    template = {
+        'model_details': {
+            'field_description': "Basic information about the model",
+            'developer': "Person or organisation developing the model",
+            'datetime': "Model date",
+            'version': "Model version",
+            'type': "Model type",
+            'info': "Information about training algorithms, parameters, fairness constraints or other applied approaches, and features",
+            'paper': "Paper or other resource for more information",
+            'citation': "Citation details",
+            'license': "License",
+            'contact': "Where to send questions or comments about the model"
+        },
+        'intended_use': {
+            'field_description': "Use cases that were envisioned during development",
+            'primary_uses': "Primary intended uses",
+            'primary_users': "Primary intended users",
+            'out_of_scope': "Out-of-scope use cases"
+        },
+        'factors': {
+            'field_description': "Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others",
+            'relevant': "Relevant factors",
+            'evaluation': "Evaluation factors"
+        },
+        'metrics': {
+            'field_description': "Metrics should be chosen to reflect potential real world impacts of the model",
+            'performance_measures': "Model performance measures",
+            'thresholds': "Decision thresholds",
+            'variation_approaches': "Variation approaches"
+        },
+        'evaluation_data': {
+            'field_description': "Details on the dataset(s) used for the quantitative analyses in the documentation",
+            'datasets': "Datasets",
+            'motivation': "Motivation",
+            'preprocessing': "Preprocessing"
+        },
+        'training_data': {
+            'field_description': """
+            May not be possible to provide in practice. When possible, this section should mirror 'Evaluation Data'.
+            If such detail is not possible, minimal allowable information should be provided here,
+            such as details of the distribution over various factors in the training datasets.""",
+            'training_data': "Information on training data"
+        },
+        'quant_analyses': {
+            'field_description': "Quantitative Analyses",
+            'unitary': "Unitary results",
+            'intersectional': "Intersectional results"
+        },
+        'ethical_considerations': {
+            'field_description': """
+            Ethical considerations that went into model development, surfacing ethical challenges and
+            solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process
+            of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.""",
+            'sensitive_data': "Does the model use any sensitive data (e.g., protected classes)?",
+            'human_life': "Is the model intended to inform decisions about mat- ters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?",
+            'mitigations': "What risk mitigation strategies were used during model development?",
+            'risks_and_harms': """
+            What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms.
+            If these cannot be determined, note that they were consid- ered but remain unknown""",
+            'use_cases': "Are there any known model use cases that are especially fraught?",
+            'additional_information': """
+            If possible, this section should also include any additional ethical considerations that went into model development,
+            for example, review by an external board, or testing with a specific community."""
+        },
+        'caveats_recommendations': {
+            'field_description': "Additional concerns that were not covered in the previous sections",
+            'caveats': "For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?",
+            'recommendations': "Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?"
+        }
+    }
 
-    def start_from_template(self):
+    def __init__(self, file_path="", autofill=True, indent_level=2):
+        self.file_path = file_path
+        self.autofill = autofill
+        self.indent_level = indent_level
+        self.setup_template()
+        if self.autofill:
+            self.autofill_template()
+
+    def autofill_template(self):
         """Creates an empty model card template, then fills it with information that is automatically obtained from the system"""
-        self.json_doc = {}
-        self.json_doc['model_details'] = {}
-        self.json_doc['model_details']['developer'] = get_username()
-        self.json_doc['model_details']['datetime'] = get_datetime()
-        self.json_doc['model_details']['version'] = "1"
-        self.json_doc['model_details']['task'] = None
-        self.json_doc['model_details']['framework'] = None
-        self.json_doc['model_details']['architecture'] = None
-        self.json_doc['model_details']['parameters'] = None
-        self.json_doc['model_details']['optimizer'] = None
-        self.json_doc['model_details']['type'] = None
-        self.json_doc['model_details']['info'] = None
-        self.json_doc['model_details']['citation'] = None
-        self.json_doc['model_details']['license'] = None
-        self.json_doc['model_details']['contact'] = None
-
-        self.json_doc['intended_use'] = {}
-        self.json_doc['intended_use']['primary_uses'] = None
-        self.json_doc['intended_use']['primary_users'] = None
-        self.json_doc['intended_use']['out_of_scope'] = None
-
-        self.json_doc['factors'] = {}
-        self.json_doc['factors']['relevant'] = None
-        self.json_doc['factors']['evaluation'] = None
-
-        self.json_doc['metrics'] = {}
-        self.json_doc['metrics']['performance_measures'] = None
-        self.json_doc['metrics']['thresholds'] = None
-        self.json_doc['metrics']['variation_approaches'] = None
-
-        self.json_doc['data'] = {}
-        self.json_doc['data']['datasets'] = None
-        self.json_doc['data']['preprocessing'] = None
-        self.json_doc['data']['motivation'] = None
-
-        self.json_doc['ethical_cons'] = {}
-        self.json_doc['ethical_cons']['impact'] = None
-        self.json_doc['ethical_cons']['risks'] = None
-        self.json_doc['ethical_cons']['mitigation'] = None
-        self.json_doc['ethical_cons']['avoid'] = None
-
-        self.json_doc['caveats_recomm'] = {}
-        self.json_doc['caveats_recomm']['caveats'] = None
-        self.json_doc['caveats_recomm']['recommendations'] = None
-        self.json_doc['caveats_recomm']['misc_notes'] = None
-
-        return self
+        auto_info = {
+            'model_details': {
+                'developer': get_username(),
+                'datetime': get_datetime()
+            }
+        }
+        self.fill_info(auto_info)

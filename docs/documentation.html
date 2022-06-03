@@ -31,11 +31,10 @@ nb_path: "00_documentation.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Each user has a specific documentation need, ranging from the simply logging the model training to a more complex description of the model pipeline with a discusson of its predictions. <code>gingado</code> addresses this variety of needs by offering a class of objects that facilitate model documentation in a generic way, as well as one specific model documentation type, described below.</p>
-<p>The model documentation is performed by objects that subclass from <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>, for example, <a href="/gingado/documentation.html#ModelCard"><code>ModelCard</code></a> - the model documentation template inspired by the work of <a href="https://dl.acm.org/doi/abs/10.1145/3287560.3287596?casa_token=3JORxBYy_DQAAAAA:0RsTpg5NsCX8B2lEwMg81rCxHiQlkZIuP1rPjAmOOF1fP0NTi3Vv3-WT75gwQm6bysUYxdXLkgqUuA">Mitchell et al, 2019</a> that comes with <code>gingado</code>. Users with documentation needs beyond the out-of-the-box solutions provided by <code>gingado</code> can simply create their own class of Documenters, and compatibility with these custom documentation routines with the rest of the code is ensured.</p>
-<p>The baseline <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> class offers code that can be used by any Documenter object to read the pipeline in question and to save the resulting documentation in a JSON format. One current area of development is the automatic filing of some fields.</p>
-<p>With the JSON documentation file at hand, the user can then use existing third-party libraries to transform the information stored in JSON into a variety of formats (eg, HTML, PDF) as needed.</p>
-<p>Users are encouraged to submit a PR with their own documentation models subclassing <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>, if the template can also benefit other users.</p>
+<p>Each user has a specific documentation need, ranging from the simply logging the model training to a more complex description of the model pipeline with a discusson of its predictions. <code>gingado</code> addresses this variety of needs by offering a class of objects, "Documenters", that facilitate model documentation in a generic way, as well as one specific model documentation type as described below.</p>
+<p>The model documentation is performed by Documenters, objects that subclass from the base class <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a>. This base class offers code that can be used by any Documenter to read the pipeline in question and to save the resulting documentation in a JSON format. One current area of development is the automatic filing of some fields related to the model. The objective is to automatise documentation of the information that can be fetched automatically from the model, leaving time for the analyst to concentrate on other tasks, such as considering the ethical implications of the machine learning model being trained.</p>
+<p>Documenters save the underlying information using the JSON format. With the JSON documentation file at hand, the user can then use existing third-party libraries to transform the information stored in JSON into a variety of formats (eg, HTML, PDF) as needed.</p>
+<p><a href="/gingado/documentation.html#ModelCard"><code>ModelCard</code></a> - the model documentation template inspired by the work of <a href="https://dl.acm.org/doi/abs/10.1145/3287560.3287596?casa_token=3JORxBYy_DQAAAAA:0RsTpg5NsCX8B2lEwMg81rCxHiQlkZIuP1rPjAmOOF1fP0NTi3Vv3-WT75gwQm6bysUYxdXLkgqUuA">Mitchell et al, 2019</a> already comes with <code>gingado</code>. Its template can be used by users as is, or tweaked according to each need. The <a href="/gingado/documentation.html#ModelCard"><code>ModelCard</code></a> template can also serve as inspiration for any custom documentation needs. Users with documentation needs beyond the out-of-the-box solutions provided by <code>gingado</code> can create their own class of Documenters (more information on that below), and compatibility with these custom documentation routines with the rest of the code is ensured. Users are encouraged to submit a pull request with their own documentation models subclassing <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> if these custom templates can also benefit other users.</p>
 
 </div>
 </div>
@@ -51,39 +50,9 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ggdModelDocumentation" class="doc_header"><code>class</code> <code>ggdModelDocumentation</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L8" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ggdModelDocumentation</code>()</p>
+<h2 id="ggdModelDocumentation" class="doc_header"><code>class</code> <code>ggdModelDocumentation</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ggdModelDocumentation</code>()</p>
 </blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="ModelCard" class="doc_header"><code>class</code> <code>ModelCard</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ModelCard</code>(<strong><code>from_template</code></strong>=<em><code>True</code></em>) :: <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a></p>
-</blockquote>
+<p>Base class for gingado Documenters</p>
 
 </div>
 
@@ -106,9 +75,9 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ModelCard.start_from_template" class="doc_header"><code>ModelCard.start_from_template</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ModelCard.start_from_template</code>()</p>
+<h2 id="ModelCard" class="doc_header"><code>class</code> <code>ModelCard</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/model_documentation.py#L86" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ModelCard</code>(<strong><code>file_path</code></strong>=<em><code>''</code></em>, <strong><code>autofill</code></strong>=<em><code>True</code></em>, <strong><code>indent_level</code></strong>=<em><code>2</code></em>) :: <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a></p>
 </blockquote>
-<p>Creates an empty model card template, then fills it with information that is automatically obtained from the system</p>
+<p>Base class for gingado Documenters</p>
 
 </div>
 
@@ -120,6 +89,13 @@ nb_path: "00_documentation.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After a Documenter object, such as <a href="/gingado/documentation.html#ModelCard"><code>ModelCard</code></a> is instanciated, the user can see the underlying template with the module <code>show_template</code>, as below:</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -127,13 +103,189 @@ nb_path: "00_documentation.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdoc</span> <span class="o">=</span> <span class="n">ModelCard</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_doc</span> <span class="o">=</span> <span class="n">ModelCard</span><span class="p">(</span><span class="n">autofill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="n">ModelCard</span><span class="o">.</span><span class="n">template</span>
+
+
+<span class="n">model_doc</span><span class="o">.</span><span class="n">show_json</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
+<details class="description">
+      <summary data-open="Hide Output" data-close="Show Output"></summary>
+        <summary></summary>
+        
+<div class="output_wrapper">
+<div class="output">
 
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{
+  &#34;model_details&#34;: {
+    &#34;developer&#34;: &#34;Person or organisation developing the model&#34;,
+    &#34;datetime&#34;: &#34;Model date&#34;,
+    &#34;version&#34;: &#34;Model version&#34;,
+    &#34;type&#34;: &#34;Model type&#34;,
+    &#34;info&#34;: &#34;Information about training algorithms, parameters, fairness constraints or other applied approaches, and features&#34;,
+    &#34;paper&#34;: &#34;Paper or other resource for more information&#34;,
+    &#34;citation&#34;: &#34;Citation details&#34;,
+    &#34;license&#34;: &#34;License&#34;,
+    &#34;contact&#34;: &#34;Where to send questions or comments about the model&#34;
+  },
+  &#34;intended_use&#34;: {
+    &#34;primary_uses&#34;: &#34;Primary intended uses&#34;,
+    &#34;primary_users&#34;: &#34;Primary intended users&#34;,
+    &#34;out_of_scope&#34;: &#34;Out-of-scope use cases&#34;
+  },
+  &#34;factors&#34;: {
+    &#34;relevant&#34;: &#34;Relevant factors&#34;,
+    &#34;evaluation&#34;: &#34;Evaluation factors&#34;
+  },
+  &#34;metrics&#34;: {
+    &#34;performance_measures&#34;: &#34;Model performance measures&#34;,
+    &#34;thresholds&#34;: &#34;Decision thresholds&#34;,
+    &#34;variation_approaches&#34;: &#34;Variation approaches&#34;
+  },
+  &#34;evaluation_data&#34;: {
+    &#34;datasets&#34;: &#34;Datasets&#34;,
+    &#34;motivation&#34;: &#34;Motivation&#34;,
+    &#34;preprocessing&#34;: &#34;Preprocessing&#34;
+  },
+  &#34;training_data&#34;: {
+    &#34;training_data&#34;: &#34;Information on training data&#34;
+  },
+  &#34;quant_analyses&#34;: {
+    &#34;unitary&#34;: &#34;Unitary results&#34;,
+    &#34;intersectional&#34;: &#34;Intersectional results&#34;
+  },
+  &#34;ethical_considerations&#34;: {
+    &#34;sensitive_data&#34;: &#34;Does the model use any sensitive data (e.g., protected classes)?&#34;,
+    &#34;human_life&#34;: &#34;Is the model intended to inform decisions about mat- ters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?&#34;,
+    &#34;mitigations&#34;: &#34;What risk mitigation strategies were used during model development?&#34;,
+    &#34;risks_and_harms&#34;: &#34;\n            What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms. \n            If these cannot be determined, note that they were consid- ered but remain unknown&#34;,
+    &#34;use_cases&#34;: &#34;Are there any known model use cases that are especially fraught?&#34;,
+    &#34;additional_information&#34;: &#34;\n            If possible, this section should also include any additional ethical considerations that went into model development, \n            for example, review by an external board, or testing with a specific community.&#34;
+  },
+  &#34;caveats_recommendations&#34;: {
+    &#34;caveats&#34;: &#34;For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?&#34;,
+    &#34;recommendations&#34;: &#34;Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?&#34;
+  }
+}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The template is protected from editing once a Documenter has been created. This way, even if a user unwarrantedly changes the template, this does not interfere with the Documenter functionality.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_doc</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="n">ModelCard</span><span class="o">.</span><span class="n">template</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+<details class="description">
+      <summary data-open="Hide Output" data-close="Show Output"></summary>
+        <summary></summary>
+        
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{
+  &#34;model_details&#34;: {
+    &#34;field_description&#34;: &#34;Basic information about the model&#34;,
+    &#34;developer&#34;: &#34;Person or organisation developing the model&#34;,
+    &#34;datetime&#34;: &#34;Model date&#34;,
+    &#34;version&#34;: &#34;Model version&#34;,
+    &#34;type&#34;: &#34;Model type&#34;,
+    &#34;info&#34;: &#34;Information about training algorithms, parameters, fairness constraints or other applied approaches, and features&#34;,
+    &#34;paper&#34;: &#34;Paper or other resource for more information&#34;,
+    &#34;citation&#34;: &#34;Citation details&#34;,
+    &#34;license&#34;: &#34;License&#34;,
+    &#34;contact&#34;: &#34;Where to send questions or comments about the model&#34;
+  },
+  &#34;intended_use&#34;: {
+    &#34;field_description&#34;: &#34;Use cases that were envisioned during development&#34;,
+    &#34;primary_uses&#34;: &#34;Primary intended uses&#34;,
+    &#34;primary_users&#34;: &#34;Primary intended users&#34;,
+    &#34;out_of_scope&#34;: &#34;Out-of-scope use cases&#34;
+  },
+  &#34;factors&#34;: {
+    &#34;field_description&#34;: &#34;Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others&#34;,
+    &#34;relevant&#34;: &#34;Relevant factors&#34;,
+    &#34;evaluation&#34;: &#34;Evaluation factors&#34;
+  },
+  &#34;metrics&#34;: {
+    &#34;field_description&#34;: &#34;Metrics should be chosen to reflect potential real world impacts of the model&#34;,
+    &#34;performance_measures&#34;: &#34;Model performance measures&#34;,
+    &#34;thresholds&#34;: &#34;Decision thresholds&#34;,
+    &#34;variation_approaches&#34;: &#34;Variation approaches&#34;
+  },
+  &#34;evaluation_data&#34;: {
+    &#34;field_description&#34;: &#34;Details on the dataset(s) used for the quantitative analyses in the documentation&#34;,
+    &#34;datasets&#34;: &#34;Datasets&#34;,
+    &#34;motivation&#34;: &#34;Motivation&#34;,
+    &#34;preprocessing&#34;: &#34;Preprocessing&#34;
+  },
+  &#34;training_data&#34;: {
+    &#34;field_description&#34;: &#34;\n            May not be possible to provide in practice. When possible, this section should mirror &#39;Evaluation Data&#39;. \n            If such detail is not possible, minimal allowable information should be provided here, \n            such as details of the distribution over various factors in the training datasets.&#34;,
+    &#34;training_data&#34;: &#34;Information on training data&#34;
+  },
+  &#34;quant_analyses&#34;: {
+    &#34;field_description&#34;: &#34;Quantitative Analyses&#34;,
+    &#34;unitary&#34;: &#34;Unitary results&#34;,
+    &#34;intersectional&#34;: &#34;Intersectional results&#34;
+  },
+  &#34;ethical_considerations&#34;: {
+    &#34;field_description&#34;: &#34;\n            Ethical considerations that went into model development, surfacing ethical challenges and \n            solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process \n            of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.&#34;,
+    &#34;sensitive_data&#34;: &#34;Does the model use any sensitive data (e.g., protected classes)?&#34;,
+    &#34;human_life&#34;: &#34;Is the model intended to inform decisions about mat- ters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?&#34;,
+    &#34;mitigations&#34;: &#34;What risk mitigation strategies were used during model development?&#34;,
+    &#34;risks_and_harms&#34;: &#34;\n            What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms. \n            If these cannot be determined, note that they were consid- ered but remain unknown&#34;,
+    &#34;use_cases&#34;: &#34;Are there any known model use cases that are especially fraught?&#34;,
+    &#34;additional_information&#34;: &#34;\n            If possible, this section should also include any additional ethical considerations that went into model development, \n            for example, review by an external board, or testing with a specific community.&#34;
+  },
+  &#34;caveats_recommendations&#34;: {
+    &#34;field_description&#34;: &#34;Additional concerns that were not covered in the previous sections&#34;,
+    &#34;caveats&#34;: &#34;For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?&#34;,
+    &#34;recommendations&#34;: &#34;Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?&#34;
+  }
+}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+    </details>
 </div>
     {% endraw %}
 
@@ -151,7 +303,233 @@ nb_path: "00_documentation.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdoc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_doc</span><span class="o">.</span><span class="n">fill_info</span><span class="p">({</span><span class="s1">&#39;caveats_recommendations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;caveats&#39;</span><span class="p">:</span> <span class="s1">&#39;This is another test&#39;</span><span class="p">}})</span>
+<span class="k">assert</span> <span class="n">model_doc</span><span class="o">.</span><span class="n">json_doc</span><span class="p">[</span><span class="s1">&#39;caveats_recommendations&#39;</span><span class="p">][</span><span class="s1">&#39;caveats&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;This is another test&quot;</span>
+
+<span class="c1"># note that caveats_recommendations__caveats is no longer considered an open question</span>
+<span class="c1"># after being filled in through `fill_info`.</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">oq</span> <span class="k">for</span> <span class="n">oq</span> <span class="ow">in</span> <span class="n">model_doc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span> <span class="k">if</span> <span class="n">oq</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;caveats&#39;</span><span class="p">)])</span>
+
+<span class="n">model_doc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+<details class="description">
+      <summary data-open="Hide Output" data-close="Show Output"></summary>
+        <summary></summary>
+        
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;caveats_recommendations__recommendations&#39;]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;model_details__developer&#39;,
+ &#39;model_details__datetime&#39;,
+ &#39;model_details__version&#39;,
+ &#39;model_details__type&#39;,
+ &#39;model_details__info&#39;,
+ &#39;model_details__paper&#39;,
+ &#39;model_details__citation&#39;,
+ &#39;model_details__license&#39;,
+ &#39;model_details__contact&#39;,
+ &#39;intended_use__primary_uses&#39;,
+ &#39;intended_use__primary_users&#39;,
+ &#39;intended_use__out_of_scope&#39;,
+ &#39;factors__relevant&#39;,
+ &#39;factors__evaluation&#39;,
+ &#39;metrics__performance_measures&#39;,
+ &#39;metrics__thresholds&#39;,
+ &#39;metrics__variation_approaches&#39;,
+ &#39;evaluation_data__datasets&#39;,
+ &#39;evaluation_data__motivation&#39;,
+ &#39;evaluation_data__preprocessing&#39;,
+ &#39;training_data__training_data&#39;,
+ &#39;quant_analyses__unitary&#39;,
+ &#39;quant_analyses__intersectional&#39;,
+ &#39;ethical_considerations__sensitive_data&#39;,
+ &#39;ethical_considerations__human_life&#39;,
+ &#39;ethical_considerations__mitigations&#39;,
+ &#39;ethical_considerations__risks_and_harms&#39;,
+ &#39;ethical_considerations__use_cases&#39;,
+ &#39;ethical_considerations__additional_information&#39;,
+ &#39;caveats_recommendations__recommendations&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the user wants to fill in an empty field such as the ones identified above by the method <code>open_questions</code>, the user simply needs to pass to the module <code>fill_info</code> a dictionary with the corresponding information. Depending on the template, the dictionary may be nested. 
+{% include note.html content='it is technically possible to attribute the element directly to the attribute <code>json_doc</code>, but this should be avoided in favour of using the method <code>fill_info</code>. The latter tests whether the new information is valid according to the documentation template and also enables the filling of more than one question at the same time. In addition, attributing information directly to <code>json_doc</code> is not logged, and may unwarrantedly create new entries that are not part of the template (eg, if a new dictionary key is created due to typos).' %}
+The template serves to provide specific instances of the Documenter object with a form-like structure, indicating which fields are open and thus require some answers or information. Consequently, the template does not change when the actual document object changes after information is added by <code>fill_info</code>.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_info</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;performance_measures&#39;</span><span class="p">:</span> <span class="s2">&quot;This is a test&quot;</span><span class="p">},</span>
+    <span class="s1">&#39;caveats_recommendations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;caveats&#39;</span><span class="p">:</span> <span class="s2">&quot;This is another test&quot;</span><span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="n">model_doc</span><span class="o">.</span><span class="n">fill_info</span><span class="p">(</span><span class="n">new_info</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">model_doc</span><span class="o">.</span><span class="n">json_doc</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">],</span> <span class="n">ModelCard</span><span class="o">.</span><span class="n">template</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]])</span>
+
+<span class="k">assert</span> <span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="n">ModelCard</span><span class="o">.</span><span class="n">template</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[{&#39;performance_measures&#39;: &#39;This is a test&#39;, &#39;thresholds&#39;: &#39;Decision thresholds&#39;, &#39;variation_approaches&#39;: &#39;Variation approaches&#39;}, {&#39;field_description&#39;: &#39;Metrics should be chosen to reflect potential real world impacts of the model&#39;, &#39;performance_measures&#39;: &#39;Model performance measures&#39;, &#39;thresholds&#39;: &#39;Decision thresholds&#39;, &#39;variation_approaches&#39;: &#39;Variation approaches&#39;}]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The method <code>show_template</code> prints the Documenter's documentation template:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{
+  &#34;model_details&#34;: {
+    &#34;field_description&#34;: &#34;Basic information about the model&#34;,
+    &#34;developer&#34;: &#34;Person or organisation developing the model&#34;,
+    &#34;datetime&#34;: &#34;Model date&#34;,
+    &#34;version&#34;: &#34;Model version&#34;,
+    &#34;type&#34;: &#34;Model type&#34;,
+    &#34;info&#34;: &#34;Information about training algorithms, parameters, fairness constraints or other applied approaches, and features&#34;,
+    &#34;paper&#34;: &#34;Paper or other resource for more information&#34;,
+    &#34;citation&#34;: &#34;Citation details&#34;,
+    &#34;license&#34;: &#34;License&#34;,
+    &#34;contact&#34;: &#34;Where to send questions or comments about the model&#34;
+  },
+  &#34;intended_use&#34;: {
+    &#34;field_description&#34;: &#34;Use cases that were envisioned during development&#34;,
+    &#34;primary_uses&#34;: &#34;Primary intended uses&#34;,
+    &#34;primary_users&#34;: &#34;Primary intended users&#34;,
+    &#34;out_of_scope&#34;: &#34;Out-of-scope use cases&#34;
+  },
+  &#34;factors&#34;: {
+    &#34;field_description&#34;: &#34;Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others&#34;,
+    &#34;relevant&#34;: &#34;Relevant factors&#34;,
+    &#34;evaluation&#34;: &#34;Evaluation factors&#34;
+  },
+  &#34;metrics&#34;: {
+    &#34;field_description&#34;: &#34;Metrics should be chosen to reflect potential real world impacts of the model&#34;,
+    &#34;performance_measures&#34;: &#34;Model performance measures&#34;,
+    &#34;thresholds&#34;: &#34;Decision thresholds&#34;,
+    &#34;variation_approaches&#34;: &#34;Variation approaches&#34;
+  },
+  &#34;evaluation_data&#34;: {
+    &#34;field_description&#34;: &#34;Details on the dataset(s) used for the quantitative analyses in the documentation&#34;,
+    &#34;datasets&#34;: &#34;Datasets&#34;,
+    &#34;motivation&#34;: &#34;Motivation&#34;,
+    &#34;preprocessing&#34;: &#34;Preprocessing&#34;
+  },
+  &#34;training_data&#34;: {
+    &#34;field_description&#34;: &#34;\n            May not be possible to provide in practice. When possible, this section should mirror &#39;Evaluation Data&#39;. \n            If such detail is not possible, minimal allowable information should be provided here, \n            such as details of the distribution over various factors in the training datasets.&#34;,
+    &#34;training_data&#34;: &#34;Information on training data&#34;
+  },
+  &#34;quant_analyses&#34;: {
+    &#34;field_description&#34;: &#34;Quantitative Analyses&#34;,
+    &#34;unitary&#34;: &#34;Unitary results&#34;,
+    &#34;intersectional&#34;: &#34;Intersectional results&#34;
+  },
+  &#34;ethical_considerations&#34;: {
+    &#34;field_description&#34;: &#34;\n            Ethical considerations that went into model development, surfacing ethical challenges and \n            solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process \n            of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.&#34;,
+    &#34;sensitive_data&#34;: &#34;Does the model use any sensitive data (e.g., protected classes)?&#34;,
+    &#34;human_life&#34;: &#34;Is the model intended to inform decisions about mat- ters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?&#34;,
+    &#34;mitigations&#34;: &#34;What risk mitigation strategies were used during model development?&#34;,
+    &#34;risks_and_harms&#34;: &#34;\n            What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms. \n            If these cannot be determined, note that they were consid- ered but remain unknown&#34;,
+    &#34;use_cases&#34;: &#34;Are there any known model use cases that are especially fraught?&#34;,
+    &#34;additional_information&#34;: &#34;\n            If possible, this section should also include any additional ethical considerations that went into model development, \n            for example, review by an external board, or testing with a specific community.&#34;
+  },
+  &#34;caveats_recommendations&#34;: {
+    &#34;field_description&#34;: &#34;Additional concerns that were not covered in the previous sections&#34;,
+    &#34;caveats&#34;: &#34;For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?&#34;,
+    &#34;recommendations&#34;: &#34;Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?&#34;
+  }
+}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_doc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -166,13 +544,10 @@ nb_path: "00_documentation.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;model_details__task&#39;,
- &#39;model_details__framework&#39;,
- &#39;model_details__architecture&#39;,
- &#39;model_details__parameters&#39;,
- &#39;model_details__optimizer&#39;,
+<pre>[&#39;model_details__version&#39;,
  &#39;model_details__type&#39;,
  &#39;model_details__info&#39;,
+ &#39;model_details__paper&#39;,
  &#39;model_details__citation&#39;,
  &#39;model_details__license&#39;,
  &#39;model_details__contact&#39;,
@@ -181,19 +556,21 @@ nb_path: "00_documentation.ipynb"
  &#39;intended_use__out_of_scope&#39;,
  &#39;factors__relevant&#39;,
  &#39;factors__evaluation&#39;,
- &#39;metrics__performance_measures&#39;,
  &#39;metrics__thresholds&#39;,
  &#39;metrics__variation_approaches&#39;,
- &#39;data__datasets&#39;,
- &#39;data__preprocessing&#39;,
- &#39;data__motivation&#39;,
- &#39;ethical_cons__impact&#39;,
- &#39;ethical_cons__risks&#39;,
- &#39;ethical_cons__mitigation&#39;,
- &#39;ethical_cons__avoid&#39;,
- &#39;caveats_recomm__caveats&#39;,
- &#39;caveats_recomm__recommendations&#39;,
- &#39;caveats_recomm__misc_notes&#39;]</pre>
+ &#39;evaluation_data__datasets&#39;,
+ &#39;evaluation_data__motivation&#39;,
+ &#39;evaluation_data__preprocessing&#39;,
+ &#39;training_data__training_data&#39;,
+ &#39;quant_analyses__unitary&#39;,
+ &#39;quant_analyses__intersectional&#39;,
+ &#39;ethical_considerations__sensitive_data&#39;,
+ &#39;ethical_considerations__human_life&#39;,
+ &#39;ethical_considerations__mitigations&#39;,
+ &#39;ethical_considerations__risks_and_harms&#39;,
+ &#39;ethical_considerations__use_cases&#39;,
+ &#39;ethical_considerations__additional_information&#39;,
+ &#39;caveats_recommendations__recommendations&#39;]</pre>
 </div>
 
 </div>
@@ -204,13 +581,6 @@ nb_path: "00_documentation.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If the user wants to fill in an empty field, identified as above, the user simply needs to attribute the corresponding dicitonary element in <code>json_doc</code>, noting that each double underscore is a separation of level. For example, based on the response above obtained from <code>mdoc.open_questions()</code>:</p>
-
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -218,10 +588,35 @@ nb_path: "00_documentation.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdoc</span><span class="o">.</span><span class="n">json_doc</span><span class="p">[</span><span class="s1">&#39;caveats_recomm&#39;</span><span class="p">][</span><span class="s1">&#39;misc_notes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;This is a test&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_info</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;performance_measures&#39;</span><span class="p">:</span> <span class="s2">&quot;This is a test&quot;</span><span class="p">},</span>
+    <span class="s1">&#39;caveats_recommendations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;caveats&#39;</span><span class="p">:</span> <span class="s2">&quot;This is another test&quot;</span><span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="n">model_doc</span><span class="o">.</span><span class="n">fill_info</span><span class="p">(</span><span class="n">new_info</span><span class="p">)</span>
+<span class="n">model_doc</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;field_description&#39;: &#39;Metrics should be chosen to reflect potential real world impacts of the model&#39;,
+ &#39;performance_measures&#39;: &#39;Model performance measures&#39;,
+ &#39;thresholds&#39;: &#39;Decision thresholds&#39;,
+ &#39;variation_approaches&#39;: &#39;Variation approaches&#39;}</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -235,66 +630,24 @@ nb_path: "00_documentation.ipynb"
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">mdoc</span><span class="o">.</span><span class="n">json_doc</span><span class="p">[</span><span class="s1">&#39;caveats_recomm&#39;</span><span class="p">][</span><span class="s1">&#39;misc_notes&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;This is a test&quot;</span>
-<span class="n">mdoc</span><span class="o">.</span><span class="n">open_questions</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;model_details__task&#39;,
- &#39;model_details__framework&#39;,
- &#39;model_details__architecture&#39;,
- &#39;model_details__parameters&#39;,
- &#39;model_details__optimizer&#39;,
- &#39;model_details__type&#39;,
- &#39;model_details__info&#39;,
- &#39;model_details__citation&#39;,
- &#39;model_details__license&#39;,
- &#39;model_details__contact&#39;,
- &#39;intended_use__primary_uses&#39;,
- &#39;intended_use__primary_users&#39;,
- &#39;intended_use__out_of_scope&#39;,
- &#39;factors__relevant&#39;,
- &#39;factors__evaluation&#39;,
- &#39;metrics__performance_measures&#39;,
- &#39;metrics__thresholds&#39;,
- &#39;metrics__variation_approaches&#39;,
- &#39;data__datasets&#39;,
- &#39;data__preprocessing&#39;,
- &#39;data__motivation&#39;,
- &#39;ethical_cons__impact&#39;,
- &#39;ethical_cons__risks&#39;,
- &#39;ethical_cons__mitigation&#39;,
- &#39;ethical_cons__avoid&#39;,
- &#39;caveats_recomm__caveats&#39;,
- &#39;caveats_recomm__recommendations&#39;]</pre>
-</div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-a-custom-Documenter">Creating a custom Documenter<a class="anchor-link" href="#Creating-a-custom-Documenter"> </a></h2><p><code>gingado</code> users can easily transform their model documentation needs into a Documenter object. The main advantages of doing this are:</p>
+<ul>
+<li>the documentation template becomes a "recyclable" object that can be saved, loaded, and used in other models or code routines; and</li>
+<li>model documentation can be more closely aligned with model creation and training, thus decreasing the probability that the model and its documentation diverge during the process of model development.</li>
+</ul>
+<p>The requirements for an object to be a <code>gingado</code> Documenter are:</p>
+<ul>
+<li>it must subclass <a href="/gingado/documentation.html#ggdModelDocumentation"><code>ggdModelDocumentation</code></a> (or implement all its methods if the user does not want to keep a dependency to <code>gingado</code>),</li>
+<li>include the actual template for the documentation as a dictionary in a class attribute called <code>template</code>,</li>
+<li>follow the <code>scikit-learn</code> convention of storing the <code>__init__</code> parameters in attributes with the same name,</li>
+<li>implement the <code>autofill_template</code> method using the <code>fill_info</code> method to set the automatically filled information fields.</li>
+</ul>
 
 </div>
 </div>
-
 </div>
-    {% endraw %}
-
 </div>
 
 
