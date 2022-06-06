@@ -23,11 +23,11 @@ The choices made during development of `gingado` derive from the following princ
 ## Acknowledgements
 
 `gingado`'s API is inspired on the following libraries:
-* `scikit-learn`
-* `keras`
-* `fastai`
+* [`scikit-learn`](https://arxiv.org/abs/1309.0238)
+* [`keras`](https://keras.io/about/) (also, [this essay](https://medium.com/s/story/notes-to-myself-on-software-engineering-c890f16f4e4d))
+* [`fastai`](https://www.mdpi.com/2078-2489/11/2/108)
 
-In addition, `gingado` is developed and maintained using `nbdev`.
+In addition, `gingado` is developed and maintained using [`nbdev`](https://nbdev.fast.ai).
 
 ## Presentations, talks, papers
 
