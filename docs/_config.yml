@@ -64,3 +64,8 @@ plugins:
     
 remote_theme: fastai/nbdev-jekyll-theme
 baseurl: /gingado/
+
+default_badges:
+  github: true
+  binder: true
+  colab: true
