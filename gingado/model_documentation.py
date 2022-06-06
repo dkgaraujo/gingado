@@ -25,7 +25,8 @@ class ggdModelDocumentation:
         print(self.file_path)
 
     def show_json(self):
-        print(json.dumps(self.json_doc, indent=self.indent_level))
+        return self.json_doc
+        #print(json.dumps(self.json_doc, indent=self.indent_level))
 
     def save_json(self, file_path):
         with open(file_path, 'w') as f:
@@ -63,6 +64,24 @@ class ggdModelDocumentation:
                             self.json_doc[k][kk] = v_v
             else:
                 self.json_doc.update({k: v})
+
+    def _read_attr(self, model):
+        "For use of method `read_model`"
+        for a in dir(model):
+            if a == '_estimator_type' or a.endswith("_") and not a.startswith("_") and not a.endswith("__"):
+                try:
+                    model_attr = model.__getattribute__(a)
+                    yield {a: model_attr}
+                except:
+                    pass
+
+    def read_model(self, model):
+        if "keras" in str(type(model)):
+            model_info = model.to_json()
+        else:
+            model_info = list(self._read_attr(model))
+            model_info = {k:v for i in model_info for k, v in i.items()}
+        self.fill_model_info(model_info)
 
     def __setitem__(self, key, value):
         setattr(self, key, value)
@@ -172,3 +191,8 @@ class ModelCard(ggdModelDocumentation):
             }
         }
         self.fill_info(auto_info)
+
+    def fill_model_info(self, model_info):
+        """Called automatically, or by the user, to add model information to the documentation according to its template"""
+        model_info_template = {'model_details': {'info': model_info}}
+        self.fill_info(model_info_template)

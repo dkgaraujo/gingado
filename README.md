@@ -20,6 +20,15 @@ The choices made during development of `gingado` derive from the following princ
 * **compatibility**: `gingado` works well with other widely used libraries in machine learning, such as `scikit-learn` and `pandas`
 * **responsibility**: `gingado` facilitates and promotes model documentation, including ethical considerations, as part of the machine learning development workflow
 
+## Acknowledgements
+
+`gingado`'s API is inspired on the following libraries:
+* `scikit-learn`
+* `keras`
+* `fastai`
+
+In addition, `gingado` is developed and maintained using `nbdev`.
+
 ## Presentations, talks, papers
 
 The material supporting public communication about `gingado` (ie, slide decks, papers) is kept in [this dedicated repository](https://github.com/dkgaraujo/gingado_comms). Interested users are welcome to visit the repository and comment on the drafts or slide decks, preferably by opening an [issue](https://github.com/dkgaraujo/gingado_comms/issues). I also store in this repository suggestions I receive as issues, so users can see what others commented (anonymously unless requested) and comment along as well!

@@ -117,8 +117,22 @@ class ggdBenchmark(BaseEstimator):
         if self.auto_document is not None:
             self.document()
 
-    def document(self):
-        self.auto_document()
+    def _read_attr(self):
+        for a in dir(self.benchmark):
+            if a == '_estimator_type' or a.endswith("_") and not a.startswith("_") and not a.endswith("__"):
+                try:
+                    model_attr = self.benchmark.__getattribute__(a)
+                    yield {a: model_attr}
+                except:
+                    pass
+
+    def document(self, documenter=None):
+        documenter = self.auto_document if documenter is None else documenter
+        self.model_documentation = documenter()
+        model_info = list(self._read_attr())
+        model_info = {k:v for i in model_info for k, v in i.items()}
+        #self.model_documentation.read_model(self.benchmark)
+        self.model_documentation.fill_model_info(model_info)
 
     @available_if(_benchmark_has("predict"))
     def predict(self, X, **predict_params):
