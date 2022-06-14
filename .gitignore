@@ -12,6 +12,7 @@ _tmp*
 tmp*
 tags
 *.DONTRUN
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

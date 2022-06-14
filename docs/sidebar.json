@@ -1,6 +1,11 @@
 {
   "gingado": {
     "Overview": "/",
+    "": {
+      "Example": {
+        "Economic growth (Barro and Lee, 1994)": "BarroLee1994.html"
+      }
+    },
     "Data augmentation": "augmentation.html",
     "Automatic benchmark model": "benchmark.html",
     "Model documentation": "documentation.html",
