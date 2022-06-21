@@ -115,7 +115,7 @@ class ggdBenchmark(BaseEstimator):
                 self.set_benchmark(cand_grid)
                 print("Benchmark updated!")
                 print("New benchmark:")
-                print(bm.benchmark.best_estimator_)
+                print(self.benchmark.best_estimator_)
 
         if self.auto_document is not None:
             self.document()

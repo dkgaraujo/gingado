@@ -35,6 +35,13 @@ nb_path: "00_utils.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include important.html content='Up until v0.0.1-11, function <code>get_username</code> existed. However, it was removed from <a href="/gingado/utils.html"><code>utils</code></a> since it depended on <code>pwd</code>, which is only available to Unix-like systems. Therefore, this <a href="https://github.com/dkgaraujo/gingado/issues/3">issue</a> was preventing Windows users from importing <code>gingado.utils</code>. Since the function was not essential, it was removed until a suitable alternative that works in all major ystems can be found.' %}</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -46,51 +53,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_username" class="doc_header"><code>get_username</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_username</code>()</p>
-</blockquote>
-<p>Returns the active username in the computer</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">get_username</span><span class="p">()</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_datetime" class="doc_header"><code>get_datetime</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datetime</code>()</p>
+<h4 id="get_datetime" class="doc_header"><code>get_datetime</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datetime</code>()</p>
 </blockquote>
 <p>Returns the time now</p>
 
@@ -141,7 +104,7 @@ nb_path: "00_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Lag" class="doc_header"><code>class</code> <code>Lag</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L31" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Lag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
+<h2 id="Lag" class="doc_header"><code>class</code> <code>Lag</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L23" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Lag</code>(<strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>False</code></em>) :: <code>BaseEstimator</code></p>
 </blockquote>
 <p>Base class for all estimators in scikit-learn.</p>
 <h2 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h2><p>All estimators should specify all the parameters that can be set
@@ -244,7 +207,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="list_SDMX_sources" class="doc_header"><code>list_SDMX_sources</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>list_SDMX_sources</code>()</p>
+<h4 id="list_SDMX_sources" class="doc_header"><code>list_SDMX_sources</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>list_SDMX_sources</code>()</p>
 </blockquote>
 <p>Returns the list of codes representing the SDMX sources available for data download</p>
 
@@ -305,7 +268,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="list_all_dataflows" class="doc_header"><code>list_all_dataflows</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>list_all_dataflows</code>(<strong><code>codes_only</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="list_all_dataflows" class="doc_header"><code>list_all_dataflows</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>list_all_dataflows</code>(<strong><code>codes_only</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Returns a dictionary listing all available dataflows for all sources. When using as a parameter to an <a href="/gingado/augmentation.html#AugmentSDMX"><code>AugmentSDMX</code></a> object or to the <a href="/gingado/utils.html#load_SDMX_data"><code>load_SDMX_data</code></a> function, set <code>codes_only=True</code></p>
 
@@ -376,7 +339,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_SDMX_data" class="doc_header"><code>load_SDMX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_SDMX_data</code>(<strong><code>sources</code></strong>, <strong><code>keys</code></strong>, <strong><code>params</code></strong>, <strong><code>verbose</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="load_SDMX_data" class="doc_header"><code>load_SDMX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L95" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_SDMX_data</code>(<strong><code>sources</code></strong>, <strong><code>keys</code></strong>, <strong><code>params</code></strong>, <strong><code>verbose</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Loads datasets from SDMX.</p>
 
@@ -460,7 +423,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_EURFX_data" class="doc_header"><code>load_EURFX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L135" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_EURFX_data</code>(<strong><code>startYear</code></strong>=<em><code>2003</code></em>, <strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="load_EURFX_data" class="doc_header"><code>load_EURFX_data</code><a href="https://github.com/dkgaraujo/gingado/tree/main/gingado/utils.py#L127" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_EURFX_data</code>(<strong><code>startYear</code></strong>=<em><code>2003</code></em>, <strong><code>lags</code></strong>=<em><code>1</code></em>, <strong><code>jump</code></strong>=<em><code>0</code></em>, <strong><code>keep_contemporaneous_X</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Loads a real-life dataset for testing use cases.</p>
 
@@ -509,8 +472,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 <div class="output_area">
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -778,8 +740,7 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
   </tbody>
 </table>
 <p>4971 rows × 16 columns</p>
-</div>
-</div>
+</div></div>
 
 </div>
 
@@ -790,5 +751,5 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
     {% endraw %}
 
 </div>
- 
+
 

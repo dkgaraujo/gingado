@@ -97,7 +97,7 @@ class ggdModelDocumentation:
 
 # Cell
 #export
-from .utils import get_username, get_datetime
+from .utils import get_datetime
 
 # Cell
 #export
@@ -186,7 +186,6 @@ class ModelCard(ggdModelDocumentation):
         """Creates an empty model card template, then fills it with information that is automatically obtained from the system"""
         auto_info = {
             'model_details': {
-                'developer': get_username(),
                 'datetime': get_datetime()
             }
         }
