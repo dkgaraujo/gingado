@@ -67,6 +67,7 @@ class ggdBenchmark(BaseEstimator):
         return self
 
     def set_benchmark(self, estimator):
+        check_is_fitted(estimator)
         self.benchmark = estimator
 
     def _read_candidate_params(self, candidates, ensemble_method):
@@ -99,7 +100,7 @@ class ggdBenchmark(BaseEstimator):
         candidates = list(candidates) if type(candidates) != list else candidates
         list_candidates = [self.benchmark] + candidates
 
-        est = self.benchmark.base_estimator_ if hasattr(self.benchmark, "base_estimator_") else self.benchmark.best_estimator_
+        est = self.benchmark.best_estimator_ if hasattr(self.benchmark, "best_estimator_") else self.benchmark
         cand_pipeline = Pipeline([('candidate_estimator', est)])
 
         if ensemble_method == 'object_default':
@@ -113,6 +114,8 @@ class ggdBenchmark(BaseEstimator):
             if cand_grid.best_estimator_.get_params() != old_benchmark_params:
                 self.set_benchmark(cand_grid)
                 print("Benchmark updated!")
+                print("New benchmark:")
+                print(bm.benchmark.best_estimator_)
 
         if self.auto_document is not None:
             self.document()
@@ -172,8 +175,8 @@ from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     def __init__(self,
     cv=None,
-    estimator=RandomForestClassifier(),
-    param_grid={'n_estimators': [50, 100, 250]},
+    estimator=RandomForestClassifier(oob_score=True),
+    param_grid={'n_estimators': [100, 250], 'max_features': ['sqrt', 'log2', None]},
     param_search=GridSearchCV,
     scoring=None,
     auto_document=ModelCard,
@@ -202,8 +205,8 @@ from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     def __init__(self,
     cv=None,
-    estimator=RandomForestRegressor(),
-    param_grid={'n_estimators': [50, 100, 250]},
+    estimator=RandomForestRegressor(oob_score=True),
+    param_grid={'n_estimators': [100, 250], 'max_features': ['sqrt', 'log2', None]},
     param_search=GridSearchCV,
     scoring=None,
     auto_document=ModelCard,
