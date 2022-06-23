@@ -74,9 +74,10 @@ def list_SDMX_sources():
 
 # Cell
 #export
+import pandas as pd
 import pandasdmx as sdmx
 
-def list_all_dataflows(codes_only=False):
+def list_all_dataflows(codes_only=False, return_pandas=True):
     "Returns a dictionary listing all available dataflows for all sources. When using as a parameter to an `AugmentSDMX` object or to the `load_SDMX_data` function, set `codes_only=True`"
     sources = sdmx.list_sources()
     dflows = {}
@@ -86,6 +87,11 @@ def list_all_dataflows(codes_only=False):
             dflows[src] = dflows[src].index if codes_only else dflows[src].index.reset_index()
         except:
             pass
+    if return_pandas:
+        dflows = pd.concat({
+            src: pd.DataFrame.from_dict(dflows)
+            for src, dflows in dflows.items()
+            })[0].rename('dataflow')
     return dflows
 
 # Cell
