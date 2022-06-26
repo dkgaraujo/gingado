@@ -153,10 +153,6 @@ class ggdBenchmark(BaseEstimator):
     def decision_function(self, X):
         return self.benchmark.decision_function(X)
 
-    @available_if(_benchmark_has("decision_function"))
-    def decision_function(self, X):
-        return self.benchmark.decision_function(X)
-
     @available_if(_benchmark_has("score_samples"))
     def score_samples(self, X):
         return self.benchmark.score_samples(X)
