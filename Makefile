@@ -32,7 +32,7 @@ pypi: dist
 
 dist: clean
 	rm -rf dist
-	pip install build && python -m build .
+	python -m build .
 
 clean:
 	rm -rf dist
