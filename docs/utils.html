@@ -381,6 +381,63 @@ arguments (no <code>*args</code> or <code>**kwargs</code>).</p>
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">list_all_dataflows</span><span class="p">(</span><span class="n">codes_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2022-06-23 03:29:33,379 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-23 03:29:43,859 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-23 03:29:48,210 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-23 03:29:48,889 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-23 03:29:52,014 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+2022-06-23 03:29:52,646 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>ABS_XML  0                 ABORIGINAL_POP_PROJ
+         1          ABORIGINAL_POP_PROJ_REMOTE
+         2    ABS_ABORIGINAL_POPPROJ_INDREGION
+         3                   ABS_ACLD_LFSTATUS
+         4                     ABS_ACLD_TENURE
+                            ...               
+UNSD     5                     DF_UNData_UNFCC
+WB       0               DF_WITS_Tariff_TRAINS
+         1      DF_WITS_TradeStats_Development
+         2           DF_WITS_TradeStats_Tariff
+         3            DF_WITS_TradeStats_Trade
+Name: dataflow, Length: 9114, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dflows</span><span class="p">[</span><span class="s1">&#39;BIS&#39;</span><span class="p">]</span>
 </pre></div>
 
