@@ -93,7 +93,6 @@ class ggdBenchmark(BaseEstimator):
         Uses a test dataset to compare the performance of the fitted benchmark model with one or more candidate models
         This method achieves this by conducting a grid search
         """
-        # Step 0: check if the benchmark is fitted
         check_is_fitted(self.benchmark)
         old_benchmark_params = self.benchmark.get_params()
 
@@ -119,6 +118,15 @@ class ggdBenchmark(BaseEstimator):
 
         if self.auto_document is not None:
             self.document()
+
+    def compare_fitted_candidates(self, X, y, candidates, scoring_func):
+        check_is_fitted(self.benchmark)
+        candidates = list(candidates) if type(candidates) != list else candidates
+        for candidate in candidates:
+            check_is_fitted(candidate)
+        list_candidates = [self.benchmark] + candidates
+
+        return {candidate.__repr__(): scoring_func(y, candidate.predict(X)) for candidate in list_candidates}
 
     def _read_attr(self):
         for a in dir(self.benchmark):
@@ -152,6 +160,10 @@ class ggdBenchmark(BaseEstimator):
     @available_if(_benchmark_has("decision_function"))
     def decision_function(self, X):
         return self.benchmark.decision_function(X)
+
+    @available_if(_benchmark_has("score"))
+    def score(self, X):
+        return self.benchmark.score(X)
 
     @available_if(_benchmark_has("score_samples"))
     def score_samples(self, X):
