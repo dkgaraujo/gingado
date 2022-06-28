@@ -59,14 +59,17 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
             X.drop(columns='TIME_PERIOD', inplace=True)
         if self.propagate_last_known_value:
             X.fillna(method="ffill", inplace=True)
+        if self.fillna is not None:
+            X.fillna(self.fillna)
         if training:
             X.index = self.index_
         return X
 
-    def __init__(self, sources={'BIS': 'WS_CBPOL_D'}, variance_threshold=None, propagate_last_known_value=True, verbose=True):
+    def __init__(self, sources={'BIS': 'WS_CBPOL_D'}, variance_threshold=None, propagate_last_known_value=True, fillna = 0, verbose=True):
         self.sources = sources
         self.variance_threshold = variance_threshold
         self.propagate_last_known_value = propagate_last_known_value
+        self.fillna = fillna
         self.verbose = verbose
 
     def fit(self, X, y=None):
