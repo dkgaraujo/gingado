@@ -15,7 +15,10 @@ entries:
         - output: web,pdf
           title: Economic growth (Barro and Lee, 1994)
           url: BarroLee1994.html
-        title: Example
+        - output: web,pdf
+          title: Forecasting exchange rates (Rossi, 2013)
+          url: forecast.html
+        title: Examples
     - output: web,pdf
       title: Data augmentation
       url: augmentation.html

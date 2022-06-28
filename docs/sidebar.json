@@ -2,8 +2,9 @@
   "gingado": {
     "Overview": "/",
     "": {
-      "Example": {
-        "Economic growth (Barro and Lee, 1994)": "BarroLee1994.html"
+      "Examples": {
+        "Economic growth (Barro and Lee, 1994)": "BarroLee1994.html",
+        "Forecasting exchange rates (Rossi, 2013)": "forecast.html"
       }
     },
     "Data augmentation": "augmentation.html",
