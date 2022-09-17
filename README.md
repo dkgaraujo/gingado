@@ -6,12 +6,15 @@
 
 ## Overview
 
-`gingado` is a free, open source library built around three main functionalities:
+`gingado` is a free, open source library built different functionalities:
 * **data augmentation**, to add more data from official sources, improving the machine models being trained by the user;
-* **automatic benchmark model**, to enable the user to assess their models against a reasonably well-performant model; and
-* **support for model documentation**, to embed documentation and ethical considerations in the model development phase.
+* **automatic benchmark model**, to enable the user to assess their models against a reasonably well-performant model; 
+* <mark>*(new!)*</mark> **relevant datasets**, both real and simulamed, to allow for easier model development and comparison;
+* **support for model documentation**, to embed documentation and ethical considerations in the model development phase; and
+* **utils**, including tools to allow for lagging variables in a straightforward way.
 
 Each of these functionalities builds on top of the previous one. They can be used on a stand-alone basis, together, or even as part of a larger pipeline from data input to model training to documentation!
+{% include tip.html content='New functionalities are planned over time, so consider checking frequently on `gingado` for the latest toolsets.' %}
 
 ## Design principles
 

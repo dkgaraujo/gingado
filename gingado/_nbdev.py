@@ -6,6 +6,8 @@ index = {"AugmentSDMX": "00_augmentation.ipynb",
          "ggdBenchmark": "00_benchmark.ipynb",
          "ClassificationBenchmark": "00_benchmark.ipynb",
          "RegressionBenchmark": "00_benchmark.ipynb",
+         "load_BarroLee_1994": "00_datasets.ipynb",
+         "make_causal_effect": "00_datasets.ipynb",
          "ggdModelDocumentation": "00_documentation.ipynb",
          "ModelCard": "00_documentation.ipynb",
          "get_datetime": "00_utils.ipynb",
@@ -17,6 +19,7 @@ index = {"AugmentSDMX": "00_augmentation.ipynb",
 
 modules = ["augmentation.py",
            "benchmark.py",
+           "datasets.py",
            "model_documentation.py",
            "utils.py"]
 

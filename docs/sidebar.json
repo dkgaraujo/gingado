@@ -7,8 +7,9 @@
         "Forecasting exchange rates (Rossi, 2013)": "forecast.html"
       }
     },
-    "Data augmentation": "augmentation.html",
     "Automatic benchmark model": "benchmark.html",
+    "Data augmentation": "augmentation.html",
+    "Datasets": "datasets.html",
     "Model documentation": "documentation.html",
     "Utils": "utils.html"
   }

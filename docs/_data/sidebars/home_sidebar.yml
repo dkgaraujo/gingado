@@ -20,11 +20,14 @@ entries:
           url: forecast.html
         title: Examples
     - output: web,pdf
+      title: Automatic benchmark model
+      url: benchmark.html
+    - output: web,pdf
       title: Data augmentation
       url: augmentation.html
     - output: web,pdf
-      title: Automatic benchmark model
-      url: benchmark.html
+      title: Datasets
+      url: datasets.html
     - output: web,pdf
       title: Model documentation
       url: documentation.html
