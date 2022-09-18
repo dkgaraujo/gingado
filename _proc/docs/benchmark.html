@@ -94,6 +94,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./datasets.html" rel="next">
+<link href="./augmentation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -326,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                           'sklearn.ensemble._voting.VotingClassifier'&gt;)</code></pre>
 </blockquote>
 <p>The base class for gingado’s Benchmark objects.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#collapse_output</span></span>
@@ -343,46 +345,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 6 candidates, totalling 30 fits
-[CV 1/5] END max_features=sqrt, n_estimators=100;, score=0.950 total time=   0.2s
+[CV 1/5] END max_features=sqrt, n_estimators=100;, score=1.000 total time=   0.1s
 [CV 2/5] END max_features=sqrt, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 3/5] END max_features=sqrt, n_estimators=100;, score=0.900 total time=   0.1s
-[CV 4/5] END max_features=sqrt, n_estimators=100;, score=1.000 total time=   0.1s
-[CV 5/5] END max_features=sqrt, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 1/5] END max_features=sqrt, n_estimators=250;, score=0.900 total time=   0.3s
-[CV 2/5] END max_features=sqrt, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 3/5] END max_features=sqrt, n_estimators=250;, score=0.900 total time=   0.3s
-[CV 4/5] END max_features=sqrt, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 5/5] END max_features=sqrt, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 1/5] END max_features=log2, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 2/5] END max_features=log2, n_estimators=100;, score=0.900 total time=   0.1s
-[CV 3/5] END max_features=log2, n_estimators=100;, score=0.900 total time=   0.1s
-[CV 4/5] END max_features=log2, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 5/5] END max_features=log2, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 1/5] END max_features=log2, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 2/5] END max_features=log2, n_estimators=250;, score=0.900 total time=   0.3s
-[CV 3/5] END max_features=log2, n_estimators=250;, score=0.900 total time=   0.3s
-[CV 4/5] END max_features=log2, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 5/5] END max_features=log2, n_estimators=250;, score=0.950 total time=   0.3s
-[CV 1/5] END max_features=None, n_estimators=100;, score=0.900 total time=   0.1s
-[CV 2/5] END max_features=None, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 3/5] END max_features=None, n_estimators=100;, score=0.900 total time=   0.1s
-[CV 4/5] END max_features=None, n_estimators=100;, score=1.000 total time=   0.1s
-[CV 5/5] END max_features=None, n_estimators=100;, score=0.950 total time=   0.1s
-[CV 1/5] END max_features=None, n_estimators=250;, score=0.900 total time=   0.4s
-[CV 2/5] END max_features=None, n_estimators=250;, score=0.950 total time=   0.4s
-[CV 3/5] END max_features=None, n_estimators=250;, score=0.900 total time=   0.3s
-[CV 4/5] END max_features=None, n_estimators=250;, score=1.000 total time=   0.3s
-[CV 5/5] END max_features=None, n_estimators=250;, score=0.950 total time=   0.3s</code></pre>
+[CV 3/5] END max_features=sqrt, n_estimators=100;, score=0.850 total time=   0.1s
+[CV 4/5] END max_features=sqrt, n_estimators=100;, score=0.850 total time=   0.1s
+[CV 5/5] END max_features=sqrt, n_estimators=100;, score=1.000 total time=   0.1s
+[CV 1/5] END max_features=sqrt, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 2/5] END max_features=sqrt, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 3/5] END max_features=sqrt, n_estimators=250;, score=0.950 total time=   0.3s
+[CV 4/5] END max_features=sqrt, n_estimators=250;, score=0.850 total time=   0.3s
+[CV 5/5] END max_features=sqrt, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 1/5] END max_features=log2, n_estimators=100;, score=1.000 total time=   0.1s
+[CV 2/5] END max_features=log2, n_estimators=100;, score=1.000 total time=   0.1s
+[CV 3/5] END max_features=log2, n_estimators=100;, score=0.950 total time=   0.1s
+[CV 4/5] END max_features=log2, n_estimators=100;, score=0.850 total time=   0.1s
+[CV 5/5] END max_features=log2, n_estimators=100;, score=1.000 total time=   0.1s
+[CV 1/5] END max_features=log2, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 2/5] END max_features=log2, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 3/5] END max_features=log2, n_estimators=250;, score=0.950 total time=   0.3s
+[CV 4/5] END max_features=log2, n_estimators=250;, score=0.850 total time=   0.3s
+[CV 5/5] END max_features=log2, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 1/5] END max_features=None, n_estimators=100;, score=0.950 total time=   0.1s
+[CV 2/5] END max_features=None, n_estimators=100;, score=1.000 total time=   0.1s
+[CV 3/5] END max_features=None, n_estimators=100;, score=0.950 total time=   0.1s
+[CV 4/5] END max_features=None, n_estimators=100;, score=0.850 total time=   0.2s
+[CV 5/5] END max_features=None, n_estimators=100;, score=1.000 total time=   0.2s
+[CV 1/5] END max_features=None, n_estimators=250;, score=0.950 total time=   0.4s
+[CV 2/5] END max_features=None, n_estimators=250;, score=1.000 total time=   0.3s
+[CV 3/5] END max_features=None, n_estimators=250;, score=0.950 total time=   0.4s
+[CV 4/5] END max_features=None, n_estimators=250;, score=0.850 total time=   0.4s
+[CV 5/5] END max_features=None, n_estimators=250;, score=1.000 total time=   0.3s</code></pre>
 </div>
 </div>
 <p>Importantly, <code>gingado</code> automatically provides some information to help the user documentat the benchmark model. More specifically, <a href="https://dkgaraujo.github.io/gingado/benchmark.html#ggdbenchmark"><code>ggdBenchmark</code></a> objects collect model information and pass it to a dictionary with key <code>info</code> in a field called <code>model_details</code>.</p>
-<div class="cell" data-execution_count="24">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#collapse_output</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bm.model_documentation.show_json()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display">
 <pre><code>{'model_details': {'developer': 'Person or organisation developing the model',
   'datetime': '2022-06-22 07:07:42 ',
   'version': 'Model version',
@@ -458,7 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>It is also simple to define as benchmark a model that you already fitted and still benefit from the other functionalities provided by <code>Benchmark</code> class. This can also be done in case you are using a saved version of a fitted model (eg, the model you are using in production) and want to have that as the benchmark.</p>
-<div class="cell" data-execution_count="25">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
@@ -494,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                       'sklearn.ensemble._voting.VotingRegressor'&gt;)</code></pre>
 </blockquote>
 <p>The base class for gingado’s Benchmark objects.</p>
-<div class="cell" data-execution_count="28">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#collapse_output</span></span>
@@ -520,7 +522,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 6 candidates, totalling 30 fits
-[CV] END ................max_features=sqrt, n_estimators=100; total time=   0.1s
+[CV] END ................max_features=sqrt, n_estimators=100; total time=   0.2s
 [CV] END ................max_features=sqrt, n_estimators=100; total time=   0.1s
 [CV] END ................max_features=sqrt, n_estimators=100; total time=   0.1s
 [CV] END ................max_features=sqrt, n_estimators=100; total time=   0.1s
@@ -541,19 +543,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [CV] END ................max_features=log2, n_estimators=250; total time=   0.3s
 [CV] END ................max_features=log2, n_estimators=250; total time=   0.3s
 [CV] END ................max_features=None, n_estimators=100; total time=   0.2s
+[CV] END ................max_features=None, n_estimators=100; total time=   0.3s
 [CV] END ................max_features=None, n_estimators=100; total time=   0.2s
 [CV] END ................max_features=None, n_estimators=100; total time=   0.2s
 [CV] END ................max_features=None, n_estimators=100; total time=   0.2s
-[CV] END ................max_features=None, n_estimators=100; total time=   0.2s
+[CV] END ................max_features=None, n_estimators=250; total time=   0.6s
 [CV] END ................max_features=None, n_estimators=250; total time=   0.5s
+[CV] END ................max_features=None, n_estimators=250; total time=   0.6s
 [CV] END ................max_features=None, n_estimators=250; total time=   0.5s
-[CV] END ................max_features=None, n_estimators=250; total time=   0.5s
-[CV] END ................max_features=None, n_estimators=250; total time=   0.5s
-[CV] END ................max_features=None, n_estimators=250; total time=   0.7s</code></pre>
+[CV] END ................max_features=None, n_estimators=250; total time=   0.6s</code></pre>
 </div>
 </div>
 <p>Below we compare the benchmark (set above manually to be the adaboost algorithm) with two other candidate models: a Gaussian process and a linear Support Vector Machine (SVM).</p>
-<div class="cell" data-execution_count="29">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#collapse_output</span></span>
@@ -604,12 +606,12 @@ Pipeline(steps=[('candidate_estimator', LinearSVR())])</code></pre>
 </div>
 <p>Note that when the benchmark object finds a model that performs better than it does, the user is informed that the benchmark is updated and the new benchmark model is shown. This only happens when the argument <code>update_benchmark</code> is set to True (as default).</p>
 <p>Below we can see by how much it outperformed the other candidates, including the previous benchmark model and an ensemble of the previous benchmark and all the candidates. It is also a good opportunity to see how stable the performance of each model was, as judged by the standard deviation of the scores across the validation folds.</p>
-<div class="cell" data-execution_count="30">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(bm.benchmark.cv_results_)[[<span class="st">'params'</span>, <span class="st">'mean_test_score'</span>, <span class="st">'std_test_score'</span>, <span class="st">'rank_test_score'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display">
 
 <div>
 
@@ -835,6 +837,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./augmentation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">gingado.augmentation</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./datasets.html" class="pagination-link">
+        <span class="nav-page-text">gingado.datasets</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

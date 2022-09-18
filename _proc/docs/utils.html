@@ -94,6 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./model_documentation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -317,7 +318,7 @@ Important
 <pre><code> get_datetime ()</code></pre>
 </blockquote>
 <p>Returns the time now</p>
-<div class="cell" data-execution_count="12">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> get_datetime()</span>
@@ -341,7 +342,7 @@ Important
 </blockquote>
 <p>Base class for all estimators in scikit-learn.</p>
 <p>The code below demonstrates how <a href="https://dkgaraujo.github.io/gingado/utils.html#lag"><code>Lag</code></a> works in practice. Note in particular that, because <a href="https://dkgaraujo.github.io/gingado/utils.html#lag"><code>Lag</code></a> is a transformer, it can be used as part of a <code>scikit-learn</code>’s <code>Pipeline</code>.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -361,7 +362,7 @@ Important
 </details>
 </div>
 <p>Below we confirm that the lagger removes the correct number of rows corresponding to the lagged observations:</p>
-<div class="cell" data-execution_count="16">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> randomX.shape[<span class="dv">0</span>] <span class="op">-</span> lags <span class="op">-</span> jump <span class="op">==</span> pipe.shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -393,7 +394,7 @@ Note
 <pre><code> list_SDMX_sources ()</code></pre>
 </blockquote>
 <p>Returns the list of codes representing the SDMX sources available for data download</p>
-<div class="cell" data-execution_count="19">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sources <span class="op">=</span> list_SDMX_sources()</span>
@@ -416,7 +417,7 @@ Note
 <pre><code> list_all_dataflows (codes_only=False, return_pandas=True)</code></pre>
 </blockquote>
 <p>Returns a dictionary listing all available dataflows for all sources. When using as a parameter to an <code>AugmentSDMX</code> object or to the <code>load_SDMX_data</code> function, set <code>codes_only=True</code></p>
-<div class="cell" data-execution_count="22">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dflows <span class="op">=</span> list_all_dataflows(return_pandas<span class="op">=</span><span class="va">False</span>)</span>
@@ -434,7 +435,7 @@ Note
 </div>
 </div>
 <p><a href="https://dkgaraujo.github.io/gingado/utils.html#list_all_dataflows"><code>list_all_dataflows</code></a> returns by default a pandas Series, facilitating data discovery by users like so:</p>
-<div class="cell" data-execution_count="25">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dflows <span class="op">=</span> list_all_dataflows(return_pandas<span class="op">=</span><span class="va">True</span>)</span>
@@ -452,7 +453,7 @@ Note
 </div>
 </div>
 <p>This format allows for more easily searching <code>dflows</code> by source:</p>
-<div class="cell" data-execution_count="52">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>list_all_dataflows(codes_only<span class="op">=</span><span class="va">True</span>, return_pandas<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -465,7 +466,7 @@ Note
 2022-06-23 03:29:52,014 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;
 2022-06-23 03:29:52,646 pandasdmx.reader.sdmxml - DEBUG: Truncate sub-microsecond time in &lt;Prepared&gt;</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="52">
+<div class="cell-output cell-output-display">
 <pre><code>ABS_XML  0                 ABORIGINAL_POP_PROJ
          1          ABORIGINAL_POP_PROJ_REMOTE
          2    ABS_ABORIGINAL_POPPROJ_INDREGION
@@ -485,7 +486,7 @@ Name: dataflow, Length: 9114, dtype: object</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dflows[<span class="st">'BIS'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display">
 <pre><code>WS_CBPOL_D                            Policy rates daily
 WS_CBPOL_M                          Policy rates monthly
 WS_CBS_PUB                      BIS consolidated banking
@@ -508,12 +509,12 @@ Name: dataflow, dtype: object</code></pre>
 </div>
 </div>
 <p>Or the user can search dataflows by their human-readable name instead of their code. For example, this is one way to see if any dataflow has information on interest rates:</p>
-<div class="cell" data-execution_count="51">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dflows[dflows.<span class="bu">str</span>.contains(<span class="st">'Interest rates'</span>, case<span class="op">=</span><span class="va">False</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="51">
+<div class="cell-output cell-output-display">
 <pre><code>ECB    RIR                                         Retail Interest Rates
 ESTAT  cpc_ecexint     Candidate countries and potential candidates: ...
        ei_mfir_m                           Interest rates - monthly data
@@ -542,7 +543,7 @@ Name: dataflow, dtype: object</code></pre>
 <pre><code> load_SDMX_data (sources, keys, params, verbose=True)</code></pre>
 </blockquote>
 <p>Loads datasets from SDMX.</p>
-<div class="cell" data-execution_count="41">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_SDMX_data(sources<span class="op">=</span>{<span class="st">'ECB'</span>: <span class="st">'CISS'</span>, <span class="st">'BIS'</span>: <span class="st">'WS_CBPOL_D'</span>}, keys<span class="op">=</span>{<span class="st">'FREQ'</span>: <span class="st">'D'</span>}, params<span class="op">=</span>{<span class="st">'startPeriod'</span>: <span class="dv">2003</span>})</span>
@@ -577,7 +578,7 @@ Name: dataflow, dtype: object</code></pre>
                   keep_contemporaneous_X=True)</code></pre>
 </blockquote>
 <p>Loads a real-life dataset for testing use cases.</p>
-<div class="cell" data-execution_count="44">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>EUR_FX <span class="op">=</span> load_EURFX_data()</span>
@@ -592,7 +593,7 @@ Name: dataflow, dtype: object</code></pre>
 <pre><code>/var/folders/b9/p8z57lqd55xfk68xz34dg0s40000gn/T/ipykernel_32613/429544813.py:1: DeprecationWarning: Function 'load_EURFX_data' will no longer be present after gingado v0.0.2. Use 'load_SDMX_data(source={'ECB': 'EXR'}) instead.
   EUR_FX = load_EURFX_data()</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display">
 
 <div>
 
@@ -1008,6 +1009,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./model_documentation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">gingado.model_documentation</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

@@ -41,11 +41,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -70,10 +70,20 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">gingado</span>
+    </a>
+  </div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">Welcome to gingado!</h1>
@@ -84,99 +94,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">gingado</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://twitter.com/DouglasKGAraujo" title="" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
-    <a href="" title="" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-github"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/dkgaraujo/gingado">
-          Source Code
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/dkgaraujo/gingado/issues">
-          Report a Bug
-          </a>
-        </li>
-    </ul>
-</div>
-    </div>
-      </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-      </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Home</a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Examples</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./barrolee1994.html" class="sidebar-item-text sidebar-link">Economic growth</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./forecast.html" class="sidebar-item-text sidebar-link">Forecasting</a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Reference</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./augmentation.html" class="sidebar-item-text sidebar-link">gingado.augmentation</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./benchmark.html" class="sidebar-item-text sidebar-link">gingado.benchmark</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./datasets.html" class="sidebar-item-text sidebar-link">gingado.datasets</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model_documentation.html" class="sidebar-item-text sidebar-link">gingado.model_documentation</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./utils.html" class="sidebar-item-text sidebar-link">gingado.utils</a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -184,13 +104,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles"><span class="toc-section-number">2</span>  Design principles</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="toc-section-number">3</span>  Acknowledgements</a></li>
-  <li><a href="#presentations-talks-papers" id="toc-presentations-talks-papers" class="nav-link" data-scroll-target="#presentations-talks-papers"><span class="toc-section-number">4</span>  Presentations, talks, papers</a></li>
-  <li><a href="#install" id="toc-install" class="nav-link" data-scroll-target="#install"><span class="toc-section-number">5</span>  Install</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles">Design principles</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#presentations-talks-papers" id="toc-presentations-talks-papers" class="nav-link" data-scroll-target="#presentations-talks-papers">Presentations, talks, papers</a></li>
+  <li><a href="#install" id="toc-install" class="nav-link" data-scroll-target="#install">Install</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/dkgaraujo/gingado/tree/main/blob/main/index.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/dkgaraujo/gingado/tree/main/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/dkgaraujo/gingado/tree/main/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -218,8 +138,8 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
 <p><code>gingado</code> seeks to facilitate the use of machine learning in economic and finance use cases, while promoting good practices. This package aims to be suitable for beginners and advanced users alike. Use cases may range from simple data retrievals to experimentation with machine learning algorithms to more complex model pipelines used in production.</p>
-<section id="overview" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p><code>gingado</code> is a free, open source library built different functionalities:</p>
 <ul>
 <li><p><strong>data augmentation</strong>, to add more data from official sources, improving the machine models being trained by the user;</p></li>
@@ -243,8 +163,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="design-principles" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="design-principles"><span class="header-section-number">2</span> Design principles</h2>
+<section id="design-principles" class="level2">
+<h2 class="anchored" data-anchor-id="design-principles">Design principles</h2>
 <p>The choices made during development of <code>gingado</code> derive from the following principles, in no particular order:</p>
 <ul>
 <li><p><strong>flexibility</strong>: users can use <code>gingado</code> out of the box or build custom processes on top of it;</p></li>
@@ -252,8 +172,8 @@ Tip
 <li><p><strong>responsibility</strong>: <code>gingado</code> facilitates and promotes model documentation, including ethical considerations, as part of the machine learning development workflow.</p></li>
 </ul>
 </section>
-<section id="acknowledgements" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">3</span> Acknowledgements</h2>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p><code>gingado</code>’s API is inspired on the following libraries:</p>
 <ul>
 <li><p><code>scikit-learn</code> (<a href="https://arxiv.org/abs/1309.0238">API description</a>)</p></li>
@@ -262,12 +182,12 @@ Tip
 </ul>
 <p>In addition, <code>gingado</code> is developed and maintained using <a href="https://nbdev.fast.ai"><code>nbdev</code></a>.</p>
 </section>
-<section id="presentations-talks-papers" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="presentations-talks-papers"><span class="header-section-number">4</span> Presentations, talks, papers</h2>
+<section id="presentations-talks-papers" class="level2">
+<h2 class="anchored" data-anchor-id="presentations-talks-papers">Presentations, talks, papers</h2>
 <p>The most current version of the paper describing <code>gingado</code> is <a href="https://github.com/dkgaraujo/gingado_comms/blob/main/gingado.pdf">here</a>. The paper and other material about <code>gingado</code> (ie, slide decks, papers) in <a href="https://github.com/dkgaraujo/gingado_comms">this dedicated repository</a>. Interested users are welcome to visit the repository and comment on the drafts or slide decks, preferably by opening an <a href="https://github.com/dkgaraujo/gingado_comms/issues">issue</a>. I also store in this repository suggestions I receive as issues, so users can see what others commented (anonymously unless requested) and comment along as well!</p>
 </section>
-<section id="install" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="install"><span class="header-section-number">5</span> Install</h2>
+<section id="install" class="level2">
+<h2 class="anchored" data-anchor-id="install">Install</h2>
 <p>To install <code>gingado</code>, simply run the following code on the terminal:</p>
 <p><code>$ pip install gingado</code></p>
 
@@ -323,57 +243,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,

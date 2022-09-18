@@ -10,11 +10,14 @@ format:
 website:
   twitter-card: true
   open-graph: true
-  repo-actions: [issue]
+  repo-actions: [issue, edit]
   navbar:
     background: primary
-    search: true
+    search: false
   sidebar:
-    style: floating
+    style: docked
+    search: true
 
 metadata-files: [nbdev.yml, sidebar.yml]
+
+bibliography: gingado.bib
