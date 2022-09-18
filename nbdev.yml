@@ -1,0 +1,9 @@
+project:
+  output-dir: docs
+
+website:
+  title: "gingado"
+  site-url: "https://dkgaraujo.github.io/gingado/"
+  description: "A machine learning library for economics and finance"
+  repo-branch: main
+  repo-url: "https://github.com/dkgaraujo/gingado/tree/main/"

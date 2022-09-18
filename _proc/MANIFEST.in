@@ -1,0 +1,6 @@
+include settings.ini
+include LICENSE
+include CONTRIBUTING.md
+include README.md
+include gingado/dataset_BarroLee_1994.csv
+recursive-exclude * __pycache__

@@ -1,0 +1,56 @@
+project:
+  type: website
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    number-sections: true
+    code-fold: true
+    code-tools: true
+    code-link: true
+    code_download: true
+    df-print: kable
+
+website:
+  page-navigation: true
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: Home
+        file: index.html
+      - section: "Examples"
+        contents:
+          - text: Economic growth
+            file: barrolee1994.html
+          - text: Forecasting
+            file: forecast.html
+      - section: "Reference"
+        contents:
+          - text: gingado.augmentation
+            file: augmentation.html
+          - text: gingado.benchmark
+            file: benchmark.html
+          - text: gingado.datasets
+            file: datasets.html
+          - text: gingado.model_documentation
+            file: model_documentation.html
+          - text: gingado.utils
+            file: utils.html
+    tools:
+      - icon: twitter
+        href: https://twitter.com/DouglasKGAraujo
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/dkgaraujo/gingado
+          - text: Report a Bug
+            url:  https://github.com/dkgaraujo/gingado/issues
+  repo-url: https://github.com/dkgaraujo/gingado
+  repo-actions: [edit, issue]
+  twitter-card: true
+  open-graph: true
+
+metadata-files: [nbdev.yml, sidebar.yml]
