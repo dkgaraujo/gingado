@@ -6,6 +6,7 @@ __all__ = ['AugmentSDMX']
 # %% ../00_augmentation.ipynb 5
 #| include: false
 from .utils import load_SDMX_data
+import numpy as np
 import pandas as pd
 import pandasdmx as sdmx
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -13,7 +14,8 @@ from sklearn.utils.validation import check_is_fitted
 from sklearn.feature_selection import VarianceThreshold
 
 class AugmentSDMX(BaseEstimator, TransformerMixin):
-
+    "A transformer that augments a dataset using SDMX"
+    
     InputIndexMessage = "The dataset to be augmented must have a row index with the date/time information"
     def _format_string(self):
         return "%Y-%m-%d" if self.data_freq_ == 'D' else "%Y-%m" if self.data_freq_ == 'M' else "%Y"
@@ -52,7 +54,6 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
 
             df.dropna(axis=0, how='all', inplace=True)
             df.dropna(axis=1, how='all', inplace=True)        
-
         
         X = pd.merge(left=X, right=df, how='left', left_index=True, right_on='TIME_PERIOD')
         if 'TIME_PERIOD' in X.columns:
@@ -72,23 +73,13 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
         self.fillna = fillna
         self.verbose = verbose
 
-    def fit(self, X, y=None):
-        """
-        Fits transformer to `X`; `y` is kept as argument for API consistency only.
-
-        Parameters
-        ----------
-        X : a pandas Series or DataFrame with an index of datetime type
-            Input samples.
-        y : default=None
-
-        Returns
-        -------
-        The fitted version of the instance of `AugmentSDMX`, ie after it learned \
-        the frequency of the time series in `X`. The possible values fitted on the \
-        data are described in: \
-        https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timedelta.resolution_string.html.
-        """
+    def fit(
+            self,
+            X, # a pandas Series or DataFrame with an index of datetime type
+            y:None=None # `y` is kept as argument for API consistency only
+        ): # A fitted version of the same AugmentSDMX instance
+        # Fits instance of AugmentSDMX to `X`, learning its time series frequency
+        
         try:
             self.data_freq_ = X.index.to_series().diff().min().resolution_string
         except AttributeError:
@@ -104,7 +95,13 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
 
         return self
 
-    def transform(self, X, y=None, training=False):
+    def transform(
+            self,
+            X, # a pandas Series or DataFrame with an index of datetime type
+            y:None=None, # `y` is kept as argument for API consistency only
+            training=False # `True` is `transform` is called during training; `False` if called during testing
+        ): # `X` augmented with data from SDMX
+        # Transforms input dataset `X` by adding the requested data using SDMX
         check_is_fitted(self)
         self.params_ = self._get_dates()
         idx = X.index
@@ -112,26 +109,12 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
         transf_X.index = idx
         return transf_X
 
-    def fit_transform(self, X, y=None):
-        """
-        Fit to data, then transform it.
-        Fits transformer to `X` and returns a transformed version of `X`. 
-        `y` is kept as argument for API consistency only.
-
-        Parameters
-        ----------
-        X : a pandas Series or DataFrame with an index of datetime type
-            Input samples.
-        y : default=None
-            Target values (None for unsupervised transformations).
-        training : True / False. default=False
-            The default value ensures that the when this transformer is called \
-            by a pipeline
-        Returns
-        -------
-        X_new : ndarray array of shape (n_samples, n_features_new)
-            Transformed array.
-        """
+    def fit_transform(
+            self, 
+            X, # # a pandas Series or DataFrame with an index of datetime type
+            y:None=None # `y` is kept as argument for API consistency only
+            ) -> np.ndarray: # `X` augmented with data from SDMX with the same number of samples but more columns
+        # Fit to data, then transform it.
         
         self.fit(X)
         self.params_ = self._get_dates()

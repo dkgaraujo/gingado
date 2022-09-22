@@ -12,34 +12,49 @@ class ggdModelDocumentation:
     "Base class for gingado Documenters"
 
     def setup_template(self):
+        # Set up the template from the JSON documentation
         self.json_doc = copy.deepcopy(self.__class__.template)
         for k in self.json_doc.keys():
             self.json_doc[k].pop('field_description', "")
 
-    def show_template(self, indent=True):
+    def show_template(
+        self, 
+        indent:bool=True # Whether to print JSON documentation template with indentation for easier human reading
+        ):
+        # Show documentation template in JSON format
         if indent:
             print(json.dumps(self.__class__.template, indent=self.indent_level))
         else:
             return self.__class__.template
         
     def documentation_path(self):
+        # Show path to documentation
         print(self.file_path)
 
     def show_json(self):
+        # Show documentation in JSON format
         return self.json_doc
         #print(json.dumps(self.json_doc, indent=self.indent_level))
 
-    def save_json(self, file_path):
+    def save_json(
+        self, 
+        file_path # Path to save JSON file
+        ):
         with open(file_path, 'w') as f:
             json.dump(self.json_doc, f)
 
-    def read_json(self, file_path=None):
+    def read_json(
+        self, 
+        file_path # Path to JSON file or path defined in `file_path` if None
+        ):
+        # Load documentation JSON from path
         if file_path is None:
             file_path = self.file_path
         f = open(file_path)
         self.json_doc = json.load(f)
 
     def open_questions(self):
+        # List open fields in the documentation
         return [
                     k + "__" + v 
                     for k, v in self.json_doc.items()
@@ -76,7 +91,10 @@ class ggdModelDocumentation:
                 except:
                     pass
 
-    def read_model(self, model):
+    def read_model(
+        self, 
+        model # The model to be documented
+        ):
         if "keras" in str(type(model)):
             model_info = model.to_json()
         else:
@@ -96,13 +114,14 @@ class ggdModelDocumentation:
     def __repr__(self):
         return f"{self.__class__}()"
 
-# %% ../00_documentation.ipynb 7
+# %% ../00_documentation.ipynb 14
 #| include: false
 from .utils import get_datetime
 
-# %% ../00_documentation.ipynb 9
+# %% ../00_documentation.ipynb 16
 #| include: false
 class ModelCard(ggdModelDocumentation):
+    "A gingado Documenter based on @ModelCards"
     template = {
         'model_details': {
             'field_description': "Basic information about the model",
@@ -183,7 +202,7 @@ class ModelCard(ggdModelDocumentation):
             self.autofill_template()            
 
     def autofill_template(self):
-        """Creates an empty model card template, then fills it with information that is automatically obtained from the system"""
+        "Create an empty model card template, then fills it with information that is automatically obtained from the system"
         auto_info = {
             'model_details': {
                 'datetime': get_datetime()
@@ -192,6 +211,6 @@ class ModelCard(ggdModelDocumentation):
         self.fill_info(auto_info)
 
     def fill_model_info(self, model_info):
-        """Called automatically, or by the user, to add model information to the documentation according to its template"""
+        "Called automatically, or by the user, to add model information to the documentation according to its template"
         model_info_template = {'model_details': {'info': model_info}}
         self.fill_info(model_info_template)

@@ -110,5 +110,4 @@ d = { 'settings': { 'branch': 'main',
                                'gingado.utils.get_datetime': ('utils.html#get_datetime', 'gingado/utils.py'),
                                'gingado.utils.list_SDMX_sources': ('utils.html#list_sdmx_sources', 'gingado/utils.py'),
                                'gingado.utils.list_all_dataflows': ('utils.html#list_all_dataflows', 'gingado/utils.py'),
-                               'gingado.utils.load_EURFX_data': ('utils.html#load_eurfx_data', 'gingado/utils.py'),
                                'gingado.utils.load_SDMX_data': ('utils.html#load_sdmx_data', 'gingado/utils.py')}}}

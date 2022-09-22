@@ -3,20 +3,52 @@ project:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cerulean
+      dark: cyborg
     css: styles.css
     toc: true
+    toc-depth: 4
+    number-sections: true
 
 website:
-  twitter-card: true
+  title: gingado
+  twitter-card:
+    creator: "@DouglasKGAraujo"
   open-graph: true
-  repo-actions: [issue, edit]
+  repo-actions: [issue]
+  reader-mode: true
   navbar:
     background: primary
-    search: false
-  sidebar:
-    style: docked
     search: true
+    left:
+      - text: "Examples"
+        menu:
+          - text: "Economic growth"
+            file: barrolee1994.html
+          - text: "Forecasting FX rates"
+            file: forecast.html
+      - text: "Reference"
+        menu:
+          - text: "gingado.augmentation"
+            file: augmentation.html
+          - text: "gingado.benchmark"
+            file: benchmark.html
+          - text: "gingado.datasets"
+            file: datasets.html
+          - text: "gingado.model_documentation"
+            file: documentation.html
+          - text: "gingado.utils"
+            file: utils.html
+      - text: "Source code"
+        menu:
+          - text: "Repository"
+            file: "https://github.com/dkgaraujo/gingado"
+    right:
+      - icon: github
+        href: "https://github.com/dkgaraujo/gingado"
+      - icon: twitter
+        href: https://twitter.com/DouglasKGARaujo
 
 metadata-files: [nbdev.yml, sidebar.yml]
 

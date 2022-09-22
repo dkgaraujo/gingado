@@ -3,41 +3,52 @@
 # %% auto 0
 __all__ = ['load_BarroLee_1994', 'make_causal_effect']
 
-# %% ../00_datasets.ipynb 6
+# %% ../00_datasets.ipynb 5
 #| include: false
 import pandas as pd
 
-def load_BarroLee_1994():
+def load_BarroLee_1994(
+    return_tuple:bool=True # Whether to return the data in a tuple or jointly in a single pandas DataFrame
+) -> pd.DataFrame|tuple: # `X` and `y` in a tuple or in a single pandas DataFrame
     "Dataset used in R Barro and J-W Lee's *Sources of Economic Growth* (1994)"
     df = pd.read_csv('gingado/dataset_BarroLee_1994.csv')
-    y = df.pop('Outcome')
-    X = df
-    return X, y
+    if return_tuple:
+        y = df.pop('Outcome')
+        X = df
+        return X, y
+    else:
+        return df
 
-# %% ../00_datasets.ipynb 10
+# %% ../00_datasets.ipynb 11
 #| include: false
 import pandas as pd
 import numpy as np
 from inspect import signature
 from sklearn.utils import check_random_state
+from typing import Callable
 
 def make_causal_effect(
-    n_samples:int=100,
-    n_features:int=100,
-    pretreatment_outcome=lambda X, bias, rng: X[:, 1] + np.maximum(X[:, 2], 0) + bias + rng.standard_normal(size=X.shape[0]),
-    treatment_propensity=lambda X: 0.4 + 0.2 * (X[:, 0] > 0),
+    n_samples:int=100, # Number of observations
+    n_features:int=100, # Number of covariates
+    # Function that generates the outcome variable before any treatment effects
+    pretreatment_outcome=lambda X, bias, rng: X[:, 1] + np.maximum(X[:, 2], 0) + bias + rng.standard_normal(size=X.shape[0]), 
+    # Number between 0 and 1, or function that generates a treatment propensity for each observation
+    treatment_propensity:float | Callable=lambda X: 0.4 + 0.2 * (X[:, 0] > 0),
+    # Function that controls how treatment propensities actually result in observations being treated
     treatment_assignment=lambda propensity, rng: rng.binomial(1, propensity),
+    # Function that determines the magnitude of the treatment for each observation, conditional on assignment
     treatment=lambda assignment: assignment,
+    # Function that calculates the effect of a treatment to each treated observation
     treatment_effect=lambda treatment_value, X: np.maximum(X[:, 0], 0) * treatment_value,
-    bias:float=0,
-    noise=0,
-    random_state=None,
-    return_propensity=False,
-    return_assignment=False,
-    return_treatment_value=False,
-    return_treatment_effect=True,
-    return_pretreatment_y=False,
-    return_as_dict=False
+    bias:float=0, # The value of the constant
+    noise:float=0, # If 0, the pretreatment value of the overview does not include a random term. If > 0, a random draw of the normal distribution with scale `noise` is drawn
+    random_state:int|None=None, # Seed for the random number generator
+    return_propensity:bool=False, # Whether the treatment propensity of each observation is to be retuned
+    return_assignment:bool=False, # Whether the treatment assignment status of each observation is to be retuned
+    return_treatment_value:bool=False, # Whether the treatment value of each observation is to be retuned
+    return_treatment_effect:bool=True, # Whether the treatment effect of each observation is to be retuned
+    return_pretreatment_y:bool=False, # Whether the outcome variable of each observation before the inclusion of treatment effects is to be retuned
+    return_as_dict:bool=False # Whether the results are returned as a list (False) or as a dictionary (True)
 ):
     "Simulated dataset with causal effects from treatment"  
     generator = check_random_state(random_state)

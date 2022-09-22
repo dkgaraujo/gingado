@@ -5,25 +5,25 @@ __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 
 # %% ../00_benchmark.ipynb 6
 #| include: false
+import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import TimeSeriesSplit, StratifiedShuffleSplit, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.utils.metaestimators import available_if
 from sklearn.utils.validation import check_is_fitted
-from .model_documentation import ModelCard
+from .model_documentation import ggdModelDocumentation, ModelCard
 
 def _benchmark_has(attr):
-    """This function is used in `ggdBenchmark` to check if the benchmark has certain attributes"""
+    # Check if the benchmark has certain attributes
     def check(self):
         getattr(self.benchmark, attr)
         return True
     return check
         
 class ggdBenchmark(BaseEstimator):
-    """
-    The base class for gingado's Benchmark objects.
-    """
+    "The base class for gingado's Benchmark objects."
+    
     def _check_is_time_series(self, X, y=None):
         """
         Checks whether the data is a time series, and sets a data splitter
@@ -67,7 +67,11 @@ class ggdBenchmark(BaseEstimator):
 
         return self
     
-    def set_benchmark(self, estimator):
+    def set_benchmark(
+        self,
+        estimator # A fitted estimator object
+        ):
+        # Define a fitted `estimator` as the new benchmark model
         check_is_fitted(estimator)
         self.benchmark = estimator
 
@@ -89,11 +93,16 @@ class ggdBenchmark(BaseEstimator):
                     param_grid.append(ensemble)
                 return param_grid
 
-    def compare(self, X, y, candidates, ensemble_method='object_default', update_benchmark=True):
-        """
-        Uses a test dataset to compare the performance of the fitted benchmark model with one or more candidate models
-        This method achieves this by conducting a grid search 
-        """
+    def compare(
+        self,
+        X:np.ndarray, # Array-like data of shape (n_samples, n_features)
+        y:np.ndarray, # Array-like data of shape (n_samples,) or (n_samples, n_targets)
+        candidates, # Candidate estimator or list of candidate estimator(s)
+        ensemble_method='object_default', 
+        update_benchmark:bool=True # Whether to use the best performing candidate model as the new benchmark
+        ):
+        "Use a testing dataset to compare the performance of the fitted benchmark model with one or more candidate models using a grid search"
+    
         check_is_fitted(self.benchmark)
         old_benchmark_params = self.benchmark.get_params()
 
@@ -138,7 +147,11 @@ class ggdBenchmark(BaseEstimator):
                 except:
                     pass
 
-    def document(self, documenter=None):
+    def document(
+        self, 
+        documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
+        ):
+        "Document the benchmark model using the template in `documenter`"
         documenter = self.auto_document if documenter is None else documenter
         self.model_documentation = documenter()
         model_info = list(self._read_attr())
@@ -174,14 +187,16 @@ class ggdBenchmark(BaseEstimator):
     def predict_log_proba(self, X, **predict_log_proba_params):
         return self.benchmark.predict_log_proba(X, **predict_log_proba_params)
 
-# %% ../00_benchmark.ipynb 9
+# %% ../00_benchmark.ipynb 11
 #| include: false
+import numpy as np
 from .model_documentation import ModelCard
 from sklearn.base import ClassifierMixin
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 
 class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
+    "A gingado Benchmark object used for classification tasks"
     def __init__(self, 
     cv=None, 
     estimator=RandomForestClassifier(oob_score=True), 
@@ -202,16 +217,24 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         self.verbose_grid = verbose_grid
         self.ensemble_method = ensemble_method
 
-    def fit(self, X, y=None):
+    def fit(
+        self, 
+        X:np.ndarray, # Array-like data of shape (n_samples, n_features)
+        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        ):
+        "Fit the `ClassificationBenchmark` model"
         self._fit(X, y)
         return self
 
-# %% ../00_benchmark.ipynb 17
+# %% ../00_benchmark.ipynb 22
 #| include: false
+import numpy as np
+from .model_documentation import ModelCard
 from sklearn.base import RegressorMixin
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 
 class RegressionBenchmark(ggdBenchmark, RegressorMixin):
+    "A gingado Benchmark object used for regression tasks"
     def __init__(self, 
     cv=None, 
     estimator=RandomForestRegressor(oob_score=True), 
@@ -232,6 +255,11 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
         self.verbose_grid = verbose_grid
         self.ensemble_method = ensemble_method
 
-    def fit(self, X, y=None):
+    def fit(
+        self, 
+        X:np.ndarray, # Array-like data of shape (n_samples, n_features)
+        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        ):
+        "Fit the `RegressionBenchmark` model"
         self._fit(X, y)
         return self
