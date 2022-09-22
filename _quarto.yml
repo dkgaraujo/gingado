@@ -10,6 +10,7 @@ format:
     toc: true
     toc-depth: 4
     number-sections: true
+    link-external-icon: true
 
 website:
   title: gingado

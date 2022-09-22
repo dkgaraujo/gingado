@@ -75,7 +75,7 @@ class Lag(BaseEstimator, TransformerMixin):
             X = pd.DataFrame(X)
         return X
 
-# %% ../00_utils.ipynb 22
+# %% ../00_utils.ipynb 23
 #| include: false
 import pandasdmx as sdmx
 
@@ -83,7 +83,7 @@ def list_SDMX_sources():
     "Returns the list of codes representing the SDMX sources available for data download"
     return sdmx.list_sources()
 
-# %% ../00_utils.ipynb 25
+# %% ../00_utils.ipynb 26
 #| include: false
 import pandas as pd
 import pandasdmx as sdmx
@@ -108,7 +108,7 @@ def list_all_dataflows(
             })[0].rename('dataflow')
     return dflows
 
-# %% ../00_utils.ipynb 36
+# %% ../00_utils.ipynb 37
 #| include: false
 import pandasdmx as sdmx
 
