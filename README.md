@@ -101,6 +101,12 @@ If you use this package in your work, please cite it as below:
 Araujo, Douglas (2022): “*gingado*: A machine learning library for
 economics and finance”. Available at: dkgaraujo.github.io/gingado.
 
+``` python
+## References
+::: {#refs}
+:::
+```
+
 <div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-sklearnAPI" class="csl-entry">
