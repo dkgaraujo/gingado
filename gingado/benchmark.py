@@ -149,7 +149,7 @@ class ggdBenchmark(BaseEstimator):
 
     def document(
         self, 
-        documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
+        documenter=None # A gingado Documenter or the documenter set in `auto_document` if None.
         ):
         "Document the benchmark model using the template in `documenter`"
         documenter = self.auto_document if documenter is None else documenter
@@ -220,7 +220,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        y=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
         ):
         "Fit the `ClassificationBenchmark` model"
         self._fit(X, y)
@@ -258,7 +258,7 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        y=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
         ):
         "Fit the `RegressionBenchmark` model"
         self._fit(X, y)

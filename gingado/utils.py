@@ -31,8 +31,8 @@ class Lag(BaseEstimator, TransformerMixin):
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
-        ):
+        y=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        ): # A fitted version of the `Lag` instance
         "Fit the `Lag` transformer"       
         self.index = None
         if hasattr(X, "index"):
@@ -48,7 +48,7 @@ class Lag(BaseEstimator, TransformerMixin):
     def transform(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        ):
+        ): # A lagged version of `X`
         "Lag the dataset `X`"
         X_forlag = X
         
@@ -79,8 +79,8 @@ class Lag(BaseEstimator, TransformerMixin):
 #| include: false
 import pandasdmx as sdmx
 
-def list_SDMX_sources():
-    "Returns the list of codes representing the SDMX sources available for data download"
+def list_SDMX_sources(): # The list of codes representing the SDMX sources available for data download
+    "Fetch the list of SDMX sources"
     return sdmx.list_sources()
 
 # %% ../00_utils.ipynb 26
@@ -114,10 +114,10 @@ import pandasdmx as sdmx
 
 def load_SDMX_data(
     sources:dict, # A dictionary with the sources and dataflows per source
-    keys, 
-    params, 
+    keys:dict, # The keys to be used in the SDMX query
+    params:dict, # The parameters to be used in the SDMX query
     verbose:bool=True # Whether to communicate download steps to the user
-    ):
+    ): # A pandas DataFrame with data from SDMX or None if no data matches the sources, keys and parameters
     "Loads datasets from SDMX."
     data_sdmx = {}
     for source in sources.keys():
