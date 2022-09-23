@@ -9,7 +9,7 @@ format:
     css: styles.css
     toc: true
     toc-depth: 4
-    number-sections: true
+    number-sections: false
     link-external-icon: true
 
 website:
@@ -45,8 +45,6 @@ website:
         menu:
           - text: "Repository"
             file: "https://github.com/dkgaraujo/gingado"
-      - text: "The Positive Selection Blog"
-        file: blog/index.qmd
     right:
       - icon: github
         href: "https://github.com/dkgaraujo/gingado"
