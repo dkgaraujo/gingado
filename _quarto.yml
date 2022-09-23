@@ -45,6 +45,8 @@ website:
         menu:
           - text: "Repository"
             file: "https://github.com/dkgaraujo/gingado"
+      - text: "The Positive Selection Blog"
+        file: blog/index.qmd
     right:
       - icon: github
         href: "https://github.com/dkgaraujo/gingado"

@@ -9,7 +9,8 @@ format:
     css: styles.css
     toc: true
     toc-depth: 4
-    number-sections: true
+    number-sections: false
+    link-external-icon: true
 
 website:
   title: gingado

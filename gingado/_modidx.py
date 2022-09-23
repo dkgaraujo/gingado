@@ -3,7 +3,7 @@
 d = { 'settings': { 'branch': 'main',
                 'doc_baseurl': '/gingado/',
                 'doc_host': 'https://dkgaraujo.github.io',
-                'git_url': 'https://github.com/dkgaraujo/gingado/tree/main/',
+                'git_url': 'https://github.com/dkgaraujo/gingado',
                 'lib_path': 'gingado'},
   'syms': { 'gingado.augmentation': { 'gingado.augmentation.AugmentSDMX': ('augmentation.html#augmentsdmx', 'gingado/augmentation.py'),
                                       'gingado.augmentation.AugmentSDMX.__init__': ( 'augmentation.html#augmentsdmx.__init__',

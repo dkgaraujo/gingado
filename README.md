@@ -99,13 +99,11 @@ To install `gingado`, simply run the following code on the terminal:
 If you use this package in your work, please cite it as below:
 
 Araujo, Douglas (2022): “*gingado*: A machine learning library for
-economics and finance”. Available at: dkgaraujo.github.io/gingado.
+economics and finance”, Irving Fisher Committee on Central Bank
+Statistics Workshop on “Data science in central banking” - Part 2: Data
+Science in Central Banking: Applications and tools.
 
-``` python
 ## References
-::: {#refs}
-:::
-```
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
