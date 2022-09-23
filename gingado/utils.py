@@ -3,18 +3,18 @@
 # %% auto 0
 __all__ = ['get_datetime', 'Lag', 'list_SDMX_sources', 'list_all_dataflows', 'load_SDMX_data']
 
-# %% ../00_utils.ipynb 5
+# %% ../00_utils.ipynb 6
 #| include: false
 import datetime
 import os
 
-# %% ../00_utils.ipynb 7
+# %% ../00_utils.ipynb 8
 #| include: false
 def get_datetime():
     "Returns the time now"
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z") 
 
-# %% ../00_utils.ipynb 11
+# %% ../00_utils.ipynb 12
 #| include: false
 import numpy as np
 import pandas as pd
@@ -75,7 +75,7 @@ class Lag(BaseEstimator, TransformerMixin):
             X = pd.DataFrame(X)
         return X
 
-# %% ../00_utils.ipynb 23
+# %% ../00_utils.ipynb 24
 #| include: false
 import pandasdmx as sdmx
 
@@ -83,7 +83,7 @@ def list_SDMX_sources(): # The list of codes representing the SDMX sources avail
     "Fetch the list of SDMX sources"
     return sdmx.list_sources()
 
-# %% ../00_utils.ipynb 26
+# %% ../00_utils.ipynb 27
 #| include: false
 import pandas as pd
 import pandasdmx as sdmx
@@ -108,7 +108,7 @@ def list_all_dataflows(
             })[0].rename('dataflow')
     return dflows
 
-# %% ../00_utils.ipynb 37
+# %% ../00_utils.ipynb 38
 #| include: false
 import pandasdmx as sdmx
 

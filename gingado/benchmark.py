@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 
-# %% ../00_benchmark.ipynb 6
+# %% ../00_benchmark.ipynb 7
 #| include: false
 import numpy as np
 import pandas as pd
@@ -187,7 +187,7 @@ class ggdBenchmark(BaseEstimator):
     def predict_log_proba(self, X, **predict_log_proba_params):
         return self.benchmark.predict_log_proba(X, **predict_log_proba_params)
 
-# %% ../00_benchmark.ipynb 11
+# %% ../00_benchmark.ipynb 12
 #| include: false
 import numpy as np
 from .model_documentation import ModelCard
@@ -226,7 +226,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         self._fit(X, y)
         return self
 
-# %% ../00_benchmark.ipynb 22
+# %% ../00_benchmark.ipynb 23
 #| include: false
 import numpy as np
 from .model_documentation import ModelCard
