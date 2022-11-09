@@ -5,13 +5,14 @@ __all__ = ['load_BarroLee_1994', 'make_causal_effect']
 
 # %% ../00_datasets.ipynb 5
 #| include: false
+import os
 import pandas as pd
 
 def load_BarroLee_1994(
     return_tuple:bool=True # Whether to return the data in a tuple or jointly in a single pandas DataFrame
 ): # `X` and `y` in a tuple or in a single pandas DataFrame
     "Dataset used in R Barro and J-W Lee's *Sources of Economic Growth* (1994)"
-    df = pd.read_csv('gingado/dataset_BarroLee_1994.csv')
+    df = pd.read_csv(os.path.abspath('.') + '/gingado/dataset_BarroLee_1994.csv')
     if return_tuple:
         y = df.pop('Outcome')
         X = df
