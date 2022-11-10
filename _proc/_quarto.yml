@@ -41,10 +41,6 @@ website:
             file: documentation.html
           - text: "gingado.utils"
             file: utils.html
-      - text: "Source code"
-        menu:
-          - text: "Repository"
-            file: "https://github.com/dkgaraujo/gingado"
     right:
       - icon: github
         href: "https://github.com/dkgaraujo/gingado"

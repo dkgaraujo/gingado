@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['AugmentSDMX']
 
-# %% ../00_augmentation.ipynb 5
+# %% ../00_augmentation.ipynb 6
 #| include: false
 from .utils import load_SDMX_data
 import numpy as np

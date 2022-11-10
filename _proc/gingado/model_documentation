@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['ggdModelDocumentation', 'ModelCard']
 
-# %% ../00_documentation.ipynb 5
+# %% ../00_documentation.ipynb 6
 #| include: false
 import copy
 import json
@@ -114,11 +114,11 @@ class ggdModelDocumentation:
     def __repr__(self):
         return f"{self.__class__}()"
 
-# %% ../00_documentation.ipynb 14
+# %% ../00_documentation.ipynb 15
 #| include: false
 from .utils import get_datetime
 
-# %% ../00_documentation.ipynb 16
+# %% ../00_documentation.ipynb 17
 #| include: false
 class ModelCard(ggdModelDocumentation):
     "A gingado Documenter based on @ModelCards"

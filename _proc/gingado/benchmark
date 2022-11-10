@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 
-# %% ../00_benchmark.ipynb 6
+# %% ../00_benchmark.ipynb 7
 #| include: false
 import numpy as np
 import pandas as pd
@@ -149,7 +149,7 @@ class ggdBenchmark(BaseEstimator):
 
     def document(
         self, 
-        documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
+        documenter=None # A gingado Documenter or the documenter set in `auto_document` if None.
         ):
         "Document the benchmark model using the template in `documenter`"
         documenter = self.auto_document if documenter is None else documenter
@@ -187,7 +187,7 @@ class ggdBenchmark(BaseEstimator):
     def predict_log_proba(self, X, **predict_log_proba_params):
         return self.benchmark.predict_log_proba(X, **predict_log_proba_params)
 
-# %% ../00_benchmark.ipynb 11
+# %% ../00_benchmark.ipynb 12
 #| include: false
 import numpy as np
 from .model_documentation import ModelCard
@@ -220,13 +220,13 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        y=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
         ):
         "Fit the `ClassificationBenchmark` model"
         self._fit(X, y)
         return self
 
-# %% ../00_benchmark.ipynb 22
+# %% ../00_benchmark.ipynb 23
 #| include: false
 import numpy as np
 from .model_documentation import ModelCard
@@ -258,7 +258,7 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
-        y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
+        y=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
         ):
         "Fit the `RegressionBenchmark` model"
         self._fit(X, y)
