@@ -8,7 +8,7 @@ __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
-from sklearn.model_selection import TimeSeriesSplit, StratifiedShuffleSplit, GridSearchCV
+from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.utils.metaestimators import available_if
 from sklearn.utils.validation import check_is_fitted
@@ -41,7 +41,7 @@ class ggdBenchmark(BaseEstimator):
                 self.is_timeseries = False
 
         if self.cv is None:
-            self.cv = TimeSeriesSplit() if self.is_timeseries else StratifiedShuffleSplit()
+            self.cv = TimeSeriesSplit() if self.is_timeseries else self.default_cv
 
     def _creates_estimator(self):
         if self.estimator is None:
@@ -56,7 +56,12 @@ class ggdBenchmark(BaseEstimator):
             self.estimator.random_state = self.random_state
 
         if self.param_search and self.param_grid:                
-            self.benchmark = self.param_search(estimator=self.estimator, param_grid=self.param_grid, scoring=self.scoring, verbose=self.verbose_grid)
+            self.benchmark = self.param_search(
+                estimator=self.estimator, 
+                param_grid=self.param_grid, 
+                scoring=self.scoring, 
+                cv=self.cv,
+                verbose=self.verbose_grid)
         else:
             self.benchmark = self.estimator
             
@@ -115,7 +120,7 @@ class ggdBenchmark(BaseEstimator):
         if ensemble_method == 'object_default':
             ensemble_method = self.ensemble_method
         cand_params = self._read_candidate_params(list_candidates, ensemble_method=ensemble_method)
-        cand_grid = GridSearchCV(cand_pipeline, cand_params, verbose=self.verbose_grid).fit(X, y)
+        cand_grid = GridSearchCV(cand_pipeline, cand_params, cv=self.cv, verbose=self.verbose_grid).fit(X, y)
         
         self.model_comparison_ = cand_grid
 
@@ -192,13 +197,14 @@ class ggdBenchmark(BaseEstimator):
 import numpy as np
 from .model_documentation import ModelCard
 from sklearn.base import ClassifierMixin
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 
 class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     "A gingado Benchmark object used for classification tasks"
     def __init__(self, 
     cv=None, 
+    default_cv = StratifiedShuffleSplit(),
     estimator=RandomForestClassifier(oob_score=True), 
     param_grid={'n_estimators': [100, 250], 'max_features': ['sqrt', 'log2', None]}, 
     param_search=GridSearchCV, 
@@ -208,6 +214,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
     verbose_grid=False,
     ensemble_method=VotingClassifier):
         self.cv = cv
+        self.default_cv = default_cv
         self.estimator = estimator
         self.param_grid = param_grid
         self.param_search = param_search
@@ -216,7 +223,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         self.random_state = random_state
         self.verbose_grid = verbose_grid
         self.ensemble_method = ensemble_method
-
+        
     def fit(
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
@@ -232,11 +239,13 @@ import numpy as np
 from .model_documentation import ModelCard
 from sklearn.base import RegressorMixin
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
+from sklearn.model_selection import ShuffleSplit, GridSearchCV
 
 class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     "A gingado Benchmark object used for regression tasks"
     def __init__(self, 
     cv=None, 
+    default_cv=ShuffleSplit(),
     estimator=RandomForestRegressor(oob_score=True), 
     param_grid={'n_estimators': [100, 250], 'max_features': ['sqrt', 'log2', None]}, 
     param_search=GridSearchCV, 
@@ -246,6 +255,7 @@ class RegressionBenchmark(ggdBenchmark, RegressorMixin):
     verbose_grid=False,
     ensemble_method=VotingRegressor):
         self.cv = cv
+        self.default_cv = default_cv
         self.estimator = estimator
         self.param_grid = param_grid
         self.param_search = param_search
