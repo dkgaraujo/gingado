@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['AugmentSDMX']
 
-# %% ../00_augmentation.ipynb 6
+# %% ../00_augmentation.ipynb 5
 #| include: false
 from .utils import load_SDMX_data
 import numpy as np
@@ -13,6 +13,8 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 from sklearn.feature_selection import VarianceThreshold
 
+# %% ../00_augmentation.ipynb 6
+#| include: false
 class AugmentSDMX(BaseEstimator, TransformerMixin):
     "A transformer that augments a dataset using SDMX"
     
@@ -37,25 +39,35 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
             # used during training, which is an evidence they are the same
             n_samples_in_transform, n_features_in_transform = X.shape
             if n_samples_in_transform != self.n_samples_in_ or n_features_in_transform != self.n_features_in_:
-                raise ValueError("The X passed to the transform() method must be compatible with the X used by the fit() method.")
+                raise ValueError("The `X` passed to the transform() method must be compatible with the `X` used by the fit() method.")
             # during testing, we don't want the possibility of a different
             # set of columns being retained by virtue of different dynamics
             # in both datasets. For example, if a feature is included in the
             # training but during the test dates the variable didn't move, it
             # should not be subject to the test below so that it is still
             # included in the fitted data.
-            feat_sel = VarianceThreshold() if self.variance_threshold is None else VarianceThreshold(threshold=self.variance_threshold)
-            feat_sel.fit(df)
-            self.features_stay_ = df.columns[feat_sel.get_support()]
-            self.features_removed_ = df.columns[~feat_sel.get_support()]
-            
-            df = df.iloc[:, feat_sel.get_support()]
-            df.columns = feat_sel.get_feature_names_out()
-
+            self.features_stay_ = df.columns
+            self.features_removed_ = None
+            merge_df = True
+            if self.variance_threshold:
+                df_temp = df.dropna(axis=0, how='any')
+                feat_sel = VarianceThreshold(threshold=self.variance_threshold)
+                try:
+                    feat_sel.fit(df)
+                    self.features_stay_ = df.columns[feat_sel.get_support()]
+                    self.features_removed_ = df.columns[~feat_sel.get_support()]
+                    df = df.iloc[:, feat_sel.get_support()]
+                    df.columns = feat_sel.get_feature_names_out()
+                except ValueError as e:
+                    print("No columns added to original data because " + str(e).lower())
+                    merge_df = False
             df.dropna(axis=0, how='all', inplace=True)
-            df.dropna(axis=1, how='all', inplace=True)        
+            df.dropna(axis=1, how='all', inplace=True)  
+            if merge_df:
+                X = pd.merge(left=X, right=df, how='left', left_index=True, right_on='TIME_PERIOD')      
         
-        X = pd.merge(left=X, right=df, how='left', left_index=True, right_on='TIME_PERIOD')
+        if training is False: # if True, `X` would already have merged with `df` (or not if no added column)
+            X = pd.merge(left=X, right=df, how='left', left_index=True, right_on='TIME_PERIOD')
         if 'TIME_PERIOD' in X.columns:
             X.drop(columns='TIME_PERIOD', inplace=True)
         if self.propagate_last_known_value:
@@ -66,7 +78,14 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
             X.index = self.index_
         return X
 
-    def __init__(self, sources={'BIS': 'WS_CBPOL_D'}, variance_threshold=None, propagate_last_known_value=True, fillna = 0, verbose=True):
+    def __init__(
+        self,
+        sources:dict={'BIS': 'WS_CBPOL_D'}, # A dictionary with sources as keys and dataflows as values
+        variance_threshold:float|None=None, # If None (default), all variables are kept. Otherwise, variables that have a lower variance through time are removed
+        propagate_last_known_value:bool=True, # Whether the last value that is not NA should be propagated to the following dates
+        fillna:float|int = 0, # Value to use to fill missing data
+        verbose:bool=True # Whether to inform the user as the process progresses
+        ):
         self.sources = sources
         self.variance_threshold = variance_threshold
         self.propagate_last_known_value = propagate_last_known_value
@@ -75,10 +94,10 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
 
     def fit(
             self,
-            X, # a pandas Series or DataFrame with an index of datetime type
+            X:pd.Series|pd.DataFrame, # Data having an index of `datetime` type
             y:None=None # `y` is kept as argument for API consistency only
         ): # A fitted version of the same AugmentSDMX instance
-        # Fits instance of AugmentSDMX to `X`, learning its time series frequency
+        "Fits instance of AugmentSDMX to `X`, learning its time series frequency"
         
         try:
             self.data_freq_ = X.index.to_series().diff().min().resolution_string
@@ -97,11 +116,11 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
 
     def transform(
             self,
-            X, # a pandas Series or DataFrame with an index of datetime type
+            X:pd.Series|pd.DataFrame, # Data having an index of `datetime` type
             y:None=None, # `y` is kept as argument for API consistency only
-            training=False # `True` is `transform` is called during training; `False` if called during testing
+            training:bool=False # `True` if `transform` is called during training, `False` (default) if called during testing
         ): # `X` augmented with data from SDMX
-        # Transforms input dataset `X` by adding the requested data using SDMX
+        "Transforms input dataset `X` by adding the requested data using SDMX"
         check_is_fitted(self)
         self.params_ = self._get_dates()
         idx = X.index
@@ -111,10 +130,10 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
 
     def fit_transform(
             self, 
-            X, # # a pandas Series or DataFrame with an index of datetime type
+            X:pd.Series|pd.DataFrame, # Data having an index of `datetime` type
             y:None=None # `y` is kept as argument for API consistency only
             ) -> np.ndarray: # `X` augmented with data from SDMX with the same number of samples but more columns
-        # Fit to data, then transform it.
+        "Fit to data, then transform it."
         
         self.fit(X)
         self.params_ = self._get_dates()
