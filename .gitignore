@@ -149,3 +149,6 @@ sidebar.yml
 blog/
 
 token
+
+# admin file (keep track of changelog for future versions, etc
+admin.txt
