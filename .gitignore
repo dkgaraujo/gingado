@@ -152,3 +152,6 @@ token
 
 # admin file (keep track of changelog for future versions, etc
 admin.txt
+
+# work in progress
+nbs_workinprogress/
