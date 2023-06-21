@@ -5,10 +5,11 @@ __all__ = ['AugmentSDMX']
 
 # %% ../00_augmentation.ipynb 5
 #| include: false
-from .utils import load_SDMX_data
 import numpy as np
 import pandas as pd
 import pandasdmx as sdmx
+
+from .utils import load_SDMX_data
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 from sklearn.feature_selection import VarianceThreshold
