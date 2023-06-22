@@ -125,7 +125,7 @@ class AugmentSDMX(BaseEstimator, TransformerMixin):
             X:pd.Series|pd.DataFrame, # Data having an index of `datetime` type
             y:None=None, # `y` is kept as argument for API consistency only
             training:bool=False # `True` if `transform` is called during training, `False` (default) if called during testing
-        ): # `X` augmented with data from SDMX
+        ) -> np.ndarray: # `X` augmented with data from SDMX with the same number of samples but more columns
         "Transforms input dataset `X` by adding the requested data using SDMX"
         check_is_fitted(self)
         self.params_ = self._get_dates()
