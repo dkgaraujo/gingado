@@ -24,7 +24,7 @@ functionalities:
 - **automatic** [**benchmark model**](benchmark.html), to assess
   candidate models against a reasonably well-performant model;
 
-- *(new!)* **machine learning-based** [**estimators**](estimators.html), to answer questions of academic or practical importance;
+- *(new!)* **machine learning-based** [**estimators**](estimators.html), to help answer questions of academic or practical importance;
 
 - **support for** [**model documentation**](documentation.html), to
   embed documentation and ethical considerations in the model
