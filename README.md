@@ -18,11 +18,13 @@ functionalities:
   official sources, improving the machine models being trained by the
   user;
 
+- **relevant** [**datasets**](datasets.html), both real and
+  simulamed, to allow for easier model development and comparison;
+
 - **automatic** [**benchmark model**](benchmark.html), to assess
   candidate models against a reasonably well-performant model;
 
-- *(new!)* **relevant** [**datasets**](datasets.html), both real and
-  simulamed, to allow for easier model development and comparison;
+- *(new!)* **machine learning-based** [**estimators**](estimators.html), to answer questions of academic or practical importance;
 
 - **support for** [**model documentation**](documentation.html), to
   embed documentation and ethical considerations in the model
@@ -98,10 +100,19 @@ To install `gingado`, simply run the following code on the terminal:
 
 If you use this package in your work, please cite it as below:
 
-Araujo, Douglas (2022): “*gingado*: A machine learning library for
-economics and finance”, Irving Fisher Committee on Central Bank
-Statistics Workshop on “Data science in central banking” - Part 2: Data
-Science in Central Banking: Applications and tools.
+Araujo, Douglas KG (2023): "gingado: a machine learning library focused on economics and finance", BIS Working Paper No 1122.
+
+```
+@techreport{gingado,
+    author = {Araujo, Douglas KG},
+    title = {gingado: a machine learning library focused on economics and finance},
+    series = {BIS Working Paper},
+    type = {Working Paper},
+    institution = {Bank for International Settlements},
+    year = {2023},
+    number = {1122}
+}
+```
 
 ## References
 
