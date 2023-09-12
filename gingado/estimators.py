@@ -68,9 +68,14 @@ class FindCluster(BaseEstimator):
 
 # %% ../00_estimators.ipynb 33
 #| include: false
+import pandas as pd
+
 from .benchmark import RegressionBenchmark
 from .model_documentation import ggdModelDocumentation, ModelCard
+from sklearn.base import check_is_fitted
+from sklearn.pipeline import Pipeline
 from sklearn.manifold import TSNE
+
 
 # %% ../00_estimators.ipynb 34
 #| include: false
@@ -84,7 +89,9 @@ class MachineControl(BaseEstimator):
         # Method to weight the control entities
         estimator:BaseEstimator=RegressionBenchmark(), 
         # Algorithm for manifold learning
-        manifold:BaseEstimator=TSNE,
+        manifold:BaseEstimator=TSNE(),
+        # Include placebo estimations during prediction?
+        with_placebo:bool=True,
         # The random seed to be used by the algorithm, if relevant
         random_state:int|None=None,
         # gingado Documenter template to facilitate model documentation
@@ -93,6 +100,7 @@ class MachineControl(BaseEstimator):
         self.cluster_alg = cluster_alg,
         self.estimator = estimator
         self.manifold = manifold
+        self.with_placebo = with_placebo
         self.random_state = random_state
         self.auto_document = auto_document
 
@@ -103,8 +111,47 @@ class MachineControl(BaseEstimator):
         if hasattr(self.manifold, "random_state"):
             self.manifold.set_params(random_state=self.random_state)    
 
-    def fit(self):
+        self.pipeline = Pipeline([
+            ('donor_pool', self.cluster_alg),
+            ('estimator', self.estimator)
+        ])
+
+    def _placebo(self):
         pass
 
-    def predict(self):
-        pass
+    def _compare_controls(
+        self,
+        X:np.ndarray, # Array-like pre-intervention data of shape (n_samples, n_control_entites)
+        y:np.ndarray # Array-like pre-intervention data of shape (n_samples,)
+    )->[np.ndarray, np.ndarray]: # 2-d representation of the treated entity, controls, and the synthetic control
+        "Calculates the 2-d manifold learning distribution"
+        df_manifold_learning = pd.concat([X, y, self.machine_controls])
+        self.manifold_repr = self.manifold.fit_transform(X=df_manifold_learning.T)
+
+    def fit(
+        self,
+        X:np.ndarray, # Array-like pre-intervention data of shape (n_samples, n_control_entites)
+        y:np.ndarray # Array-like pre-intervention data of shape (n_samples,)
+    ):
+        self.estimator.fit(X=X, y=y)
+        self.machine_controls = self.estimator.predict(X=X)
+
+        self._compare_controls()
+
+        if self.with_placebo:
+            self._placebo()
+
+        return self
+
+    def predict(
+        self,
+        X:np.ndarray, # Array-like data of shape (n_samples, n_control_entites)
+    ):
+        check_is_fitted(self.estimator)
+        pred = self.estimator.predict(X=X)
+
+        if self.with_placebo:
+            self._placebo()
+
+        return pred
+
