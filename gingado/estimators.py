@@ -70,7 +70,7 @@ class FindCluster(BaseEstimator):
 #| include: false
 import pandas as pd
 
-from .benchmark import RegressionBenchmark
+from .benchmark import ggdBenchmark, RegressionBenchmark
 from .model_documentation import ggdModelDocumentation, ModelCard
 from sklearn.base import check_is_fitted
 from sklearn.pipeline import Pipeline
@@ -97,7 +97,7 @@ class MachineControl(BaseEstimator):
         # gingado Documenter template to facilitate model documentation
         auto_document:ggdModelDocumentation=ModelCard
     ):
-        self.cluster_alg = cluster_alg,
+        self.cluster_alg = cluster_alg
         self.estimator = estimator
         self.manifold = manifold
         self.with_placebo = with_placebo
@@ -119,6 +119,30 @@ class MachineControl(BaseEstimator):
     def _placebo(self):
         pass
 
+    def _select_controls(
+        self,
+        X:pd.DataFrame, # A pandas DataFrame with pre-intervention data of shape (n_samples, n_control_entites)
+        y:pd.DataFrame|pd.Series # A pandas DataFrame or Series with pre-intervention data of shape (n_samples,)
+    ): # 
+        "Identifies which columns of `X` should be used as controls"
+        if self.cluster_alg is None:
+            self.donor_pool_ = X.columns
+        else:
+            Xy = pd.concat([X, y], axis=1)
+            self.cluster_alg.fit(Xy.T)
+            idx_y = Xy.columns == y.name
+            self.donor_pool_ = [
+                c for c in Xy.columns[self.cluster_alg.labels_ == self.cluster_alg.labels_[idx_y]]
+                if c != y.name
+            ]
+
+    def get_controls(self):
+        "Get the list of control entities"
+        if hasattr(self, "donor_pool_"):
+            return self.donor_pool_
+        else:
+            "Controls not selected yet"
+
     def _compare_controls(
         self,
         X:np.ndarray, # Array-like pre-intervention data of shape (n_samples, n_control_entites)
@@ -130,13 +154,19 @@ class MachineControl(BaseEstimator):
 
     def fit(
         self,
-        X:np.ndarray, # Array-like pre-intervention data of shape (n_samples, n_control_entites)
-        y:np.ndarray # Array-like pre-intervention data of shape (n_samples,)
+        X:pd.DataFrame, # A pandas DataFrame with pre-intervention data of shape (n_samples, n_control_entites)
+        y:pd.DataFrame|pd.Series # A pandas DataFrame or Series with pre-intervention data of shape (n_samples,)
     ):
+        "Fit the `MachineControl` model"
+        
+        self._select_controls(X=X, y=y)
+
+        X, y = self._validate_data(X[self.donor_pool_], y)
         self.estimator.fit(X=X, y=y)
+        
         self.machine_controls = self.estimator.predict(X=X)
 
-        self._compare_controls()
+        self._compare_controls(X=X, y=y)
 
         if self.with_placebo:
             self._placebo()
@@ -145,8 +175,9 @@ class MachineControl(BaseEstimator):
 
     def predict(
         self,
-        X:np.ndarray, # Array-like data of shape (n_samples, n_control_entites)
+        X:pd.DataFrame # A pandas DataFrame with complete time series (pre- and post-intervention) of shape (n_samples, n_control_entites)
     ):
+        "Calculate the model predictions before and after the intervention"
         check_is_fitted(self.estimator)
         pred = self.estimator.predict(X=X)
 
