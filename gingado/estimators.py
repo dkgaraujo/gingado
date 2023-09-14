@@ -135,7 +135,7 @@ class MachineControl(BaseEstimator):
         self.placebo_models_ = {}
         self.placebo_score_pre_ = {}
         for entity in self.donor_pool_:
-            X_pl, y_pl = self._create_placebo_df(X_pre, y_pre, entity)
+            X_pl, y_pl = self._create_placebo_df(X, y, entity)
             self.placebo_models_[entity] = clone(self.estimator)
             self.placebo_models_[entity].fit(X_pl, y_pl)
             self.placebo_score_pre_[entity] = mean_squared_error(
@@ -193,6 +193,9 @@ class MachineControl(BaseEstimator):
         self.target_name_ = y.columns if hasattr(y, "columns") else y.name
         self._select_controls(X=X, y=y)
         
+        if self.with_placebo:
+            self._fit_placebo_models(X=X, y=y)
+
         X_donor_pool, y = self._validate_data(X[self.donor_pool_], y)
         
         self.estimator.fit(X=X_donor_pool, y=y)
@@ -203,9 +206,6 @@ class MachineControl(BaseEstimator):
         # this allows us to use a more robust test of whether there are many out-of-cluster entity
         # that would by itself be closer to the target entity.
         self._compare_controls(X=X.values, y=y)
-
-        if self.with_placebo:
-            self._fit_placebo_models(X=X, y=y)
 
         return self
 
