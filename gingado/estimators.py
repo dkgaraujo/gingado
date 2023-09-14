@@ -75,7 +75,7 @@ from .model_documentation import ggdModelDocumentation, ModelCard
 from sklearn.base import check_is_fitted
 from sklearn.pipeline import Pipeline
 from sklearn.manifold import TSNE
-
+from scipy.spatial.distance import pdist, squareform
 
 # %% ../00_estimators.ipynb 34
 #| include: false
@@ -148,9 +148,15 @@ class MachineControl(BaseEstimator):
         X:np.ndarray, # Array-like pre-intervention data of shape (n_samples, n_control_entites)
         y:np.ndarray # Array-like pre-intervention data of shape (n_samples,)
     )->[np.ndarray, np.ndarray]: # 2-d representation of the treated entity, controls, and the synthetic control
-        "Calculates the 2-d manifold learning distribution"
-        df_manifold_learning = pd.concat([X, y, self.machine_controls])
-        self.manifold_repr = self.manifold.fit_transform(X=df_manifold_learning.T)
+        "Calculates the 2-d manifold learning distribution and locates the distance between target and control in this distribution"
+        df_manifold_learning = pd.concat([
+            pd.DataFrame(X), 
+            pd.DataFrame(self.machine_controls_),
+            pd.DataFrame(y) # if actual data is last, it is easier to do the distance learning
+        ], axis=1)
+        self.manifold_embed_ = self.manifold.fit_transform(X=df_manifold_learning.T)
+        self.distances_ = squareform(pdist(self.manifold_embed_))[-1,:-1] # last position in the resulting array is the dist between actual and synth control
+        self.control_quality_test_ = np.percentile(self.distances_, self.distances_[-1])
 
     def fit(
         self,
@@ -160,13 +166,17 @@ class MachineControl(BaseEstimator):
         "Fit the `MachineControl` model"
         
         self._select_controls(X=X, y=y)
-
-        X, y = self._validate_data(X[self.donor_pool_], y)
-        self.estimator.fit(X=X, y=y)
         
-        self.machine_controls = self.estimator.predict(X=X)
+        X_donor, y = self._validate_data(X[self.donor_pool_], y)
+        
+        self.estimator.fit(X=X_donor, y=y)
+        
+        self.machine_controls_ = self.estimator.predict(X=X_donor)
 
-        self._compare_controls(X=X, y=y)
+        # for the comparison part, note we use everyone, not just the selected control entities
+        # this allows us to use a more robust test of whether there are many out-of-cluster entity
+        # that would by itself be closer to the target entity.
+        self._compare_controls(X=X.values, y=y)
 
         if self.with_placebo:
             self._placebo()
