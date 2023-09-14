@@ -39,13 +39,13 @@ class ggdBenchmark(BaseEstimator):
         Note: all data without an index (eg, a Numpy array) are considered to NOT be a time series
         """
         if hasattr(X, "index"):
-            self.is_timeseries = (ptypes.is_datetime64_dtype(X.index) 
+            self.is_timeseries = (ptypes.is_datetime64_dtype(X.index)
                                   or ptypes.is_timedelta64_dtype(X.index))
         else:
             self.is_timeseries = False
         if self.is_timeseries and y is not None:
             if hasattr(y, "index"):
-                self.is_timeseries = (ptypes.is_datetime64_dtype(y.index) 
+                self.is_timeseries = (ptypes.is_datetime64_dtype(y.index)
                                       or ptypes.is_timedelta64_dtype(y.index))
             else:
                 self.is_timeseries = False
