@@ -102,6 +102,7 @@ If you use this package in your work, please cite it as below:
 
 Araujo, Douglas KG (2023): "gingado: a machine learning library focused on economics and finance", BIS Working Paper No 1122.
 
+Below is a BibTeX snippet:
 ```
 @techreport{gingado,
     author = {Araujo, Douglas KG},
