@@ -66,7 +66,7 @@ class FindCluster(BaseEstimator):
         self.fit(X, y)
         return self.transform(X)
 
-# %% ../00_estimators.ipynb 33
+# %% ../00_estimators.ipynb 32
 #| include: false
 import pandas as pd
 
@@ -81,7 +81,7 @@ from scipy.spatial.distance import pdist, squareform
 # %% ../00_estimators.ipynb 34
 #| include: false
 class MachineControl(BaseEstimator):
-    "Estimate synthetic controls with machine learning methods"
+    "Synthetic controls with machine learning methods"
 
     def __init__(
         self,
@@ -127,11 +127,15 @@ class MachineControl(BaseEstimator):
         y_placebo = X_placebo.pop(entity)
         return X_placebo, y_placebo
 
-    def _fit_placebo_models(self, X, y):
+    def _fit_placebo_models(
+        self, 
+        X:pd.DataFrame, # A pandas DataFrame with pre-intervention data of shape (n_samples, n_control_entites)
+        y:pd.DataFrame|pd.Series # A pandas DataFrame or Series with pre-intervention data of shape (n_samples,)
+    ):
         self.placebo_models_ = {}
         self.placebo_score_pre_ = {}
         for entity in self.donor_pool_:
-            X_pl, y_pl = synth_BR._create_placebo_df(X_pre, y_pre, entity)
+            X_pl, y_pl = self._create_placebo_df(X_pre, y_pre, entity)
             self.placebo_models_[entity] = clone(self.estimator)
             self.placebo_models_[entity].fit(X_pl, y_pl)
             self.placebo_score_pre_[entity] = mean_squared_error(
