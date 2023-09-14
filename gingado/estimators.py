@@ -72,9 +72,10 @@ import pandas as pd
 
 from .benchmark import ggdBenchmark, RegressionBenchmark
 from .model_documentation import ggdModelDocumentation, ModelCard
-from sklearn.base import check_is_fitted
+from sklearn.base import check_is_fitted, clone
 from sklearn.pipeline import Pipeline
 from sklearn.manifold import TSNE
+from sklearn.metrics import mean_squared_error
 from scipy.spatial.distance import pdist, squareform
 
 # %% ../00_estimators.ipynb 34
@@ -116,8 +117,28 @@ class MachineControl(BaseEstimator):
             ('estimator', self.estimator)
         ])
 
-    def _placebo(self):
-        pass
+    def _create_placebo_df(
+        self,
+        X:pd.DataFrame, # A pandas DataFrame with data of shape (n_samples, n_control_entites)
+        y:pd.DataFrame|pd.Series, # A pandas DataFrame or Series with data of shape (n_samples,)
+        entity:str # A singleton column name for an entity in the control group
+    ):
+        X_placebo = pd.concat([X[self.donor_pool_], y], axis=1)
+        y_placebo = X_placebo.pop(entity)
+        return X_placebo, y_placebo
+
+    def _fit_placebo_models(self, X, y):
+        self.placebo_models_ = {}
+        self.placebo_score_pre_ = {}
+        for entity in self.donor_pool_:
+            X_pl, y_pl = synth_BR._create_placebo_df(X_pre, y_pre, entity)
+            self.placebo_models_[entity] = clone(self.estimator)
+            self.placebo_models_[entity].fit(X_pl, y_pl)
+            self.placebo_score_pre_[entity] = mean_squared_error(
+                y_true=y_pl, 
+                y_pred=self.placebo_models_[entity].predict(X=X_pl),
+                squared=False
+            )
 
     def _select_controls(
         self,
@@ -165,13 +186,14 @@ class MachineControl(BaseEstimator):
     ):
         "Fit the `MachineControl` model"
         
+        self.target_name_ = y.columns if hasattr(y, "columns") else y.name
         self._select_controls(X=X, y=y)
         
-        X_donor, y = self._validate_data(X[self.donor_pool_], y)
+        X_donor_pool, y = self._validate_data(X[self.donor_pool_], y)
         
-        self.estimator.fit(X=X_donor, y=y)
+        self.estimator.fit(X=X_donor_pool, y=y)
         
-        self.machine_controls_ = self.estimator.predict(X=X_donor)
+        self.machine_controls_ = self.estimator.predict(X=X_donor_pool)
 
         # for the comparison part, note we use everyone, not just the selected control entities
         # this allows us to use a more robust test of whether there are many out-of-cluster entity
@@ -179,20 +201,42 @@ class MachineControl(BaseEstimator):
         self._compare_controls(X=X.values, y=y)
 
         if self.with_placebo:
-            self._placebo()
+            self._fit_placebo_models(X=X, y=y)
 
         return self
 
     def predict(
         self,
-        X:pd.DataFrame # A pandas DataFrame with complete time series (pre- and post-intervention) of shape (n_samples, n_control_entites)
+        X:pd.DataFrame, # A pandas DataFrame with complete time series (pre- and post-intervention) of shape (n_samples, n_control_entites)
+        y:pd.DataFrame|pd.Series # A pandas DataFrame or Series with complete time series of shape (n_samples,)
     ):
         "Calculate the model predictions before and after the intervention"
         check_is_fitted(self.estimator)
-        pred = self.estimator.predict(X=X)
+
+        X = X[self.donor_pool_]
+        self.pred_ = self.estimator.predict(X=X)
+        self.diff_ = y - self.pred_
+        
+        self.pred_ = pd.DataFrame(self.pred_, index=X.index)
 
         if self.with_placebo:
-            self._placebo()
+            self.placebo_predict_ = {}
+            self.placebo_diff_ = {}
+            self.placebo_score_all_ = {}
+            for entity, model in self.placebo_models_.items():
+                X_pl, y_pl = self._create_placebo_df(X=X, y=y, entity=entity)
+                self.placebo_predict_[entity] = model.predict(X=X_pl)
+                self.placebo_score_all_[entity] = mean_squared_error(
+                    y_true=y_pl,
+                    y_pred=self.placebo_predict_[entity],
+                    squared=False
+                )
+                self.placebo_diff_[entity] = y_pl - self.placebo_predict_[entity]
+            self.placebo_predict_ = pd.DataFrame(self.placebo_predict_, index=X.index)
+            self.placebo_diff_ = pd.DataFrame(self.placebo_diff_, index=X.index)
 
-        return pred
+        return self.pred_
 
+    def intervention_effect(self):
+        "Calculate the intervention effect after the cutoff date"
+        pass
