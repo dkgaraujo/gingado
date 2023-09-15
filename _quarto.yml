@@ -29,14 +29,18 @@ website:
             file: barrolee1994.html
           - text: "Forecasting FX rates"
             file: forecast.html
+          - text: "Effects of labour reform"
+            file: machine_controls.html
       - text: "Reference"
         menu:
           - text: "gingado.augmentation"
             file: augmentation.html
-          - text: "gingado.benchmark"
-            file: benchmark.html
           - text: "gingado.datasets"
             file: datasets.html
+          - text: "gingado.benchmark"
+            file: benchmark.html
+          - text: "gingado.estimators"
+            file: estimators.html
           - text: "gingado.model_documentation"
             file: documentation.html
           - text: "gingado.utils"
