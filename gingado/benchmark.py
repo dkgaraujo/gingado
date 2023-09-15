@@ -13,12 +13,13 @@ __all__ = ['ggdBenchmark', 'ClassificationBenchmark', 'RegressionBenchmark']
 import numpy as np
 import pandas as pd
 import pandas.api.types as ptypes
+from .model_documentation import ggdModelDocumentation, ModelCard
+from .utils import read_attr
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.utils.metaestimators import available_if
 from sklearn.utils.validation import check_is_fitted
-from .model_documentation import ggdModelDocumentation, ModelCard
 
 # %% ../00_benchmark.ipynb 10
 #| include: false
@@ -85,7 +86,7 @@ class ggdBenchmark(BaseEstimator):
     def set_benchmark(
         self,
         estimator # A fitted estimator object
-        ):
+    ):
         # Define a fitted `estimator` as the new benchmark model
         check_is_fitted(estimator)
         self.benchmark = estimator
@@ -115,7 +116,7 @@ class ggdBenchmark(BaseEstimator):
         candidates, # Candidate estimator or list of candidate estimator(s)
         ensemble_method='object_default', 
         update_benchmark:bool=True # Whether to use the best performing candidate model as the new benchmark
-        ):
+    ):
         "Use a testing dataset to compare the performance of the fitted benchmark model with one or more candidate models using a grid search"
     
         check_is_fitted(self.benchmark)
@@ -153,23 +154,14 @@ class ggdBenchmark(BaseEstimator):
         
         return {candidate.__repr__(): scoring_func(y, candidate.predict(X)) for candidate in list_candidates}
 
-    def _read_attr(self):
-        for a in dir(self.benchmark):
-            if a == '_estimator_type' or a.endswith("_") and not a.startswith("_") and not a.endswith("__"):
-                try:
-                    model_attr = self.benchmark.__getattribute__(a)
-                    yield {a: model_attr}
-                except:
-                    pass
-
     def document(
         self, 
         documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
-        ):
+    ):
         "Document the benchmark model using the template in `documenter`"
         documenter = self.auto_document if documenter is None else documenter
         self.model_documentation = documenter()
-        model_info = list(self._read_attr())
+        model_info = list(read_attr(self.benchmark))
         model_info = {k:v for i in model_info for k, v in i.items()}
         #self.model_documentation.read_model(self.benchmark)
         self.model_documentation.fill_model_info(model_info)
@@ -247,7 +239,7 @@ class ClassificationBenchmark(ggdBenchmark, ClassifierMixin):
         self, 
         X:np.ndarray, # Array-like data of shape (n_samples, n_features)
         y:np.ndarray|None=None # Array-like data of shape (n_samples,) or (n_samples, n_targets) or None
-        ):
+    ):
         "Fit the `ClassificationBenchmark` model"
         self._fit(X, y)
         return self
