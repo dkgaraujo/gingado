@@ -141,8 +141,13 @@ class MachineControl(BaseEstimator):
         "Document the `MachineControl` model using the template in `documenter`"
         documenter = self.auto_document if documenter is None else documenter
         self.model_documentation = documenter()
-        model_info = list(read_attr(self.cluster_alg))
-        model_info = {k:v for i in model_info for k, v in i.items()}
+        model_info = {}
+        model_info_cluster = list(read_attr(self.cluster_alg))
+        model_info['cluster'] = {k:v for i in model_info_cluster for k, v in i.items()}
+        model_info_estimator = list(read_attr(self.estimator))
+        model_info['estimator'] = {k:v for i in model_info_estimator for k, v in i.items()}
+        model_info_manifold = list(read_attr(self.manifold))
+        model_info['manifold'] = {k:v for i in model_info_manifold for k, v in i.items()}
         #self.model_documentation.read_model(self.benchmark)
         self.model_documentation.fill_model_info(model_info)
 
