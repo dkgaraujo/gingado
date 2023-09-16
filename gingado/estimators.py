@@ -11,6 +11,8 @@ __all__ = ['FindCluster', 'MachineControl']
 # %% ../00_estimators.ipynb 9
 #| include: false
 import numpy as np
+from .model_documentation import ggdModelDocumentation, ModelCard
+from .utils import read_attr
 from sklearn.base import BaseEstimator, ClusterMixin
 from sklearn.cluster import AffinityPropagation
 from sklearn.utils.metaestimators import available_if
@@ -23,13 +25,26 @@ class FindCluster(BaseEstimator):
     def __init__(
         self,
         cluster_alg:[BaseEstimator,ClusterMixin]=AffinityPropagation(), # An instance of the clustering algorithm to use
+        auto_document:ggdModelDocumentation=ModelCard, # gingado Documenter template to facilitate model documentation
         random_state:int|None=None, # The random seed to be used by the algorithm, if relevant
     ):
         self.cluster_alg = cluster_alg
+        self.auto_document = auto_document
         self.random_state = random_state
         if hasattr(self.cluster_alg, "random_state"):
             self.cluster_alg.set_params(random_state=self.random_state)
 
+    def document(
+        self, 
+        documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
+    ):
+        "Document the `FindCluster` model using the template in `documenter`"
+        documenter = self.auto_document if documenter is None else documenter
+        self.model_documentation = documenter()
+        model_info = list(read_attr(self.cluster_alg))
+        model_info = {k:v for i in model_info for k, v in i.items()}
+        #self.model_documentation.read_model(self.benchmark)
+        self.model_documentation.fill_model_info(model_info)
 
     def fit(
         self,
@@ -48,6 +63,8 @@ class FindCluster(BaseEstimator):
 
         cluster = entities[self.cluster_alg.labels_ == self.cluster_alg.labels_[y_mask]]
         self.same_cluster_ = [e for e in cluster if e != temp_y_colname]
+        
+        self.document()
         return self
 
     def transform(
@@ -66,7 +83,7 @@ class FindCluster(BaseEstimator):
         self.fit(X, y)
         return self.transform(X)
 
-# %% ../00_estimators.ipynb 32
+# %% ../00_estimators.ipynb 38
 #| include: false
 import pandas as pd
 
@@ -78,7 +95,7 @@ from sklearn.manifold import TSNE
 from sklearn.metrics import mean_squared_error
 from scipy.spatial.distance import pdist, squareform
 
-# %% ../00_estimators.ipynb 34
+# %% ../00_estimators.ipynb 40
 #| include: false
 class MachineControl(BaseEstimator):
     "Synthetic controls with machine learning methods"
@@ -93,17 +110,17 @@ class MachineControl(BaseEstimator):
         manifold:BaseEstimator=TSNE(),
         # Include placebo estimations during prediction?
         with_placebo:bool=True,
-        # The random seed to be used by the algorithm, if relevant
-        random_state:int|None=None,
         # gingado Documenter template to facilitate model documentation
-        auto_document:ggdModelDocumentation=ModelCard
+        auto_document:ggdModelDocumentation=ModelCard,
+        # The random seed to be used by the algorithm, if relevant
+        random_state:int|None=None
     ):
         self.cluster_alg = cluster_alg
         self.estimator = estimator
         self.manifold = manifold
         self.with_placebo = with_placebo
-        self.random_state = random_state
         self.auto_document = auto_document
+        self.random_state = random_state
 
         if hasattr(self.cluster_alg, "random_state"):
             self.cluster_alg.set_params(random_state=self.random_state)
@@ -116,6 +133,18 @@ class MachineControl(BaseEstimator):
             ('donor_pool', self.cluster_alg),
             ('estimator', self.estimator)
         ])
+
+    def document(
+        self, 
+        documenter:ggdModelDocumentation|None=None # A gingado Documenter or the documenter set in `auto_document` if None.
+    ):
+        "Document the `MachineControl` model using the template in `documenter`"
+        documenter = self.auto_document if documenter is None else documenter
+        self.model_documentation = documenter()
+        model_info = list(read_attr(self.cluster_alg))
+        model_info = {k:v for i in model_info for k, v in i.items()}
+        #self.model_documentation.read_model(self.benchmark)
+        self.model_documentation.fill_model_info(model_info)
 
     def _create_placebo_df(
         self,
