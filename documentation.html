@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Functions to jumpstart and facilitate model documentation">
+
+<title>gingado - Model documentation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="gingado - Model documentation">
+<meta property="og:description" content="Functions to jumpstart and facilitate model documentation">
+<meta property="og:site-name" content="gingado">
+<meta name="twitter:title" content="gingado - Model documentation">
+<meta name="twitter:description" content="Functions to jumpstart and facilitate model documentation">
+<meta name="twitter:creator" content="@DouglasKGAraujo">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">gingado</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examples" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Examples</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-examples">    
+        <li>
+    <a class="dropdown-item" href="./barrolee1994.html" rel="" target="">
+ <span class="dropdown-text">Economic growth</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./forecast.html" rel="" target="">
+ <span class="dropdown-text">Forecasting FX rates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./machine_controls.html" rel="" target="">
+ <span class="dropdown-text">Effects of labour reform</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reference" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Reference</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
+        <li>
+    <a class="dropdown-item" href="./augmentation.html" rel="" target="">
+ <span class="dropdown-text">gingado.augmentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./datasets.html" rel="" target="">
+ <span class="dropdown-text">gingado.datasets</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./benchmark.html" rel="" target="">
+ <span class="dropdown-text">gingado.benchmark</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./estimators.html" rel="" target="">
+ <span class="dropdown-text">gingado.estimators</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./documentation.html" rel="" target="">
+ <span class="dropdown-text">gingado.model_documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./utils.html" rel="" target="">
+ <span class="dropdown-text">gingado.utils</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dkgaraujo/gingado" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DouglasKGARaujo" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#base-class" id="toc-base-class" class="nav-link active" data-scroll-target="#base-class">Base class</a>
+  <ul>
+  <li><a href="#ggdmodeldocumentation" id="toc-ggdmodeldocumentation" class="nav-link" data-scroll-target="#ggdmodeldocumentation">ggdModelDocumentation</a>
+  <ul class="collapse">
+  <li><a href="#setup_template" id="toc-setup_template" class="nav-link" data-scroll-target="#setup_template">setup_template</a></li>
+  <li><a href="#show_template" id="toc-show_template" class="nav-link" data-scroll-target="#show_template">show_template</a></li>
+  <li><a href="#documentation_path" id="toc-documentation_path" class="nav-link" data-scroll-target="#documentation_path">documentation_path</a></li>
+  <li><a href="#save_json" id="toc-save_json" class="nav-link" data-scroll-target="#save_json">save_json</a></li>
+  <li><a href="#read_json" id="toc-read_json" class="nav-link" data-scroll-target="#read_json">read_json</a></li>
+  <li><a href="#show_json" id="toc-show_json" class="nav-link" data-scroll-target="#show_json">show_json</a></li>
+  <li><a href="#read_model" id="toc-read_model" class="nav-link" data-scroll-target="#read_model">read_model</a></li>
+  <li><a href="#open_questions" id="toc-open_questions" class="nav-link" data-scroll-target="#open_questions">open_questions</a></li>
+  <li><a href="#fill_model_info" id="toc-fill_model_info" class="nav-link" data-scroll-target="#fill_model_info">fill_model_info</a></li>
+  <li><a href="#fill_info" id="toc-fill_info" class="nav-link" data-scroll-target="#fill_info">fill_info</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#documenters" id="toc-documenters" class="nav-link" data-scroll-target="#documenters">Documenters</a>
+  <ul>
+  <li><a href="#modelcard" id="toc-modelcard" class="nav-link" data-scroll-target="#modelcard">ModelCard</a>
+  <ul class="collapse">
+  <li><a href="#modelcard-1" id="toc-modelcard-1" class="nav-link" data-scroll-target="#modelcard-1">ModelCard</a>
+  <ul class="collapse">
+  <li><a href="#autofill_template" id="toc-autofill_template" class="nav-link" data-scroll-target="#autofill_template">autofill_template</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#forecastcard" id="toc-forecastcard" class="nav-link" data-scroll-target="#forecastcard">ForecastCard</a>
+  <ul class="collapse">
+  <li><a href="#forecastcard-1" id="toc-forecastcard-1" class="nav-link" data-scroll-target="#forecastcard-1">ForecastCard</a>
+  <ul class="collapse">
+  <li><a href="#autofill_template-1" id="toc-autofill_template-1" class="nav-link" data-scroll-target="#autofill_template-1">autofill_template</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#basic-functioning-of-model-documentation" id="toc-basic-functioning-of-model-documentation" class="nav-link" data-scroll-target="#basic-functioning-of-model-documentation">Basic functioning of model documentation</a></li>
+  <li><a href="#reading-information-from-models" id="toc-reading-information-from-models" class="nav-link" data-scroll-target="#reading-information-from-models">Reading information from models</a>
+  <ul>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries">Preliminaries</a></li>
+  <li><a href="#gingado-benchmark" id="toc-gingado-benchmark" class="nav-link" data-scroll-target="#gingado-benchmark">gingado Benchmark</a></li>
+  <li><a href="#scikit-learn" id="toc-scikit-learn" class="nav-link" data-scroll-target="#scikit-learn">scikit-learn</a></li>
+  <li><a href="#keras" id="toc-keras" class="nav-link" data-scroll-target="#keras">Keras</a></li>
+  <li><a href="#other-models" id="toc-other-models" class="nav-link" data-scroll-target="#other-models">Other models</a></li>
+  </ul></li>
+  <li><a href="#sec-custom" id="toc-sec-custom" class="nav-link" data-scroll-target="#sec-custom">Creating a custom Documenter</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/dkgaraujo/gingado/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Model documentation</h1>
+</div>
+
+<div>
+  <div class="description">
+    Functions to jumpstart and facilitate model documentation
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>Each user has a specific documentation need, ranging from simply logging the model training to a more complex description of the model pipeline with a discusson of the model outcomes. <code>gingado</code> addresses this variety of needs by offering a class of objects, “Documenters”, that facilitate model documentation. A base class facilitates the creation of generic ways to document models, and <code>gingado</code> includes two specific model documentation templates off-the-shelf as described below.</p>
+<p>The model documentation is performed by Documenters, objects that subclass from the base class <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a>. This base class offers code that can be used by any Documenter to read the model in question, format the information according to a template and save the resulting documentation in a JSON format. Documenters save the underlying information using the JSON format. With the JSON documentation file at hand, the user can then deploy existing third-party libraries to transform the information stored in JSON into a variety of formats (eg, HTML, PDF) as needed.</p>
+<p>One current area of development is the automatic filing of some fields related to the model. The objective is to automatise documentation of the information that can be fetched automatically from the model, leaving time for the analyst to concentrate on other tasks, such as considering the ethical implications of the machine learning model being trained.</p>
+<section id="base-class" class="level1">
+<h1>Base class</h1>
+<p><code>gingado</code> has a <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a> base class that contains the basic functionalities for Documenters. It is not meant to be used by itself, but only as a hyperclass for Documenters objects. <code>gingado</code> ships with two such objects that subclass <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a>: <a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a> and <a href="https://dkgaraujo.github.io/gingado/documentation.html#forecastcard"><code>ForecastCard</code></a>. They are both described below in their respective sections.</p>
+<p>Users are encouraged to submit a PR with their own Documenter models subclassing <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a>; see <a href="#sec-custom">Section&nbsp;5</a> for more information.</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L16" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ggdmodeldocumentation" class="level3">
+<h3 class="anchored" data-anchor-id="ggdmodeldocumentation">ggdModelDocumentation</h3>
+<blockquote class="blockquote">
+<pre><code> ggdModelDocumentation ()</code></pre>
+</blockquote>
+<p>Base class for gingado Documenters</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L19" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="setup_template" class="level4">
+<h4 class="anchored" data-anchor-id="setup_template">setup_template</h4>
+<blockquote class="blockquote">
+<pre><code> setup_template ()</code></pre>
+</blockquote>
+<p>Set up the template from the JSON documentation</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L25" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="show_template" class="level4">
+<h4 class="anchored" data-anchor-id="show_template">show_template</h4>
+<blockquote class="blockquote">
+<pre><code> show_template (indent:bool=True)</code></pre>
+</blockquote>
+<p>Show documentation template in JSON format</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>indent</td>
+<td>bool</td>
+<td>True</td>
+<td>Whether to print JSON documentation template with indentation for easier human reading</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L35" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="documentation_path" class="level4">
+<h4 class="anchored" data-anchor-id="documentation_path">documentation_path</h4>
+<blockquote class="blockquote">
+<pre><code> documentation_path ()</code></pre>
+</blockquote>
+<p>Show path to documentation</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L44" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="save_json" class="level4">
+<h4 class="anchored" data-anchor-id="save_json">save_json</h4>
+<blockquote class="blockquote">
+<pre><code> save_json (file_path:str)</code></pre>
+</blockquote>
+<p>Save the documentation in JSON format in the specified file</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file_path</td>
+<td>str</td>
+<td>Path to save JSON file</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L52" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="read_json" class="level4">
+<h4 class="anchored" data-anchor-id="read_json">read_json</h4>
+<blockquote class="blockquote">
+<pre><code> read_json (file_path:str)</code></pre>
+</blockquote>
+<p>Load documentation JSON from path</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file_path</td>
+<td>str</td>
+<td>Path to JSON file or path defined in <code>file_path</code> if None</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L39" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="show_json" class="level4">
+<h4 class="anchored" data-anchor-id="show_json">show_json</h4>
+<blockquote class="blockquote">
+<pre><code> show_json ()</code></pre>
+</blockquote>
+<p>Show documentation in JSON format</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L107" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="read_model" class="level4">
+<h4 class="anchored" data-anchor-id="read_model">read_model</h4>
+<blockquote class="blockquote">
+<pre><code> read_model (model)</code></pre>
+</blockquote>
+<p>Read automatically information form the model and add to documentation</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>model</td>
+<td>The model to be documented</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L62" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="open_questions" class="level4">
+<h4 class="anchored" data-anchor-id="open_questions">open_questions</h4>
+<blockquote class="blockquote">
+<pre><code> open_questions ()</code></pre>
+</blockquote>
+<p>List open fields in the documentation</p>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L119" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="fill_model_info" class="level4">
+<h4 class="anchored" data-anchor-id="fill_model_info">fill_model_info</h4>
+<blockquote class="blockquote">
+<pre><code> fill_model_info (model_info:Union[str,dict],
+                  model_info_keyname:str='model_details')</code></pre>
+</blockquote>
+<p>Called automatically, or by the user, to add model information to the documentation according to its template</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>model_info</td>
+<td>str | dict</td>
+<td></td>
+<td>Information about the model to be added in the documentation</td>
+</tr>
+<tr class="even">
+<td>model_info_keyname</td>
+<td>str</td>
+<td>model_details</td>
+<td>Dictionary key in the Documenter template to which this information should be linked</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L72" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="fill_info" class="level4">
+<h4 class="anchored" data-anchor-id="fill_info">fill_info</h4>
+<blockquote class="blockquote">
+<pre><code> fill_info (new_info:dict)</code></pre>
+</blockquote>
+<p>Include infomation in model documentation</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>new_info</td>
+<td>dict</td>
+<td>Dictionary with information to be added to the model documentation</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="documenters" class="level1">
+<h1>Documenters</h1>
+<section id="modelcard" class="level2">
+<h2 class="anchored" data-anchor-id="modelcard">ModelCard</h2>
+<p><a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a> - the model documentation template inspired by the work of <span class="citation" data-cites="ModelCards">Mitchell et al. (<a href="#ref-ModelCards" role="doc-biblioref">2018</a>)</span> already comes with <code>gingado</code>. Its template can be used by users as is, or tweaked according to each need. The <a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a> template can also serve as inspiration for any custom documentation needs. Users with documentation needs beyond the out-of-the-box solutions provided by <code>gingado</code> can create their own class of Documenters (more information on that below), and compatibility with these custom documentation routines with the rest of the code is ensured. Users are encouraged to submit a pull request with their own documentation models subclassing <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a> if these custom templates can also benefit other users.</p>
+<p>Like all <code>gingado</code> Documenters, a <a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a> is can be easily created on a standalone basis as shown below, or as part of a <code>gingado.ggdBenchmark</code> object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model_doc <span class="op">=</span> ModelCard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By default, it autofills the template with the current date and time. Users can add other information to be automatically added by a customised Documenter object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_doc_with_autofill <span class="op">=</span> ModelCard(autofill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model_doc_no_autofill <span class="op">=</span> ModelCard(autofill<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below is a comparison of the <code>model_details</code> section of the model document, with and without the autofill.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model_doc_with_autofill.show_json()[<span class="st">'model_details'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'developer': 'Person or organisation developing the model',
+ 'datetime': '2023-06-22 09:05:40 ',
+ 'version': 'Model version',
+ 'type': 'Model type',
+ 'info': 'Information about training algorithms, parameters, fairness constraints or other applied approaches, and features',
+ 'paper': 'Paper or other resource for more information',
+ 'citation': 'Citation details',
+ 'license': 'License',
+ 'contact': 'Where to send questions or comments about the model'}</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>model_doc_no_autofill.show_json()[<span class="st">'model_details'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'developer': 'Person or organisation developing the model',
+ 'datetime': 'Model date',
+ 'version': 'Model version',
+ 'type': 'Model type',
+ 'info': 'Information about training algorithms, parameters, fairness constraints or other applied approaches, and features',
+ 'paper': 'Paper or other resource for more information',
+ 'citation': 'Citation details',
+ 'license': 'License',
+ 'contact': 'Where to send questions or comments about the model'}</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L146" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="modelcard-1" class="level3">
+<h3 class="anchored" data-anchor-id="modelcard-1">ModelCard</h3>
+<blockquote class="blockquote">
+<pre><code> ModelCard (file_path:str='', autofill:bool=True, indent_level:int|None=2)</code></pre>
+</blockquote>
+<p>A gingado Documenter based on <span class="citation" data-cites="ModelCards">Mitchell et al. (<a href="#ref-ModelCards" role="doc-biblioref">2018</a>)</span></p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file_path</td>
+<td>str</td>
+<td></td>
+<td>Path for the JSON file with the documentation</td>
+</tr>
+<tr class="even">
+<td>autofill</td>
+<td>bool</td>
+<td>True</td>
+<td>Whether the Documenter object should autofill when created</td>
+</tr>
+<tr class="odd">
+<td>indent_level</td>
+<td>int | None</td>
+<td>2</td>
+<td>Level of indentation during serialisation to JSON</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L222" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="autofill_template" class="level4">
+<h4 class="anchored" data-anchor-id="autofill_template">autofill_template</h4>
+<blockquote class="blockquote">
+<pre><code> autofill_template ()</code></pre>
+</blockquote>
+<p>Create an empty model card template, then fills it with information that is automatically obtained from the system</p>
+</section>
+</section>
+</section>
+<section id="forecastcard" class="level2">
+<h2 class="anchored" data-anchor-id="forecastcard">ForecastCard</h2>
+<p><a href="https://dkgaraujo.github.io/gingado/documentation.html#forecastcard"><code>ForecastCard</code></a> is a model documentation template inspired by <span class="citation" data-cites="ModelCards">Mitchell et al. (<a href="#ref-ModelCards" role="doc-biblioref">2018</a>)</span>, but with fields that are more specifically targeted towards forecasting or nowcasting use cases.</p>
+<p>Because a <a href="https://dkgaraujo.github.io/gingado/documentation.html#forecastcard"><code>ForecastCard</code></a> Documenter object is targeted to forecasting and nowcasting models, it contains some specialised fields, as illustrated below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model_doc <span class="op">=</span> ForecastCard()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model_doc.show_template()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "model_details": {
+    "field_description": "Basic information about the model",
+    "variable": "Variable(s) being forecasted or nowcasted",
+    "jurisdiction": "Jurisdiction(s) of the variable being forecasted or nowcasted",
+    "developer": "Person or organisation developing the model",
+    "datetime": "Model date",
+    "version": "Model version",
+    "type": "Model type",
+    "pipeline": "Description of the pipeline steps being used",
+    "info": "Information about training algorithms, parameters, fairness constraints or other applied approaches, and features",
+    "econometric_model": "Information about the econometric model or technique",
+    "paper": "Paper or other resource for more information",
+    "citation": "Citation details",
+    "license": "License",
+    "contact": "Where to send questions or comments about the model"
+  },
+  "intended_use": {
+    "field_description": "Use cases that were envisioned during development",
+    "primary_uses": "Primary intended uses",
+    "primary_users": "Primary intended users",
+    "out_of_scope": "Out-of-scope use cases"
+  },
+  "factors": {
+    "field_description": "Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others",
+    "relevant": "Relevant factors",
+    "evaluation": "Evaluation factors"
+  },
+  "metrics": {
+    "field_description": "Metrics should be chosen to reflect potential real world impacts of the model",
+    "performance_measures": "Model performance measures",
+    "estimation_approaches": "How are the evaluation metrics calculated? Include information on the cross-validation approach, if used"
+  },
+  "data": {
+    "field_description": "Details on the dataset(s) used for the training and evaluation of the model",
+    "datasets": "Datasets",
+    "preprocessing": "Preprocessing",
+    "cutoff_date": "Cut-off date that separates training from evaluation data"
+  },
+  "ethical_considerations": {
+    "field_description": "Ethical considerations that went into model development, surfacing ethical challenges and solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.",
+    "sensitive_data": "Does the model use any sensitive data (e.g., protected classes)?",
+    "risks_and_harms": "What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms. If these cannot be determined, note that they were considered but remain unknown",
+    "use_cases": "Are there any known model use cases that are especially fraught?",
+    "additional_information": "If possible, this section should also include any additional ethical considerations that went into model development, for example, review by an external board, or testing with a specific community."
+  },
+  "caveats_recommendations": {
+    "field_description": "Additional concerns that were not covered in the previous sections",
+    "caveats": "For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?",
+    "recommendations": "Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model_doc.show_json()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'model_details': {'variable': 'Variable(s) being forecasted or nowcasted',
+  'jurisdiction': 'Jurisdiction(s) of the variable being forecasted or nowcasted',
+  'developer': 'Person or organisation developing the model',
+  'datetime': '2023-06-22 09:05:40 ',
+  'version': 'Model version',
+  'type': 'Model type',
+  'pipeline': 'Description of the pipeline steps being used',
+  'info': 'Information about training algorithms, parameters, fairness constraints or other applied approaches, and features',
+  'econometric_model': 'Information about the econometric model or technique',
+  'paper': 'Paper or other resource for more information',
+  'citation': 'Citation details',
+  'license': 'License',
+  'contact': 'Where to send questions or comments about the model'},
+ 'intended_use': {'primary_uses': 'Primary intended uses',
+  'primary_users': 'Primary intended users',
+  'out_of_scope': 'Out-of-scope use cases'},
+ 'factors': {'relevant': 'Relevant factors',
+  'evaluation': 'Evaluation factors'},
+ 'metrics': {'performance_measures': 'Model performance measures',
+  'estimation_approaches': 'How are the evaluation metrics calculated? Include information on the cross-validation approach, if used'},
+ 'data': {'datasets': 'Datasets',
+  'preprocessing': 'Preprocessing',
+  'cutoff_date': 'Cut-off date that separates training from evaluation data'},
+ 'ethical_considerations': {'sensitive_data': 'Does the model use any sensitive data (e.g., protected classes)?',
+  'risks_and_harms': 'What risks may be present in model usage? Try to identify the potential recipients, likelihood, and magnitude of harms. If these cannot be determined, note that they were considered but remain unknown',
+  'use_cases': 'Are there any known model use cases that are especially fraught?',
+  'additional_information': 'If possible, this section should also include any additional ethical considerations that went into model development, for example, review by an external board, or testing with a specific community.'},
+ 'caveats_recommendations': {'caveats': 'For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?',
+  'recommendations': 'Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?'}}</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L233" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="forecastcard-1" class="level3">
+<h3 class="anchored" data-anchor-id="forecastcard-1">ForecastCard</h3>
+<blockquote class="blockquote">
+<pre><code> ForecastCard (file_path:str='', autofill:bool=True,
+               indent_level:int|None=2)</code></pre>
+</blockquote>
+<p>A gingado Documenter for forecasting or nowcasting use cases</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file_path</td>
+<td>str</td>
+<td></td>
+<td>Path for the JSON file with the documentation</td>
+</tr>
+<tr class="even">
+<td>autofill</td>
+<td>bool</td>
+<td>True</td>
+<td>Whether the Documenter object should autofill when created</td>
+</tr>
+<tr class="odd">
+<td>indent_level</td>
+<td>int | None</td>
+<td>2</td>
+<td>Level of indentation during serialisation to JSON</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/dkgaraujo/gingado/blob/main/gingado/model_documentation.py#L300" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="autofill_template-1" class="level4">
+<h4 class="anchored" data-anchor-id="autofill_template-1">autofill_template</h4>
+<blockquote class="blockquote">
+<pre><code> autofill_template ()</code></pre>
+</blockquote>
+<p>Create an empty model card template, then fills it with information that is automatically obtained from the system</p>
+</section>
+</section>
+</section>
+</section>
+<section id="basic-functioning-of-model-documentation" class="level1">
+<h1>Basic functioning of model documentation</h1>
+<p>After a Documenter object, such as <a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a> or <a href="https://dkgaraujo.github.io/gingado/documentation.html#forecastcard"><code>ForecastCard</code></a> is instanciated, the user can see the underlying template with the module <code>show_template</code>, as below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_doc <span class="op">=</span> ModelCard(autofill<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> model_doc.show_template(indent<span class="op">=</span><span class="va">False</span>) <span class="op">==</span> ModelCard.template</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>model_doc.show_template()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "model_details": {
+    "field_description": "Basic information about the model",
+    "developer": "Person or organisation developing the model",
+    "datetime": "Model date",
+    "version": "Model version",
+    "type": "Model type",
+    "info": "Information about training algorithms, parameters, fairness constraints or other applied approaches, and features",
+    "paper": "Paper or other resource for more information",
+    "citation": "Citation details",
+    "license": "License",
+    "contact": "Where to send questions or comments about the model"
+  },
+  "intended_use": {
+    "field_description": "Use cases that were envisioned during development",
+    "primary_uses": "Primary intended uses",
+    "primary_users": "Primary intended users",
+    "out_of_scope": "Out-of-scope use cases"
+  },
+  "factors": {
+    "field_description": "Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others",
+    "relevant": "Relevant factors",
+    "evaluation": "Evaluation factors"
+  },
+  "metrics": {
+    "field_description": "Metrics should be chosen to reflect potential real world impacts of the model",
+    "performance_measures": "Model performance measures",
+    "thresholds": "Decision thresholds",
+    "variation_approaches": "Variation approaches"
+  },
+  "evaluation_data": {
+    "field_description": "Details on the dataset(s) used for the quantitative analyses in the documentation",
+    "datasets": "Datasets",
+    "motivation": "Motivation",
+    "preprocessing": "Preprocessing"
+  },
+  "training_data": {
+    "field_description": "May not be possible to provide in practice. When possible, this section should mirror 'Evaluation Data'. If such detail is not possible, minimal allowable information should be provided here, such as details of the distribution over various factors in the training datasets.",
+    "training_data": "Information on training data"
+  },
+  "quant_analyses": {
+    "field_description": "Quantitative Analyses",
+    "unitary": "Unitary results",
+    "intersectional": "Intersectional results"
+  },
+  "ethical_considerations": {
+    "field_description": "Ethical considerations that went into model development, surfacing ethical challenges and solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.",
+    "sensitive_data": "Does the model use any sensitive data (e.g., protected classes)?",
+    "human_life": "Is the model intended to inform decisions about matters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?",
+    "mitigations": "What risk mitigation strategies were used during model development?",
+    "risks_and_harms": "What risks may be present in model usage? Try to identify the potential recipients,likelihood, and magnitude of harms. If these cannot be determined, note that they were considered but remain unknown",
+    "use_cases": "Are there any known model use cases that are especially fraught?",
+    "additional_information": "If possible, this section should also include any additional ethical considerations that went into model development, for example, review by an external board, or testing with a specific community."
+  },
+  "caveats_recommendations": {
+    "field_description": "Additional concerns that were not covered in the previous sections",
+    "caveats": "For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?",
+    "recommendations": "Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?"
+  }
+}</code></pre>
+</div>
+</div>
+<p>The method <code>show_json</code> prints the Documenter’s documentation template, where the unfilled information retains the descriptions from the original template:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model_doc <span class="op">=</span> ModelCard(autofill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>model_doc.show_json()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'model_details': {'developer': 'Person or organisation developing the model',
+  'datetime': '2023-06-22 09:05:41 ',
+  'version': 'Model version',
+  'type': 'Model type',
+  'info': 'Information about training algorithms, parameters, fairness constraints or other applied approaches, and features',
+  'paper': 'Paper or other resource for more information',
+  'citation': 'Citation details',
+  'license': 'License',
+  'contact': 'Where to send questions or comments about the model'},
+ 'intended_use': {'primary_uses': 'Primary intended uses',
+  'primary_users': 'Primary intended users',
+  'out_of_scope': 'Out-of-scope use cases'},
+ 'factors': {'relevant': 'Relevant factors',
+  'evaluation': 'Evaluation factors'},
+ 'metrics': {'performance_measures': 'Model performance measures',
+  'thresholds': 'Decision thresholds',
+  'variation_approaches': 'Variation approaches'},
+ 'evaluation_data': {'datasets': 'Datasets',
+  'motivation': 'Motivation',
+  'preprocessing': 'Preprocessing'},
+ 'training_data': {'training_data': 'Information on training data'},
+ 'quant_analyses': {'unitary': 'Unitary results',
+  'intersectional': 'Intersectional results'},
+ 'ethical_considerations': {'sensitive_data': 'Does the model use any sensitive data (e.g., protected classes)?',
+  'human_life': 'Is the model intended to inform decisions about matters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?',
+  'mitigations': 'What risk mitigation strategies were used during model development?',
+  'risks_and_harms': 'What risks may be present in model usage? Try to identify the potential recipients,likelihood, and magnitude of harms. If these cannot be determined, note that they were considered but remain unknown',
+  'use_cases': 'Are there any known model use cases that are especially fraught?',
+  'additional_information': 'If possible, this section should also include any additional ethical considerations that went into model development, for example, review by an external board, or testing with a specific community.'},
+ 'caveats_recommendations': {'caveats': 'For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?',
+  'recommendations': 'Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?'}}</code></pre>
+</div>
+</div>
+<p>The template is protected from editing once a Documenter has been created. This way, even if a user unwarrantedly changes the template, this does not interfere with the Documenter functionality.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model_doc.template <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>model_doc.show_template()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> model_doc.show_template(indent<span class="op">=</span><span class="va">False</span>) <span class="op">==</span> ModelCard.template</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "model_details": {
+    "field_description": "Basic information about the model",
+    "developer": "Person or organisation developing the model",
+    "datetime": "Model date",
+    "version": "Model version",
+    "type": "Model type",
+    "info": "Information about training algorithms, parameters, fairness constraints or other applied approaches, and features",
+    "paper": "Paper or other resource for more information",
+    "citation": "Citation details",
+    "license": "License",
+    "contact": "Where to send questions or comments about the model"
+  },
+  "intended_use": {
+    "field_description": "Use cases that were envisioned during development",
+    "primary_uses": "Primary intended uses",
+    "primary_users": "Primary intended users",
+    "out_of_scope": "Out-of-scope use cases"
+  },
+  "factors": {
+    "field_description": "Factors could include demographic or phenotypic groups, environmental conditions, technical attributes, or others",
+    "relevant": "Relevant factors",
+    "evaluation": "Evaluation factors"
+  },
+  "metrics": {
+    "field_description": "Metrics should be chosen to reflect potential real world impacts of the model",
+    "performance_measures": "Model performance measures",
+    "thresholds": "Decision thresholds",
+    "variation_approaches": "Variation approaches"
+  },
+  "evaluation_data": {
+    "field_description": "Details on the dataset(s) used for the quantitative analyses in the documentation",
+    "datasets": "Datasets",
+    "motivation": "Motivation",
+    "preprocessing": "Preprocessing"
+  },
+  "training_data": {
+    "field_description": "May not be possible to provide in practice. When possible, this section should mirror 'Evaluation Data'. If such detail is not possible, minimal allowable information should be provided here, such as details of the distribution over various factors in the training datasets.",
+    "training_data": "Information on training data"
+  },
+  "quant_analyses": {
+    "field_description": "Quantitative Analyses",
+    "unitary": "Unitary results",
+    "intersectional": "Intersectional results"
+  },
+  "ethical_considerations": {
+    "field_description": "Ethical considerations that went into model development, surfacing ethical challenges and solutions to stakeholders. Ethical analysis does not always lead to precise solutions, but the process of ethical contemplation is worthwhile to inform on responsible practices and next steps in future work.",
+    "sensitive_data": "Does the model use any sensitive data (e.g., protected classes)?",
+    "human_life": "Is the model intended to inform decisions about matters central to human life or flourishing - e.g., health or safety? Or could it be used in such a way?",
+    "mitigations": "What risk mitigation strategies were used during model development?",
+    "risks_and_harms": "What risks may be present in model usage? Try to identify the potential recipients,likelihood, and magnitude of harms. If these cannot be determined, note that they were considered but remain unknown",
+    "use_cases": "Are there any known model use cases that are especially fraught?",
+    "additional_information": "If possible, this section should also include any additional ethical considerations that went into model development, for example, review by an external board, or testing with a specific community."
+  },
+  "caveats_recommendations": {
+    "field_description": "Additional concerns that were not covered in the previous sections",
+    "caveats": "For example, did the results suggest any further testing? Were there any relevant groups that were not represented in the evaluation dataset?",
+    "recommendations": "Are there additional recommendations for model use? What are the ideal characteristics of an evaluation dataset for this model?"
+  }
+}</code></pre>
+</div>
+</div>
+<p>Users can find which fields in their templates are still open by using the module <code>open_questions</code>. The levels of the template are reflected in the resulting dictionary, with double underscores separating the different dictionary levels in the underlying template.</p>
+<p>Below we see that after inputting information for the item <code>caveats</code> in the section <code>caveats_recommendations</code>, this item does not appear in the results of the <code>open_questions</code> method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model_doc.fill_info({<span class="st">'caveats_recommendations'</span>: {<span class="st">'caveats'</span>: <span class="st">'This is another test'</span>}})</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> model_doc.json_doc[<span class="st">'caveats_recommendations'</span>][<span class="st">'caveats'</span>] <span class="op">==</span> <span class="st">"This is another test"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># note that caveats_recommendations__caveats is no longer considered an open question</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after being filled in through `fill_info`.</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([oq <span class="cf">for</span> oq <span class="kw">in</span> model_doc.open_questions() <span class="cf">if</span> oq.startswith(<span class="st">'caveats'</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['caveats_recommendations__recommendations']</code></pre>
+</div>
+</div>
+<p>And now the complete result of the <code>open_questions</code> method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model_doc.open_questions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>['model_details__developer',
+ 'model_details__version',
+ 'model_details__type',
+ 'model_details__info',
+ 'model_details__paper',
+ 'model_details__citation',
+ 'model_details__license',
+ 'model_details__contact',
+ 'intended_use__primary_uses',
+ 'intended_use__primary_users',
+ 'intended_use__out_of_scope',
+ 'factors__relevant',
+ 'factors__evaluation',
+ 'metrics__performance_measures',
+ 'metrics__thresholds',
+ 'metrics__variation_approaches',
+ 'evaluation_data__datasets',
+ 'evaluation_data__motivation',
+ 'evaluation_data__preprocessing',
+ 'training_data__training_data',
+ 'quant_analyses__unitary',
+ 'quant_analyses__intersectional',
+ 'ethical_considerations__sensitive_data',
+ 'ethical_considerations__human_life',
+ 'ethical_considerations__mitigations',
+ 'ethical_considerations__risks_and_harms',
+ 'ethical_considerations__use_cases',
+ 'ethical_considerations__additional_information',
+ 'caveats_recommendations__recommendations']</code></pre>
+</div>
+</div>
+<p>If the user wants to fill in an empty field such as the ones identified above by the method <code>open_questions</code>, the user simply needs to pass to the module <code>fill_info</code> a dictionary with the corresponding information. Depending on the template, the dictionary may be nested.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>it is technically possible to attribute the element directly to the attribute <code>json_doc</code>, but this should be avoided in favour of using the method <code>fill_info</code>. The latter tests whether the new information is valid according to the documentation template and also enables filling of more than one question at the same time. In addition, attributing information directly to <code>json_doc</code> is not logged, and may unwarrantedly create new entries that are not part of the template (eg, if a new dictionary key is created due to typos).</p>
+</div>
+</div>
+<p>The template serves to provide specific instances of the Documenter object with a form-like structure, indicating which fields are open and thus require some answers or information. Consequently, the template does not change when the actual document object changes after information is added by <code>fill_info</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>new_info <span class="op">=</span> {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'metrics'</span>: {<span class="st">'performance_measures'</span>: <span class="st">"This is a test"</span>},</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'caveats_recommendations'</span>: {<span class="st">'caveats'</span>: <span class="st">"This is another test"</span>}</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>model_doc.fill_info(new_info)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([model_doc.json_doc[<span class="st">'metrics'</span>], ModelCard.template[<span class="st">'metrics'</span>]])</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> model_doc.show_template(indent<span class="op">=</span><span class="va">False</span>) <span class="op">==</span> ModelCard.template</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{'performance_measures': 'This is a test', 'thresholds': 'Decision thresholds', 'variation_approaches': 'Variation approaches'}, {'field_description': 'Metrics should be chosen to reflect potential real world impacts of the model', 'performance_measures': 'Model performance measures', 'thresholds': 'Decision thresholds', 'variation_approaches': 'Variation approaches'}]</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-information-from-models" class="level1">
+<h1>Reading information from models</h1>
+<p><code>gingado</code>’s <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a> base class is able to extract information from machine learning models from a number of widely used libraries and make it available to the Documenter objects. This is done through the method <code>read_model</code>, which recognises whether the model is a <code>gingado</code> object or any of <code>scikit-learn</code>, <code>keras</code>, or <code>fastai</code> models and read the model characteristics appropriately. For filing out information from other models (eg, <code>pytorch</code> or even models coded from scratch, machine learning or not), the user can benefit from the module <code>fill_model_info</code> that every Documenter should have, as demonstrated below.</p>
+<p>In the case of <a href="https://dkgaraujo.github.io/gingado/documentation.html#modelcard"><code>ModelCard</code></a>, these informations are included under <code>model_details</code>, item <code>info</code>. But the model information could be saved in another area of a custom Documenter.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>the model-specific information saved is different depending on the model’s original library.</p>
+</div>
+</div>
+<section id="preliminaries" class="level2">
+<h2 class="anchored" data-anchor-id="preliminaries">Preliminaries</h2>
+<p>The mock dataset below is used to construct models using different libraries, to demonstrate how they are read by Documenters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># some mock up data</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification()</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>X.shape, y.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>((100, 20), (100,))</code></pre>
+</div>
+</div>
+</section>
+<section id="gingado-benchmark" class="level2">
+<h2 class="anchored" data-anchor-id="gingado-benchmark">gingado Benchmark</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gingado.benchmark <span class="im">import</span> ClassificationBenchmark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the gingado benchmark</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>gingado_clf <span class="op">=</span> ClassificationBenchmark(verbose_grid<span class="op">=</span><span class="dv">1</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 10 folds for each of 6 candidates, totalling 60 fits</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a new instance of ModelCard is created and used to document the model</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>model_doc_gingado <span class="op">=</span> ModelCard()</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>model_doc_gingado.read_model(gingado_clf.benchmark)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_doc_gingado.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>])</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># but given that gingado Benchmark objects already document the best model at every fit, we can check that they are equal:</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> model_doc_gingado.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>] <span class="op">==</span> gingado_clf.model_documentation.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'_estimator_type': 'classifier', 'best_estimator_': RandomForestClassifier(oob_score=True), 'best_index_': 0, 'best_params_': {'max_features': 'sqrt', 'n_estimators': 100}, 'best_score_': 0.99, 'classes_': array([0, 1]), 'cv_results_': {'mean_fit_time': array([0.13181503, 0.29619505, 0.1136914 , 0.28267403, 0.12027018,
+       0.29762466]), 'std_fit_time': array([0.01625579, 0.02733223, 0.00146566, 0.00806355, 0.0079422 ,
+       0.02163048]), 'mean_score_time': array([0.00838451, 0.01815953, 0.0072778 , 0.01760452, 0.00771282,
+       0.01794319]), 'std_score_time': array([0.0007298 , 0.00164848, 0.00029095, 0.00087866, 0.00064812,
+       0.00179062]), 'param_max_features': masked_array(data=['sqrt', 'sqrt', 'log2', 'log2', None, None],
+             mask=[False, False, False, False, False, False],
+       fill_value='?',
+            dtype=object), 'param_n_estimators': masked_array(data=[100, 250, 100, 250, 100, 250],
+             mask=[False, False, False, False, False, False],
+       fill_value='?',
+            dtype=object), 'params': [{'max_features': 'sqrt', 'n_estimators': 100}, {'max_features': 'sqrt', 'n_estimators': 250}, {'max_features': 'log2', 'n_estimators': 100}, {'max_features': 'log2', 'n_estimators': 250}, {'max_features': None, 'n_estimators': 100}, {'max_features': None, 'n_estimators': 250}], 'split0_test_score': array([0.9, 0.9, 0.9, 0.9, 0.9, 0.9]), 'split1_test_score': array([1., 1., 1., 1., 1., 1.]), 'split2_test_score': array([1., 1., 1., 1., 1., 1.]), 'split3_test_score': array([1., 1., 1., 1., 1., 1.]), 'split4_test_score': array([1., 1., 1., 1., 1., 1.]), 'split5_test_score': array([1., 1., 1., 1., 1., 1.]), 'split6_test_score': array([1., 1., 1., 1., 1., 1.]), 'split7_test_score': array([1., 1., 1., 1., 1., 1.]), 'split8_test_score': array([1., 1., 1., 1., 1., 1.]), 'split9_test_score': array([1., 1., 1., 1., 1., 1.]), 'mean_test_score': array([0.99, 0.99, 0.99, 0.99, 0.99, 0.99]), 'std_test_score': array([0.03, 0.03, 0.03, 0.03, 0.03, 0.03]), 'rank_test_score': array([1, 1, 1, 1, 1, 1], dtype=int32)}, 'multimetric_': False, 'n_features_in_': 20, 'n_splits_': 10, 'refit_time_': 0.13797831535339355, 'scorer_': &lt;function _passthrough_scorer&gt;}</code></pre>
+</div>
+</div>
+</section>
+<section id="scikit-learn" class="level2">
+<h2 class="anchored" data-anchor-id="scikit-learn">scikit-learn</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>sklearn_clf <span class="op">=</span> RandomForestClassifier().fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>model_doc_sklearn <span class="op">=</span> ModelCard()</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>model_doc_sklearn.read_model(sklearn_clf)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_doc_sklearn.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'_estimator_type': 'classifier', 'base_estimator_': DecisionTreeClassifier(), 'classes_': array([0, 1]), 'estimators_': [DecisionTreeClassifier(max_features='sqrt', random_state=644629283), DecisionTreeClassifier(max_features='sqrt', random_state=773222412), DecisionTreeClassifier(max_features='sqrt', random_state=172080181), DecisionTreeClassifier(max_features='sqrt', random_state=777314458), DecisionTreeClassifier(max_features='sqrt', random_state=890227001), DecisionTreeClassifier(max_features='sqrt', random_state=638760693), DecisionTreeClassifier(max_features='sqrt', random_state=221026659), DecisionTreeClassifier(max_features='sqrt', random_state=8390130), DecisionTreeClassifier(max_features='sqrt', random_state=432789656), DecisionTreeClassifier(max_features='sqrt', random_state=1972759968), DecisionTreeClassifier(max_features='sqrt', random_state=1576187512), DecisionTreeClassifier(max_features='sqrt', random_state=166168759), DecisionTreeClassifier(max_features='sqrt', random_state=1463202577), DecisionTreeClassifier(max_features='sqrt', random_state=1755000244), DecisionTreeClassifier(max_features='sqrt', random_state=1886503315), DecisionTreeClassifier(max_features='sqrt', random_state=1377389061), DecisionTreeClassifier(max_features='sqrt', random_state=594812349), DecisionTreeClassifier(max_features='sqrt', random_state=191490399), DecisionTreeClassifier(max_features='sqrt', random_state=2094686855), DecisionTreeClassifier(max_features='sqrt', random_state=1782311375), DecisionTreeClassifier(max_features='sqrt', random_state=375006184), DecisionTreeClassifier(max_features='sqrt', random_state=1886779260), DecisionTreeClassifier(max_features='sqrt', random_state=20598082), DecisionTreeClassifier(max_features='sqrt', random_state=1038188436), DecisionTreeClassifier(max_features='sqrt', random_state=1821597520), DecisionTreeClassifier(max_features='sqrt', random_state=850416929), DecisionTreeClassifier(max_features='sqrt', random_state=1853389052), DecisionTreeClassifier(max_features='sqrt', random_state=250119911), DecisionTreeClassifier(max_features='sqrt', random_state=1259325505), DecisionTreeClassifier(max_features='sqrt', random_state=76487423), DecisionTreeClassifier(max_features='sqrt', random_state=1409801089), DecisionTreeClassifier(max_features='sqrt', random_state=598699990), DecisionTreeClassifier(max_features='sqrt', random_state=76174600), DecisionTreeClassifier(max_features='sqrt', random_state=193904761), DecisionTreeClassifier(max_features='sqrt', random_state=1703822078), DecisionTreeClassifier(max_features='sqrt', random_state=1339222994), DecisionTreeClassifier(max_features='sqrt', random_state=2010201174), DecisionTreeClassifier(max_features='sqrt', random_state=1140435560), DecisionTreeClassifier(max_features='sqrt', random_state=752716613), DecisionTreeClassifier(max_features='sqrt', random_state=154000048), DecisionTreeClassifier(max_features='sqrt', random_state=834145348), DecisionTreeClassifier(max_features='sqrt', random_state=1512945615), DecisionTreeClassifier(max_features='sqrt', random_state=150048855), DecisionTreeClassifier(max_features='sqrt', random_state=1569930300), DecisionTreeClassifier(max_features='sqrt', random_state=847545530), DecisionTreeClassifier(max_features='sqrt', random_state=467086770), DecisionTreeClassifier(max_features='sqrt', random_state=904736232), DecisionTreeClassifier(max_features='sqrt', random_state=550161302), DecisionTreeClassifier(max_features='sqrt', random_state=1272240134), DecisionTreeClassifier(max_features='sqrt', random_state=1979934607), DecisionTreeClassifier(max_features='sqrt', random_state=1968170115), DecisionTreeClassifier(max_features='sqrt', random_state=1735755797), DecisionTreeClassifier(max_features='sqrt', random_state=730511601), DecisionTreeClassifier(max_features='sqrt', random_state=1676843219), DecisionTreeClassifier(max_features='sqrt', random_state=1348911102), DecisionTreeClassifier(max_features='sqrt', random_state=819688245), DecisionTreeClassifier(max_features='sqrt', random_state=834285415), DecisionTreeClassifier(max_features='sqrt', random_state=1838527500), DecisionTreeClassifier(max_features='sqrt', random_state=358239969), DecisionTreeClassifier(max_features='sqrt', random_state=1101177373), DecisionTreeClassifier(max_features='sqrt', random_state=994347621), DecisionTreeClassifier(max_features='sqrt', random_state=1882007098), DecisionTreeClassifier(max_features='sqrt', random_state=1912439135), DecisionTreeClassifier(max_features='sqrt', random_state=1021450603), DecisionTreeClassifier(max_features='sqrt', random_state=177239870), DecisionTreeClassifier(max_features='sqrt', random_state=335200354), DecisionTreeClassifier(max_features='sqrt', random_state=66252232), DecisionTreeClassifier(max_features='sqrt', random_state=956249068), DecisionTreeClassifier(max_features='sqrt', random_state=30070017), DecisionTreeClassifier(max_features='sqrt', random_state=1330396499), DecisionTreeClassifier(max_features='sqrt', random_state=207906059), DecisionTreeClassifier(max_features='sqrt', random_state=1323234017), DecisionTreeClassifier(max_features='sqrt', random_state=2083574934), DecisionTreeClassifier(max_features='sqrt', random_state=1721483578), DecisionTreeClassifier(max_features='sqrt', random_state=439587182), DecisionTreeClassifier(max_features='sqrt', random_state=888640081), DecisionTreeClassifier(max_features='sqrt', random_state=1274687214), DecisionTreeClassifier(max_features='sqrt', random_state=1394566340), DecisionTreeClassifier(max_features='sqrt', random_state=1058291198), DecisionTreeClassifier(max_features='sqrt', random_state=1868840268), DecisionTreeClassifier(max_features='sqrt', random_state=1367322994), DecisionTreeClassifier(max_features='sqrt', random_state=217588037), DecisionTreeClassifier(max_features='sqrt', random_state=1419428676), DecisionTreeClassifier(max_features='sqrt', random_state=849946680), DecisionTreeClassifier(max_features='sqrt', random_state=2096213933), DecisionTreeClassifier(max_features='sqrt', random_state=2004379246), DecisionTreeClassifier(max_features='sqrt', random_state=428198071), DecisionTreeClassifier(max_features='sqrt', random_state=774183356), DecisionTreeClassifier(max_features='sqrt', random_state=1452489189), DecisionTreeClassifier(max_features='sqrt', random_state=410945613), DecisionTreeClassifier(max_features='sqrt', random_state=2035389513), DecisionTreeClassifier(max_features='sqrt', random_state=1818418019), DecisionTreeClassifier(max_features='sqrt', random_state=1905831285), DecisionTreeClassifier(max_features='sqrt', random_state=1263948971), DecisionTreeClassifier(max_features='sqrt', random_state=1860077210), DecisionTreeClassifier(max_features='sqrt', random_state=1006638035), DecisionTreeClassifier(max_features='sqrt', random_state=2072402722), DecisionTreeClassifier(max_features='sqrt', random_state=1095293459), DecisionTreeClassifier(max_features='sqrt', random_state=716644424), DecisionTreeClassifier(max_features='sqrt', random_state=844801010)], 'feature_importances_': array([0.01427207, 0.0160448 , 0.07213446, 0.00679389, 0.01636618,
+       0.0119022 , 0.01342794, 0.16113749, 0.01067974, 0.47137566,
+       0.01179527, 0.07481836, 0.00827858, 0.02065695, 0.01097749,
+       0.01589413, 0.02206046, 0.01543262, 0.00987852, 0.01607318]), 'n_classes_': 2, 'n_features_': 20, 'n_features_in_': 20, 'n_outputs_': 1}</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/sklearn/utils/deprecation.py:103: FutureWarning: Attribute `n_features_` was deprecated in version 1.0 and will be removed in 1.2. Use `n_features_in_` instead.
+  warnings.warn(msg, category=FutureWarning)</code></pre>
+</div>
+</div>
+</section>
+<section id="keras" class="level2">
+<h2 class="anchored" data-anchor-id="keras">Keras</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> keras</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2023-06-22 09:05:56.756655: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>keras_clf <span class="op">=</span> keras.Sequential()</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>keras_clf.add(keras.layers.Dense(<span class="dv">16</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>(<span class="dv">20</span>,)))</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>keras_clf.add(keras.layers.Dense(<span class="dv">8</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>keras_clf.add(keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>))</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>keras_clf.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'sgd'</span>, loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>keras_clf.fit(X, y, batch_size<span class="op">=</span><span class="dv">10</span>, epochs<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Metal device set to: AMD Radeon Pro 5500M
+
+systemMemory: 64.00 GB
+maxCacheSize: 3.99 GB
+
+Epoch 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2023-06-22 09:06:05.182863: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0
+2023-06-22 09:06:05.182925: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0
+2023-06-22 09:06:05.525360: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0
+2023-06-22 09:06:05.525391: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0
+2023-06-22 09:06:05.794085: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0
+2023-06-22 09:06:05.794121: W tensorflow/core/framework/op_kernel.cc:1830] OP_REQUIRES failed at xla_ops.cc:418 : NOT_FOUND: could not find registered platform with id: 0x7fda3b1488a0</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>NotFoundError: Graph execution error:
+
+Detected at node 'StatefulPartitionedCall_4' defined at (most recent call last):
+    File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+      return _run_code(code, main_globals, None,
+    File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 86, in _run_code
+      exec(code, run_globals)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel_launcher.py", line 17, in &lt;module&gt;
+      app.launch_new_instance()
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/traitlets/config/application.py", line 1043, in launch_instance
+      app.start()
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/kernelapp.py", line 724, in start
+      self.io_loop.start()
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/tornado/platform/asyncio.py", line 215, in start
+      self.asyncio_loop.run_forever()
+    File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 595, in run_forever
+      self._run_once()
+    File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1881, in _run_once
+      handle._run()
+    File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/events.py", line 80, in _run
+      self._context.run(self._callback, *self._args)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/kernelbase.py", line 512, in dispatch_queue
+      await self.process_one()
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/kernelbase.py", line 501, in process_one
+      await dispatch(*args)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/kernelbase.py", line 408, in dispatch_shell
+      await result
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/kernelbase.py", line 731, in execute_request
+      reply_content = await reply_content
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/ipkernel.py", line 424, in do_execute
+      res = shell.run_cell(code, store_history=store_history, silent=silent)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/ipykernel/zmqshell.py", line 540, in run_cell
+      return super().run_cell(*args, **kwargs)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/interactiveshell.py", line 2768, in run_cell
+      result = self._run_cell(
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/interactiveshell.py", line 2814, in _run_cell
+      return runner(coro)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/async_helpers.py", line 129, in _pseudo_sync_runner
+      coro.send(None)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/interactiveshell.py", line 3012, in run_cell_async
+      has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/interactiveshell.py", line 3191, in run_ast_nodes
+      if await self.run_code(code, result, async_=asy):
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/IPython/core/interactiveshell.py", line 3251, in run_code
+      exec(code_obj, self.user_global_ns, self.user_ns)
+    File "/var/folders/b9/p8z57lqd55xfk68xz34dg0s40000gn/T/ipykernel_34473/3587272776.py", line 6, in &lt;module&gt;
+      keras_clf.fit(X, y, batch_size=10, epochs=10)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/engine/training.py", line 1650, in fit
+      tmp_logs = self.train_function(iterator)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/engine/training.py", line 1249, in train_function
+      return step_function(self, iterator)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/engine/training.py", line 1233, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/engine/training.py", line 1222, in run_step
+      outputs = model.train_step(data)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/engine/training.py", line 1027, in train_step
+      self.optimizer.minimize(loss, self.trainable_variables, tape=tape)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 527, in minimize
+      self.apply_gradients(grads_and_vars)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 1140, in apply_gradients
+      return super().apply_gradients(grads_and_vars, name=name)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 634, in apply_gradients
+      iteration = self._internal_apply_gradients(grads_and_vars)
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 1166, in _internal_apply_gradients
+      return tf.__internal__.distribute.interim.maybe_merge_call(
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 1216, in _distributed_apply_gradients_fn
+      distribution.extended.update(
+    File "/Users/douglasaraujo/Coding/.venv_gingado/lib/python3.10/site-packages/keras/optimizers/optimizer_experimental/optimizer.py", line 1211, in apply_grad_to_update_var
+      return self._update_step_xla(grad, var, id(self._var_key(var)))
+Node: 'StatefulPartitionedCall_4'
+could not find registered platform with id: 0x7fda3b1488a0
+     [[{{node StatefulPartitionedCall_4}}]] [Op:__inference_train_function_664]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>model_doc_keras <span class="op">=</span> ModelCard()</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>model_doc_keras.read_model(keras_clf)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>model_doc_keras.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>'{"class_name": "Sequential", "config": {"name": "sequential", "layers": [{"class_name": "InputLayer", "config": {"batch_input_shape": [null, 20], "dtype": "float32", "sparse": false, "ragged": false, "name": "dense_input"}}, {"class_name": "Dense", "config": {"name": "dense", "trainable": true, "batch_input_shape": [null, 20], "dtype": "float32", "units": 16, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_1", "trainable": true, "dtype": "float32", "units": 8, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_2", "trainable": true, "dtype": "float32", "units": 1, "activation": "sigmoid", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}]}, "keras_version": "2.8.0", "backend": "tensorflow"}'</code></pre>
+</div>
+</div>
+</section>
+<section id="other-models" class="level2">
+<h2 class="anchored" data-anchor-id="other-models">Other models</h2>
+<p>Native support for automatic documentation of other model types, such as from <code>fastai</code>, <code>pytorch</code> is expected to be available in future versions. Until then, any models coded form scratch by the user as well as any other model can be documented by passing the information as an argument to the Documenter’s <code>fill_model_info</code> method. This can be done with a string or dictionary. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MockDataset(torch.utils.data.Dataset):</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, X, y):</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.X <span class="op">=</span> torch.from_numpy(X.astype(np.float32))</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.y <span class="op">=</span> torch.from_numpy(y.astype(np.float32))</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">len</span> <span class="op">=</span> <span class="va">self</span>.X.shape[<span class="dv">0</span>]</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.<span class="bu">len</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, idx):</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.X[idx], <span class="va">self</span>.y[idx]</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PytorchNet(torch.nn.Module):</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(PytorchNet, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layer1 <span class="op">=</span> torch.nn.Linear(<span class="dv">20</span>, <span class="dv">16</span>)</span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layer2 <span class="op">=</span> torch.nn.Linear(<span class="dv">16</span>, <span class="dv">8</span>)</span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layer3 <span class="op">=</span> torch.nn.Linear(<span class="dv">8</span>, <span class="dv">1</span>)</span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> torch.relu(<span class="va">self</span>.layer1(x))</span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> torch.relu(<span class="va">self</span>.layer2(x))</span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> torch.sigmoid(<span class="va">self</span>.layer3(x))</span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>pytorch_clf <span class="op">=</span> PytorchNet()</span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>dataloader <span class="op">=</span> MockDataset(X, y)</span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>loss_func <span class="op">=</span> torch.nn.BCELoss()</span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.SGD(pytorch_clf.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>, momentum<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb60-33"><a href="#cb60-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-34"><a href="#cb60-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb60-35"><a href="#cb60-35" aria-hidden="true" tabindex="-1"></a>    running_loss <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb60-36"><a href="#cb60-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, data <span class="kw">in</span> <span class="bu">enumerate</span>(dataloader, <span class="dv">0</span>):</span>
+<span id="cb60-37"><a href="#cb60-37" aria-hidden="true" tabindex="-1"></a>        _X, _y <span class="op">=</span> data</span>
+<span id="cb60-38"><a href="#cb60-38" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb60-39"><a href="#cb60-39" aria-hidden="true" tabindex="-1"></a>        y_pred_epoch <span class="op">=</span> pytorch_clf(_X)</span>
+<span id="cb60-40"><a href="#cb60-40" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> loss_func(y_pred_epoch, _y.reshape(<span class="dv">1</span>))</span>
+<span id="cb60-41"><a href="#cb60-41" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb60-42"><a href="#cb60-42" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>model_doc_pytorch <span class="op">=</span> ModelCard()</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>model_doc_pytorch.fill_model_info(<span class="st">"This model is a neural network consisting of two fully connected layers and ending in a linear layer with a sigmoid activation"</span>)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>model_doc_pytorch.show_json()[<span class="st">'model_details'</span>][<span class="st">'info'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>'This model is a neural network consisting of two fully connected layers and ending in a linear layer with a sigmoid activation'</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-custom" class="level1">
+<h1>Creating a custom Documenter</h1>
+<p><code>gingado</code> users can easily transform their model documentation needs into a Documenter object. The main advantages of doing this are:</p>
+<ul>
+<li>the documentation template becomes a “recyclable” object that can be saved, loaded, and used in other models or code routines; and</li>
+<li>model documentation can be more closely aligned with model creation and training, thus decreasing the probability that the model and its documentation diverge during the process of model development.</li>
+</ul>
+<p>A <code>gingado</code> Documenter must:</p>
+<ul>
+<li>subclass <a href="https://dkgaraujo.github.io/gingado/documentation.html#ggdmodeldocumentation"><code>ggdModelDocumentation</code></a> (or implement all its methods if the user does not want to keep a dependency to <code>gingado</code>),</li>
+<li>include the actual template for the documentation as a dictionary (with at most two levels of keys) in a class attribute called <code>template</code>,</li>
+<li>ensure that <code>template</code> complies with <a href="https://www.json.org/json-en.html">JSON specifications</a>,</li>
+<li>have <code>file_path</code>, <code>autofill</code> and <code>indent_level</code> as arguments in <code>__init__</code>,</li>
+<li>follow the <code>scikit-learn</code> convention of storing the <code>__init__</code> parameters in <code>self</code> attributes with the same name, and</li>
+<li>implement the <code>autofill_template</code> method using the <code>fill_info</code> method to set the automatically filled information fields.</li>
+</ul>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-ModelCards" class="csl-entry" role="listitem">
+Mitchell, Margaret, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, and Timnit Gebru. 2018. <span>“Model Cards for Model Reporting.”</span> <em>CoRR</em> abs/1810.03993. <a href="http://arxiv.org/abs/1810.03993">http://arxiv.org/abs/1810.03993</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/dkgaraujo\.github\.io\/gingado\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
